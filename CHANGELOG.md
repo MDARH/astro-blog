@@ -2,6 +2,50 @@
 
 All notable changes to SomaDhanTech Blog will be documented in this file.
 
+## [2.4.0] - 2024-12-28
+
+### GitHub Actions & Deployment
+- **Updated GitHub Workflow**: Enhanced deployment workflow with automated build process
+- **Build Integration**: Added Node.js setup, dependency installation, and build steps to CI/CD pipeline
+- **Optimized File Exclusions**: Updated exclude patterns to only upload necessary build files (dist directory)
+- **Removed Unknown Directories**: Cleaned up workflow by removing references to non-existent directories (/resources/js/, /MobileApp/)
+- **Added Development File Exclusions**: Excluded source files, configuration files, and development dependencies from deployment
+
+### Bug Fixes
+- **Fixed API Endpoint**: Resolved duplicate GET function declaration in content.json.js API endpoint
+- **Improved API Documentation**: Enhanced function-level comments for better code maintainability
+- **Build Process**: Fixed build errors preventing successful deployment
+
+### Technical Improvements
+- **Deployment Optimization**: Only essential build output (dist directory) is now uploaded to production
+- **CI/CD Enhancement**: Automated build process ensures consistent deployments
+- **Code Quality**: Improved API endpoint structure and error handling
+
+## [2.3.0] - 2024-01-30
+
+### Major Framework Integration
+- **TailwindCSS Integration**: Added TailwindCSS framework with @astrojs/tailwind integration
+- **Modern Utility-First Styling**: Replaced custom CSS with Tailwind utility classes for better maintainability
+- **Enhanced Design System**: Implemented consistent spacing, colors, and responsive design patterns
+- **Improved Developer Experience**: Faster styling with utility classes and better code organization
+
+### Component Refactoring
+- **MobileMenu Redesign**: Completely refactored MobileMenu component using TailwindCSS
+- **Modern Mobile UI**: Enhanced mobile menu with better spacing, animations, and visual hierarchy
+- **Dark Mode Support**: Improved dark mode implementation with Tailwind's dark: variants
+- **Responsive Design**: Better mobile-first responsive design patterns
+
+### Technical Improvements
+- **Build Optimization**: TailwindCSS purging for smaller bundle sizes
+- **Custom Color Palette**: Extended Tailwind config with brand colors
+- **Typography System**: Integrated @tailwindcss/typography for better content styling
+- **Animation System**: Smooth transitions and animations using Tailwind utilities
+
+### Git Integration
+- **Repository Setup**: Initialized Git repository and connected to GitHub
+- **Version Control**: Committed all changes with proper commit messages
+- **Remote Tracking**: Set up remote origin and pushed to main branch
+
 ## [2.2.1] - 2024-01-30
 
 ### Bug Fixes
