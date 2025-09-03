@@ -1,0 +1,548 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="SomaDhanTech Blog" href="https://example.com/rss.xml"><meta name="generator" content="Astro v5.13.5"><meta name="author" content="SomaDhanTech Team"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><meta name="keywords" content="technology blog, web development, hosting solutions, domain management, digital products, programming tutorials, cloud computing, devops, infrastructure"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://example.com/blog/cloud-devops-best-practices/"><!-- Primary Meta Tags --><title>Cloud DevOps Best Practices: Streamlining Development and Deployment</title><meta name="title" content="Cloud DevOps Best Practices: Streamlining Development and Deployment"><meta name="description" content="Master cloud DevOps with proven strategies for CI/CD, infrastructure as code, monitoring, and security. Build scalable and reliable cloud-native applications."><meta name="theme-color" content="#2337ff"><meta name="color-scheme" content="light dark"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://example.com/blog/cloud-devops-best-practices/"><meta property="og:title" content="Cloud DevOps Best Practices: Streamlining Development and Deployment"><meta property="og:description" content="Master cloud DevOps with proven strategies for CI/CD, infrastructure as code, monitoring, and security. Build scalable and reliable cloud-native applications."><meta property="og:image" content="https://example.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:site_name" content="SomaDhanTech Blog"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2024-02-04T18:00:00.000Z"><meta property="article:author" content="SomaDhanTech Team"><meta property="article:section" content="Cloud &#38; DevOps"><meta property="article:tag" content="Cloud Computing"><meta property="article:tag" content="DevOps"><meta property="article:tag" content="Infrastructure"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://example.com/blog/cloud-devops-best-practices/"><meta property="twitter:title" content="Cloud DevOps Best Practices: Streamlining Development and Deployment"><meta property="twitter:description" content="Master cloud DevOps with proven strategies for CI/CD, infrastructure as code, monitoring, and security. Build scalable and reliable cloud-native applications."><meta property="twitter:image" content="https://example.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><meta property="twitter:image:alt" content="Cloud DevOps Best Practices: Streamlining Development and Deployment"><meta property="twitter:site" content="@bdapextech"><meta property="twitter:creator" content="@bdapextech"><!-- Additional SEO Meta Tags --><meta name="format-detection" content="telephone=no"><meta name="msapplication-TileColor" content="#2337ff"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cloud DevOps Best Practices: Streamlining Development and Deployment","description":"Master cloud DevOps with proven strategies for CI/CD, infrastructure as code, monitoring, and security. Build scalable and reliable cloud-native applications.","url":"https://example.com/blog/cloud-devops-best-practices/","image":"https://example.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg","datePublished":"2024-02-04T18:00:00.000Z","dateModified":"2024-02-04T18:00:00.000Z","author":{"@type":"Person","name":"SomaDhanTech Team"},"publisher":{"@type":"Organization","name":"SomaDhanTech Blog","url":"https://somadhantec.com"},"articleSection":"Cloud & DevOps","keywords":"Cloud Computing, DevOps, Infrastructure"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://somadhantec.com"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://somadhantec.com/blog"},{"@type":"ListItem","position":3,"name":"Cloud devops best practices","item":"https://somadhantec.com/blog/cloud-devops-best-practices"}]}</script><!-- Preconnect to external domains --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://picsum.photos"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="stylesheet" href="/_astro/about.3p-58opd.css">
+<link rel="stylesheet" href="/_astro/about.DtDoXnHr.css">
+<style>a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}
+.social-share[data-astro-cid-luj3ckct]{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin:2rem 0}.share-title[data-astro-cid-luj3ckct]{margin:0 0 1rem;font-size:1.1rem;font-weight:600;color:var(--text-color)}.share-buttons[data-astro-cid-luj3ckct]{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.75rem}.share-btn[data-astro-cid-luj3ckct]{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1rem;border:1px solid var(--border-color);border-radius:8px;text-decoration:none;color:var(--text-color);background:var(--bg-color);transition:all .2s ease;font-size:.9rem;font-weight:500;cursor:pointer;font-family:inherit}.share-btn[data-astro-cid-luj3ckct]:hover{transform:translateY(-2px);box-shadow:0 4px 12px #0000001a}.share-btn[data-astro-cid-luj3ckct] span[data-astro-cid-luj3ckct]{display:none}.twitter[data-astro-cid-luj3ckct]:hover{background:#1da1f2;color:#fff;border-color:#1da1f2}.facebook[data-astro-cid-luj3ckct]:hover{background:#4267b2;color:#fff;border-color:#4267b2}.linkedin[data-astro-cid-luj3ckct]:hover{background:#0077b5;color:#fff;border-color:#0077b5}.whatsapp[data-astro-cid-luj3ckct]:hover{background:#25d366;color:#fff;border-color:#25d366}.copy-link[data-astro-cid-luj3ckct]:hover{background:var(--accent);color:#fff;border-color:var(--accent)}.copy-link[data-astro-cid-luj3ckct].copied{background:#10b981;color:#fff;border-color:#10b981}@media (min-width: 640px){.share-buttons[data-astro-cid-luj3ckct]{grid-template-columns:repeat(5,1fr)}.share-btn[data-astro-cid-luj3ckct] span[data-astro-cid-luj3ckct]{display:inline}}@media (max-width: 639px){.share-buttons[data-astro-cid-luj3ckct]{grid-template-columns:repeat(5,1fr);gap:.5rem}.share-btn[data-astro-cid-luj3ckct]{padding:.75rem .5rem;flex-direction:column;gap:.25rem;font-size:.75rem}.share-btn[data-astro-cid-luj3ckct] svg[data-astro-cid-luj3ckct]{width:18px;height:18px}}[data-astro-cid-luj3ckct][data-theme=dark] .social-share[data-astro-cid-luj3ckct]{background:var(--card-bg)}[data-astro-cid-luj3ckct][data-theme=dark] .share-btn[data-astro-cid-luj3ckct]{background:var(--bg-secondary)}main[data-astro-cid-bvzihdzo]{width:100%;max-width:100%;margin:0;padding:2rem 0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:100%;max-width:800px;margin:auto;padding:0 2rem;color:var(--text-color)}.title[data-astro-cid-bvzihdzo]{margin-bottom:2rem;padding:2rem 0;text-align:center;line-height:1;border-bottom:1px solid var(--border-color)}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 1rem;font-size:2.5rem;line-height:1.2;color:var(--text-color)}@media (max-width: 768px){.prose[data-astro-cid-bvzihdzo]{padding:0 1rem}.title[data-astro-cid-bvzihdzo]{padding:1.5rem 0}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{font-size:2rem}.hero-image[data-astro-cid-bvzihdzo]{margin:0 -1rem}}.date[data-astro-cid-bvzihdzo]{margin-bottom:1rem;color:var(--text-muted);font-size:.95rem}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+.go-to-top[data-astro-cid-4ogupr24]{position:fixed;bottom:2rem;right:2rem;width:50px;height:50px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px #00000026;transition:all .3s ease;z-index:1000;opacity:0;visibility:hidden;transform:translateY(20px)}.go-to-top[data-astro-cid-4ogupr24].visible{opacity:1;visibility:visible;transform:translateY(0)}.go-to-top[data-astro-cid-4ogupr24]:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 6px 20px #0003}.go-to-top[data-astro-cid-4ogupr24]:active{transform:translateY(0)}@media (max-width: 768px){.go-to-top[data-astro-cid-4ogupr24]{bottom:1rem;right:1rem;width:45px;height:45px}}@keyframes bounce{0%,20%,50%,80%,to{transform:translateY(0)}40%{transform:translateY(-5px)}60%{transform:translateY(-3px)}}.go-to-top[data-astro-cid-4ogupr24].visible:hover{animation:bounce 1s}
+</style></head> <body data-astro-cid-bvzihdzo> <header id="main-header" class="header" data-astro-cid-3ef6ksr2> <nav class="nav-container" data-astro-cid-3ef6ksr2> <!-- Mobile hamburger menu --> <button id="hamburger-menu" class="hamburger-btn" aria-label="Open menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> <!-- Logo (centered on mobile, left on desktop) --> <div class="logo-container" data-astro-cid-3ef6ksr2> <a href="/" class="logo-link" data-astro-cid-3ef6ksr2> <svg width="180" height="50" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" class data-astro-cid-tvrurpns> <!-- Background gradient --> <defs data-astro-cid-tvrurpns> <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%" data-astro-cid-tvrurpns> <stop offset="0%" style="stop-color:var(--accent);stop-opacity:1" data-astro-cid-tvrurpns></stop> <stop offset="100%" style="stop-color:var(--accent-dark);stop-opacity:1" data-astro-cid-tvrurpns></stop> </linearGradient> <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%" data-astro-cid-tvrurpns> <stop offset="0%" style="stop-color:var(--text-color);stop-opacity:1" data-astro-cid-tvrurpns></stop> <stop offset="50%" style="stop-color:var(--accent);stop-opacity:1" data-astro-cid-tvrurpns></stop> <stop offset="100%" style="stop-color:var(--text-color);stop-opacity:1" data-astro-cid-tvrurpns></stop> </linearGradient> </defs> <!-- Logo background shape --> <rect x="2" y="8" width="196" height="44" rx="8" fill="url(#logoGradient)" opacity="0.1" stroke="url(#logoGradient)" stroke-width="1" data-astro-cid-tvrurpns></rect> <!-- Main text: SomaDhanTech --> <text x="100" y="38" font-family="'Atkinson', sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="url(#textGradient)" letter-spacing="0.5px" data-astro-cid-tvrurpns>
+SomaDhanTech
+</text> <!-- Decorative tech elements --> <circle cx="15" cy="30" r="3" fill="var(--accent)" opacity="0.6" data-astro-cid-tvrurpns> <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" data-astro-cid-tvrurpns></animate> </circle> <circle cx="185" cy="30" r="3" fill="var(--accent)" opacity="0.6" data-astro-cid-tvrurpns> <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite" data-astro-cid-tvrurpns></animate> </circle> <!-- Tech circuit lines --> <path d="M25 30 L35 30 L35 25 L45 25" stroke="var(--accent)" stroke-width="1" opacity="0.4" data-astro-cid-tvrurpns></path> <path d="M175 30 L165 30 L165 35 L155 35" stroke="var(--accent)" stroke-width="1" opacity="0.4" data-astro-cid-tvrurpns></path> </svg>  </a> </div> <!-- Desktop navigation --> <div class="desktop-nav" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  </div> <!-- Header actions --> <div class="header-actions" data-astro-cid-3ef6ksr2> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" data-astro-cid-x3pjskd3> <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">function n(){const m=document.getElementById("theme-toggle"),e=document.documentElement,o=localStorage.getItem("theme")||"light";e.setAttribute("data-theme",o);function d(){const t=e.getAttribute("data-theme")==="light"?"dark":"light";e.setAttribute("data-theme",t),localStorage.setItem("theme",t)}m?.addEventListener("click",d)}document.addEventListener("DOMContentLoaded",n);document.addEventListener("astro:page-load",n);</script> </div> </nav> </header> <!-- Mobile Menu Component --> <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] opacity-0 invisible transition-all duration-300 ease-in-out" data-astro-cid-6aabv5oc> <div class="absolute top-0 left-0 w-80 h-full bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-700 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col shadow-2xl" data-astro-cid-6aabv5oc> <!-- Header --> <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-slate-700" data-astro-cid-6aabv5oc> <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-astro-cid-6aabv5oc>Navigation</h3> <button id="mobile-menu-close" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors duration-200" aria-label="Close menu" data-astro-cid-6aabv5oc> <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-6aabv5oc> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-6aabv5oc></path> </svg> </button> </div> <!-- Navigation Links --> <nav class="flex-1 py-4" data-astro-cid-6aabv5oc> <a href="/" class="mobile-nav-link flex items-center gap-4 px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 border-l-3 border-transparent hover:border-blue-600 font-medium" data-astro-cid-6aabv5oc> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-6aabv5oc> <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" data-astro-cid-6aabv5oc></path> </svg>
+Home
+</a> <a href="/blog" class="mobile-nav-link flex items-center gap-4 px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 border-l-3 border-transparent hover:border-blue-600 font-medium" data-astro-cid-6aabv5oc> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-6aabv5oc> <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" data-astro-cid-6aabv5oc></path> </svg>
+Blog
+</a> </nav> <!-- Footer with Social Links --> <div class="p-6 border-t border-gray-200 dark:border-slate-700" data-astro-cid-6aabv5oc> <div class="space-y-3" data-astro-cid-6aabv5oc> <a href="https://twitter.com/somadhantec" target="_blank" class="mobile-social-link flex items-center gap-3 p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all duration-200 text-sm" data-astro-cid-6aabv5oc> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-6aabv5oc> <path stroke-linecap="round" stroke-linejoin="round" d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" data-astro-cid-6aabv5oc></path> </svg>
+Twitter
+</a> <a href="https://github.com/somadhantec" target="_blank" class="mobile-social-link flex items-center gap-3 p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all duration-200 text-sm" data-astro-cid-6aabv5oc> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-6aabv5oc> <path stroke-linecap="round" stroke-linejoin="round" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" data-astro-cid-6aabv5oc></path> </svg>
+GitHub
+</a> </div> </div> </div> </div>  <script type="module">document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("mobile-menu-overlay"),o=document.getElementById("mobile-menu-close"),n=document.getElementById("hamburger-menu"),a=document.querySelectorAll(".mobile-nav-link");function s(){t.classList.add("active"),document.body.style.overflow="hidden"}function c(){t.classList.remove("active"),document.body.style.overflow=""}n&&n.addEventListener("click",s),o&&o.addEventListener("click",c),t&&t.addEventListener("click",function(e){e.target===t&&c()}),a.forEach(e=>{e.addEventListener("click",c)}),document.addEventListener("keydown",function(e){e.key==="Escape"&&t.classList.contains("active")&&c()});function r(){const e=window.location.pathname;a.forEach(i=>{i.classList.remove("active"),(i.getAttribute("href")===e||e==="/"&&i.getAttribute("href")==="/"||e.startsWith("/blog")&&i.getAttribute("href")==="/blog")&&i.classList.add("active")})}r()});document.addEventListener("astro:page-load",function(){const t=document.querySelectorAll(".mobile-nav-link"),o=window.location.pathname;t.forEach(n=>{n.classList.remove("active"),(n.getAttribute("href")===o||o==="/"&&n.getAttribute("href")==="/"||o.startsWith("/blog")&&n.getAttribute("href")==="/blog")&&n.classList.add("active")})});</script>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="https://picsum.photos/1020/510?random=5" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2024-02-04T18:00:00.000Z"> Feb 5, 2024 </time>  </div> <h1 data-astro-cid-bvzihdzo>Cloud DevOps Best Practices: Streamlining Development and Deployment</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Cloud DevOps has become essential for modern software development, enabling teams to deliver applications faster, more reliably, and at scale. This comprehensive guide covers the best practices for implementing effective cloud DevOps strategies.</p>
+<h2 id="understanding-cloud-devops">Understanding Cloud DevOps</h2>
+<p>Cloud DevOps combines development and operations practices with cloud computing to create a culture of collaboration, automation, and continuous improvement.</p>
+<h3 id="core-principles">Core Principles</h3>
+<ul>
+<li><strong>Automation</strong>: Reduce manual processes</li>
+<li><strong>Collaboration</strong>: Break down silos between teams</li>
+<li><strong>Continuous Integration/Deployment</strong>: Frequent, reliable releases</li>
+<li><strong>Monitoring</strong>: Proactive issue detection and resolution</li>
+<li><strong>Infrastructure as Code</strong>: Version-controlled infrastructure</li>
+</ul>
+<h2 id="cicd-pipeline-implementation">CI/CD Pipeline Implementation</h2>
+<h3 id="continuous-integration-best-practices">Continuous Integration Best Practices</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># Example GitHub Actions CI/CD Pipeline</span></span>
+<span class="line"><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">CI/CD Pipeline</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">on</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  push</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    branches</span><span style="color:#E1E4E8">: [ </span><span style="color:#9ECBFF">main</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">develop</span><span style="color:#E1E4E8"> ]</span></span>
+<span class="line"><span style="color:#85E89D">  pull_request</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    branches</span><span style="color:#E1E4E8">: [ </span><span style="color:#9ECBFF">main</span><span style="color:#E1E4E8"> ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">jobs</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  test</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    runs-on</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">ubuntu-latest</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#85E89D">    steps</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">actions/checkout@v3</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Setup Node.js</span></span>
+<span class="line"><span style="color:#85E89D">      uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">actions/setup-node@v3</span></span>
+<span class="line"><span style="color:#85E89D">      with</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        node-version</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'18'</span></span>
+<span class="line"><span style="color:#85E89D">        cache</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'npm'</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Install dependencies</span></span>
+<span class="line"><span style="color:#85E89D">      run</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">npm ci</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Run tests</span></span>
+<span class="line"><span style="color:#85E89D">      run</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">npm test</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Run linting</span></span>
+<span class="line"><span style="color:#85E89D">      run</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">npm run lint</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Security audit</span></span>
+<span class="line"><span style="color:#85E89D">      run</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">npm audit</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Build application</span></span>
+<span class="line"><span style="color:#85E89D">      run</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">npm run build</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">  deploy</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    needs</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">test</span></span>
+<span class="line"><span style="color:#85E89D">    runs-on</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">ubuntu-latest</span></span>
+<span class="line"><span style="color:#85E89D">    if</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">github.ref == 'refs/heads/main'</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#85E89D">    steps</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">actions/checkout@v3</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Configure AWS credentials</span></span>
+<span class="line"><span style="color:#85E89D">      uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">aws-actions/configure-aws-credentials@v2</span></span>
+<span class="line"><span style="color:#85E89D">      with</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        aws-access-key-id</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">${{ secrets.AWS_ACCESS_KEY_ID }}</span></span>
+<span class="line"><span style="color:#85E89D">        aws-secret-access-key</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">${{ secrets.AWS_SECRET_ACCESS_KEY }}</span></span>
+<span class="line"><span style="color:#85E89D">        aws-region</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">us-east-1</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Deploy to AWS</span></span>
+<span class="line"><span style="color:#85E89D">      run</span><span style="color:#E1E4E8">: </span><span style="color:#F97583">|</span></span>
+<span class="line"><span style="color:#9ECBFF">        aws s3 sync ./build s3://my-app-bucket</span></span>
+<span class="line"><span style="color:#9ECBFF">        aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_ID }} --paths "/*"</span></span></code></pre>
+<h3 id="pipeline-stages">Pipeline Stages</h3>
+<ol>
+<li><strong>Source Control</strong>: Git-based version control</li>
+<li><strong>Build</strong>: Compile and package applications</li>
+<li><strong>Test</strong>: Automated testing (unit, integration, e2e)</li>
+<li><strong>Security Scan</strong>: Vulnerability assessment</li>
+<li><strong>Deploy</strong>: Automated deployment to environments</li>
+<li><strong>Monitor</strong>: Post-deployment monitoring</li>
+</ol>
+<h2 id="infrastructure-as-code-iac">Infrastructure as Code (IaC)</h2>
+<h3 id="terraform-example">Terraform Example</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="hcl"><code><span class="line"><span style="color:#6A737D"># main.tf - AWS Infrastructure</span></span>
+<span class="line"><span style="color:#B392F0">provider</span><span style="color:#79B8FF"> "aws"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  region</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">aws_region</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># VPC Configuration</span></span>
+<span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "aws_vpc"</span><span style="color:#79B8FF"> "main"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  cidr_block</span><span style="color:#F97583">           =</span><span style="color:#9ECBFF"> "10.0.0.0/16"</span></span>
+<span class="line"><span style="color:#E1E4E8">  enable_dns_hostnames</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">  enable_dns_support</span><span style="color:#F97583">   =</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  tags</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Name        </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "</span><span style="color:#F97583">${</span><span style="color:#E1E4E8">var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">project_name</span><span style="color:#F97583">}</span><span style="color:#9ECBFF">-vpc"</span></span>
+<span class="line"><span style="color:#E1E4E8">    Environment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var.environment</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Public Subnet</span></span>
+<span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "aws_subnet"</span><span style="color:#79B8FF"> "public"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  count</span><span style="color:#F97583">             =</span><span style="color:#79B8FF"> length</span><span style="color:#E1E4E8">(var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">availability_zones)</span></span>
+<span class="line"><span style="color:#E1E4E8">  vpc_id</span><span style="color:#F97583">            =</span><span style="color:#E1E4E8"> aws_vpc</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">main</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">id</span></span>
+<span class="line"><span style="color:#E1E4E8">  cidr_block</span><span style="color:#F97583">        =</span><span style="color:#9ECBFF"> "10.0.</span><span style="color:#F97583">${</span><span style="color:#E1E4E8">count</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">index</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">}</span><span style="color:#9ECBFF">.0/24"</span></span>
+<span class="line"><span style="color:#E1E4E8">  availability_zone</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">availability_zones[count</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">index]</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#E1E4E8">  map_public_ip_on_launch</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  tags</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "</span><span style="color:#F97583">${</span><span style="color:#E1E4E8">var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">project_name</span><span style="color:#F97583">}</span><span style="color:#9ECBFF">-public-</span><span style="color:#F97583">${</span><span style="color:#E1E4E8">count</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">index</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">}</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    Type </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Public"</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Application Load Balancer</span></span>
+<span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "aws_lb"</span><span style="color:#79B8FF"> "main"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  name</span><span style="color:#F97583">               =</span><span style="color:#9ECBFF"> "</span><span style="color:#F97583">${</span><span style="color:#E1E4E8">var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">project_name</span><span style="color:#F97583">}</span><span style="color:#9ECBFF">-alb"</span></span>
+<span class="line"><span style="color:#E1E4E8">  internal</span><span style="color:#F97583">           =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">  load_balancer_type</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "application"</span></span>
+<span class="line"><span style="color:#E1E4E8">  security_groups</span><span style="color:#F97583">    =</span><span style="color:#E1E4E8"> [aws_security_group</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">alb</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">id]</span></span>
+<span class="line"><span style="color:#E1E4E8">  subnets</span><span style="color:#F97583">            =</span><span style="color:#E1E4E8"> aws_subnet</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">public[</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">id</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  enable_deletion_protection</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  tags</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Environment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var.environment</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># ECS Cluster</span></span>
+<span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "aws_ecs_cluster"</span><span style="color:#79B8FF"> "main"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  name</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "</span><span style="color:#F97583">${</span><span style="color:#E1E4E8">var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">project_name</span><span style="color:#F97583">}</span><span style="color:#9ECBFF">-cluster"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  setting</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    name</span><span style="color:#F97583">  =</span><span style="color:#9ECBFF"> "containerInsights"</span></span>
+<span class="line"><span style="color:#E1E4E8">    value</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "enabled"</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  tags</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Environment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var.environment</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># ECS Service</span></span>
+<span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "aws_ecs_service"</span><span style="color:#79B8FF"> "app"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  name</span><span style="color:#F97583">            =</span><span style="color:#9ECBFF"> "</span><span style="color:#F97583">${</span><span style="color:#E1E4E8">var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">project_name</span><span style="color:#F97583">}</span><span style="color:#9ECBFF">-service"</span></span>
+<span class="line"><span style="color:#E1E4E8">  cluster</span><span style="color:#F97583">         =</span><span style="color:#E1E4E8"> aws_ecs_cluster</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">main</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">id</span></span>
+<span class="line"><span style="color:#E1E4E8">  task_definition</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> aws_ecs_task_definition</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">app</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">arn</span></span>
+<span class="line"><span style="color:#E1E4E8">  desired_count</span><span style="color:#F97583">   =</span><span style="color:#E1E4E8"> var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">app_count</span></span>
+<span class="line"><span style="color:#E1E4E8">  launch_type</span><span style="color:#F97583">     =</span><span style="color:#9ECBFF"> "FARGATE"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  network_configuration</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    security_groups</span><span style="color:#F97583">  =</span><span style="color:#E1E4E8"> [aws_security_group</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ecs_tasks</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">id]</span></span>
+<span class="line"><span style="color:#E1E4E8">    subnets</span><span style="color:#F97583">          =</span><span style="color:#E1E4E8"> aws_subnet</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">public[</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">id</span></span>
+<span class="line"><span style="color:#E1E4E8">    assign_public_ip</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  load_balancer</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    target_group_arn</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> aws_lb_target_group</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">app</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">arn</span></span>
+<span class="line"><span style="color:#E1E4E8">    container_name</span><span style="color:#F97583">   =</span><span style="color:#9ECBFF"> "app"</span></span>
+<span class="line"><span style="color:#E1E4E8">    container_port</span><span style="color:#F97583">   =</span><span style="color:#E1E4E8"> var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">app_port</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  depends_on</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> [aws_lb_listener</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">app]</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="iac-best-practices">IaC Best Practices</h3>
+<ul>
+<li><strong>Version Control</strong>: Store IaC in Git repositories</li>
+<li><strong>Modular Design</strong>: Create reusable modules</li>
+<li><strong>Environment Separation</strong>: Separate configs for dev/staging/prod</li>
+<li><strong>State Management</strong>: Use remote state storage</li>
+<li><strong>Validation</strong>: Implement plan reviews before apply</li>
+</ul>
+<h2 id="container-orchestration">Container Orchestration</h2>
+<h3 id="docker-best-practices">Docker Best Practices</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dockerfile"><code><span class="line"><span style="color:#6A737D"># Multi-stage Dockerfile for Node.js application</span></span>
+<span class="line"><span style="color:#F97583">FROM</span><span style="color:#E1E4E8"> node:18-alpine </span><span style="color:#F97583">AS</span><span style="color:#E1E4E8"> builder</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">WORKDIR</span><span style="color:#E1E4E8"> /app</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Copy package files</span></span>
+<span class="line"><span style="color:#F97583">COPY</span><span style="color:#E1E4E8"> package*.json ./</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Install dependencies</span></span>
+<span class="line"><span style="color:#F97583">RUN</span><span style="color:#E1E4E8"> npm ci --only=production</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Copy source code</span></span>
+<span class="line"><span style="color:#F97583">COPY</span><span style="color:#E1E4E8"> . .</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Build application</span></span>
+<span class="line"><span style="color:#F97583">RUN</span><span style="color:#E1E4E8"> npm run build</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Production stage</span></span>
+<span class="line"><span style="color:#F97583">FROM</span><span style="color:#E1E4E8"> node:18-alpine </span><span style="color:#F97583">AS</span><span style="color:#E1E4E8"> production</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Create non-root user</span></span>
+<span class="line"><span style="color:#F97583">RUN</span><span style="color:#E1E4E8"> addgroup -g 1001 -S nodejs</span></span>
+<span class="line"><span style="color:#F97583">RUN</span><span style="color:#E1E4E8"> adduser -S nextjs -u 1001</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">WORKDIR</span><span style="color:#E1E4E8"> /app</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Copy built application</span></span>
+<span class="line"><span style="color:#F97583">COPY</span><span style="color:#E1E4E8"> --from=builder --chown=nextjs:nodejs /app/dist ./dist</span></span>
+<span class="line"><span style="color:#F97583">COPY</span><span style="color:#E1E4E8"> --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules</span></span>
+<span class="line"><span style="color:#F97583">COPY</span><span style="color:#E1E4E8"> --from=builder --chown=nextjs:nodejs /app/package.json ./package.json</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Switch to non-root user</span></span>
+<span class="line"><span style="color:#F97583">USER</span><span style="color:#E1E4E8"> nextjs</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Expose port</span></span>
+<span class="line"><span style="color:#F97583">EXPOSE</span><span style="color:#E1E4E8"> 3000</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Health check</span></span>
+<span class="line"><span style="color:#F97583">HEALTHCHECK</span><span style="color:#E1E4E8"> --interval=30s --timeout=3s --start-period=5s --retries=3 \</span></span>
+<span class="line"><span style="color:#F97583">  CMD</span><span style="color:#E1E4E8"> curl -f http://localhost:3000/health || exit 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Start application</span></span>
+<span class="line"><span style="color:#F97583">CMD</span><span style="color:#E1E4E8"> [</span><span style="color:#9ECBFF">"npm"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"start"</span><span style="color:#E1E4E8">]</span></span></code></pre>
+<h3 id="kubernetes-deployment">Kubernetes Deployment</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># deployment.yaml</span></span>
+<span class="line"><span style="color:#85E89D">apiVersion</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">apps/v1</span></span>
+<span class="line"><span style="color:#85E89D">kind</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Deployment</span></span>
+<span class="line"><span style="color:#85E89D">metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app</span></span>
+<span class="line"><span style="color:#85E89D">  labels</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    app</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app</span></span>
+<span class="line"><span style="color:#85E89D">spec</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  replicas</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span></span>
+<span class="line"><span style="color:#85E89D">  selector</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    matchLabels</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      app</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app</span></span>
+<span class="line"><span style="color:#85E89D">  template</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      labels</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        app</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app</span></span>
+<span class="line"><span style="color:#85E89D">    spec</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      containers</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app</span></span>
+<span class="line"><span style="color:#85E89D">        image</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">myregistry/web-app:latest</span></span>
+<span class="line"><span style="color:#85E89D">        ports</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">        - </span><span style="color:#85E89D">containerPort</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3000</span></span>
+<span class="line"><span style="color:#85E89D">        env</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">        - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">NODE_ENV</span></span>
+<span class="line"><span style="color:#85E89D">          value</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"production"</span></span>
+<span class="line"><span style="color:#E1E4E8">        - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">DATABASE_URL</span></span>
+<span class="line"><span style="color:#85E89D">          valueFrom</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">            secretKeyRef</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">              name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">app-secrets</span></span>
+<span class="line"><span style="color:#85E89D">              key</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">database-url</span></span>
+<span class="line"><span style="color:#85E89D">        resources</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          requests</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">            memory</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"128Mi"</span></span>
+<span class="line"><span style="color:#85E89D">            cpu</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"100m"</span></span>
+<span class="line"><span style="color:#85E89D">          limits</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">            memory</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"256Mi"</span></span>
+<span class="line"><span style="color:#85E89D">            cpu</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"200m"</span></span>
+<span class="line"><span style="color:#85E89D">        livenessProbe</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          httpGet</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">            path</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">/health</span></span>
+<span class="line"><span style="color:#85E89D">            port</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3000</span></span>
+<span class="line"><span style="color:#85E89D">          initialDelaySeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">30</span></span>
+<span class="line"><span style="color:#85E89D">          periodSeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">10</span></span>
+<span class="line"><span style="color:#85E89D">        readinessProbe</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          httpGet</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">            path</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">/ready</span></span>
+<span class="line"><span style="color:#85E89D">            port</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3000</span></span>
+<span class="line"><span style="color:#85E89D">          initialDelaySeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">5</span></span>
+<span class="line"><span style="color:#85E89D">          periodSeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">5</span></span>
+<span class="line"><span style="color:#B392F0">---</span></span>
+<span class="line"><span style="color:#85E89D">apiVersion</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">v1</span></span>
+<span class="line"><span style="color:#85E89D">kind</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Service</span></span>
+<span class="line"><span style="color:#85E89D">metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app-service</span></span>
+<span class="line"><span style="color:#85E89D">spec</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  selector</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    app</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app</span></span>
+<span class="line"><span style="color:#85E89D">  ports</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">protocol</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">TCP</span></span>
+<span class="line"><span style="color:#85E89D">      port</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">80</span></span>
+<span class="line"><span style="color:#85E89D">      targetPort</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3000</span></span>
+<span class="line"><span style="color:#85E89D">  type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">LoadBalancer</span></span></code></pre>
+<h2 id="monitoring-and-observability">Monitoring and Observability</h2>
+<h3 id="application-monitoring">Application Monitoring</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// Express.js monitoring setup</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> express</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> require</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'express'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> prometheus</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> require</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'prom-client'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> winston</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> require</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'winston'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> app</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> express</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Prometheus metrics</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> httpRequestDuration</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> prometheus.</span><span style="color:#B392F0">Histogram</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">'http_request_duration_seconds'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  help: </span><span style="color:#9ECBFF">'Duration of HTTP requests in seconds'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  labelNames: [</span><span style="color:#9ECBFF">'method'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'route'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'status_code'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">  buckets: [</span><span style="color:#79B8FF">0.1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.3</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.7</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">7</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> httpRequestTotal</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> prometheus.</span><span style="color:#B392F0">Counter</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">'http_requests_total'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  help: </span><span style="color:#9ECBFF">'Total number of HTTP requests'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  labelNames: [</span><span style="color:#9ECBFF">'method'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'route'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'status_code'</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Winston logger configuration</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> logger</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> winston.</span><span style="color:#B392F0">createLogger</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  level: </span><span style="color:#9ECBFF">'info'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  format: winston.format.</span><span style="color:#B392F0">combine</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    winston.format.</span><span style="color:#B392F0">timestamp</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    winston.format.</span><span style="color:#B392F0">errors</span><span style="color:#E1E4E8">({ stack: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8"> }),</span></span>
+<span class="line"><span style="color:#E1E4E8">    winston.format.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">  ),</span></span>
+<span class="line"><span style="color:#E1E4E8">  transports: [</span></span>
+<span class="line"><span style="color:#F97583">    new</span><span style="color:#E1E4E8"> winston.transports.</span><span style="color:#B392F0">File</span><span style="color:#E1E4E8">({ filename: </span><span style="color:#9ECBFF">'error.log'</span><span style="color:#E1E4E8">, level: </span><span style="color:#9ECBFF">'error'</span><span style="color:#E1E4E8"> }),</span></span>
+<span class="line"><span style="color:#F97583">    new</span><span style="color:#E1E4E8"> winston.transports.</span><span style="color:#B392F0">File</span><span style="color:#E1E4E8">({ filename: </span><span style="color:#9ECBFF">'combined.log'</span><span style="color:#E1E4E8"> }),</span></span>
+<span class="line"><span style="color:#F97583">    new</span><span style="color:#E1E4E8"> winston.transports.</span><span style="color:#B392F0">Console</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">      format: winston.format.</span><span style="color:#B392F0">simple</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    })</span></span>
+<span class="line"><span style="color:#E1E4E8">  ]</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Middleware for metrics collection</span></span>
+<span class="line"><span style="color:#E1E4E8">app.</span><span style="color:#B392F0">use</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">req</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">res</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">next</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> start</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Date.</span><span style="color:#B392F0">now</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#E1E4E8">  res.</span><span style="color:#B392F0">on</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'finish'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> duration</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (Date.</span><span style="color:#B392F0">now</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> start) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 1000</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> route</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> req.route </span><span style="color:#F97583">?</span><span style="color:#E1E4E8"> req.route.path </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> req.path;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    httpRequestDuration</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">labels</span><span style="color:#E1E4E8">(req.method, route, res.statusCode)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">observe</span><span style="color:#E1E4E8">(duration);</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    httpRequestTotal</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">labels</span><span style="color:#E1E4E8">(req.method, route, res.statusCode)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">inc</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    logger.</span><span style="color:#B392F0">info</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'HTTP Request'</span><span style="color:#E1E4E8">, {</span></span>
+<span class="line"><span style="color:#E1E4E8">      method: req.method,</span></span>
+<span class="line"><span style="color:#E1E4E8">      url: req.url,</span></span>
+<span class="line"><span style="color:#E1E4E8">      statusCode: res.statusCode,</span></span>
+<span class="line"><span style="color:#E1E4E8">      duration: duration,</span></span>
+<span class="line"><span style="color:#E1E4E8">      userAgent: req.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'User-Agent'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ip: req.ip</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#B392F0">  next</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Health check endpoint</span></span>
+<span class="line"><span style="color:#E1E4E8">app.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'/health'</span><span style="color:#E1E4E8">, (</span><span style="color:#FFAB70">req</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">res</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  res.</span><span style="color:#B392F0">status</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">({ status: </span><span style="color:#9ECBFF">'healthy'</span><span style="color:#E1E4E8">, timestamp: </span><span style="color:#F97583">new</span><span style="color:#B392F0"> Date</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toISOString</span><span style="color:#E1E4E8">() });</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Metrics endpoint</span></span>
+<span class="line"><span style="color:#E1E4E8">app.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'/metrics'</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">req</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">res</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  res.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Content-Type'</span><span style="color:#E1E4E8">, prometheus.register.contentType);</span></span>
+<span class="line"><span style="color:#E1E4E8">  res.</span><span style="color:#B392F0">end</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">await</span><span style="color:#E1E4E8"> prometheus.register.</span><span style="color:#B392F0">metrics</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span></code></pre>
+<h3 id="monitoring-stack">Monitoring Stack</h3>
+<ul>
+<li><strong>Metrics</strong>: Prometheus + Grafana</li>
+<li><strong>Logging</strong>: ELK Stack (Elasticsearch, Logstash, Kibana)</li>
+<li><strong>Tracing</strong>: Jaeger or Zipkin</li>
+<li><strong>Alerting</strong>: AlertManager + PagerDuty</li>
+</ul>
+<h2 id="security-best-practices">Security Best Practices</h2>
+<h3 id="secret-management">Secret Management</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># AWS Secrets Manager integration</span></span>
+<span class="line"><span style="color:#85E89D">apiVersion</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">external-secrets.io/v1beta1</span></span>
+<span class="line"><span style="color:#85E89D">kind</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">SecretStore</span></span>
+<span class="line"><span style="color:#85E89D">metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">aws-secrets-manager</span></span>
+<span class="line"><span style="color:#85E89D">spec</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  provider</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    aws</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      service</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">SecretsManager</span></span>
+<span class="line"><span style="color:#85E89D">      region</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">us-east-1</span></span>
+<span class="line"><span style="color:#85E89D">      auth</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        jwt</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          serviceAccountRef</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">            name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">external-secrets-sa</span></span>
+<span class="line"><span style="color:#B392F0">---</span></span>
+<span class="line"><span style="color:#85E89D">apiVersion</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">external-secrets.io/v1beta1</span></span>
+<span class="line"><span style="color:#85E89D">kind</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">ExternalSecret</span></span>
+<span class="line"><span style="color:#85E89D">metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">app-secrets</span></span>
+<span class="line"><span style="color:#85E89D">spec</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  refreshInterval</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">1h</span></span>
+<span class="line"><span style="color:#85E89D">  secretStoreRef</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">aws-secrets-manager</span></span>
+<span class="line"><span style="color:#85E89D">    kind</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">SecretStore</span></span>
+<span class="line"><span style="color:#85E89D">  target</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">app-secrets</span></span>
+<span class="line"><span style="color:#85E89D">    creationPolicy</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Owner</span></span>
+<span class="line"><span style="color:#85E89D">  data</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#85E89D">secretKey</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">database-url</span></span>
+<span class="line"><span style="color:#85E89D">    remoteRef</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      key</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">prod/database</span></span>
+<span class="line"><span style="color:#85E89D">      property</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">url</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#85E89D">secretKey</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">api-key</span></span>
+<span class="line"><span style="color:#85E89D">    remoteRef</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      key</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">prod/api</span></span>
+<span class="line"><span style="color:#85E89D">      property</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">key</span></span></code></pre>
+<h3 id="security-scanning">Security Scanning</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># Security scanning in CI/CD</span></span>
+<span class="line"><span style="color:#E1E4E8">- </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Run Trivy vulnerability scanner</span></span>
+<span class="line"><span style="color:#85E89D">  uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">aquasecurity/trivy-action@master</span></span>
+<span class="line"><span style="color:#85E89D">  with</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    image-ref</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'myregistry/myapp:${{ github.sha }}'</span></span>
+<span class="line"><span style="color:#85E89D">    format</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'sarif'</span></span>
+<span class="line"><span style="color:#85E89D">    output</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'trivy-results.sarif'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">- </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Upload Trivy scan results to GitHub Security tab</span></span>
+<span class="line"><span style="color:#85E89D">  uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">github/codeql-action/upload-sarif@v2</span></span>
+<span class="line"><span style="color:#85E89D">  with</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    sarif_file</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'trivy-results.sarif'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">- </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">OWASP ZAP Baseline Scan</span></span>
+<span class="line"><span style="color:#85E89D">  uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">zaproxy/action-baseline@v0.7.0</span></span>
+<span class="line"><span style="color:#85E89D">  with</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    target</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'https://staging.myapp.com'</span></span></code></pre>
+<h2 id="performance-optimization">Performance Optimization</h2>
+<h3 id="auto-scaling-configuration">Auto Scaling Configuration</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># Horizontal Pod Autoscaler</span></span>
+<span class="line"><span style="color:#85E89D">apiVersion</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">autoscaling/v2</span></span>
+<span class="line"><span style="color:#85E89D">kind</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">HorizontalPodAutoscaler</span></span>
+<span class="line"><span style="color:#85E89D">metadata</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app-hpa</span></span>
+<span class="line"><span style="color:#85E89D">spec</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  scaleTargetRef</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    apiVersion</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">apps/v1</span></span>
+<span class="line"><span style="color:#85E89D">    kind</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Deployment</span></span>
+<span class="line"><span style="color:#85E89D">    name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web-app</span></span>
+<span class="line"><span style="color:#85E89D">  minReplicas</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2</span></span>
+<span class="line"><span style="color:#85E89D">  maxReplicas</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">10</span></span>
+<span class="line"><span style="color:#85E89D">  metrics</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#85E89D">type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Resource</span></span>
+<span class="line"><span style="color:#85E89D">    resource</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">cpu</span></span>
+<span class="line"><span style="color:#85E89D">      target</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Utilization</span></span>
+<span class="line"><span style="color:#85E89D">        averageUtilization</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">70</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#85E89D">type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Resource</span></span>
+<span class="line"><span style="color:#85E89D">    resource</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">memory</span></span>
+<span class="line"><span style="color:#85E89D">      target</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Utilization</span></span>
+<span class="line"><span style="color:#85E89D">        averageUtilization</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">80</span></span>
+<span class="line"><span style="color:#85E89D">  behavior</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    scaleDown</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      stabilizationWindowSeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">300</span></span>
+<span class="line"><span style="color:#85E89D">      policies</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Percent</span></span>
+<span class="line"><span style="color:#85E89D">        value</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">10</span></span>
+<span class="line"><span style="color:#85E89D">        periodSeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">60</span></span>
+<span class="line"><span style="color:#85E89D">    scaleUp</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      stabilizationWindowSeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">60</span></span>
+<span class="line"><span style="color:#85E89D">      policies</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Percent</span></span>
+<span class="line"><span style="color:#85E89D">        value</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span></span>
+<span class="line"><span style="color:#85E89D">        periodSeconds</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">60</span></span></code></pre>
+<h2 id="disaster-recovery-and-backup">Disaster Recovery and Backup</h2>
+<h3 id="backup-strategy">Backup Strategy</h3>
+<ul>
+<li><strong>Database Backups</strong>: Automated daily backups with point-in-time recovery</li>
+<li><strong>Application Data</strong>: Regular snapshots of persistent volumes</li>
+<li><strong>Configuration</strong>: Version-controlled infrastructure and application configs</li>
+<li><strong>Cross-Region Replication</strong>: Multi-region deployment for high availability</li>
+</ul>
+<h3 id="recovery-procedures">Recovery Procedures</h3>
+<ol>
+<li><strong>RTO (Recovery Time Objective)</strong>: Target time to restore service</li>
+<li><strong>RPO (Recovery Point Objective)</strong>: Maximum acceptable data loss</li>
+<li><strong>Automated Failover</strong>: Health checks and automatic traffic routing</li>
+<li><strong>Regular DR Testing</strong>: Scheduled disaster recovery drills</li>
+</ol>
+<h2 id="cost-optimization">Cost Optimization</h2>
+<h3 id="resource-management">Resource Management</h3>
+<ul>
+<li><strong>Right-sizing</strong>: Monitor and adjust resource allocations</li>
+<li><strong>Spot Instances</strong>: Use spot instances for non-critical workloads</li>
+<li><strong>Reserved Instances</strong>: Long-term commitments for predictable workloads</li>
+<li><strong>Auto-scaling</strong>: Scale resources based on demand</li>
+</ul>
+<h3 id="cost-monitoring">Cost Monitoring</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// AWS Cost monitoring function</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> AWS</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> require</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'aws-sdk'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> costExplorer</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> AWS</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">CostExplorer</span><span style="color:#E1E4E8">({ region: </span><span style="color:#9ECBFF">'us-east-1'</span><span style="color:#E1E4E8"> });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> getDailyCosts</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> params</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    TimePeriod: {</span></span>
+<span class="line"><span style="color:#E1E4E8">      Start: </span><span style="color:#9ECBFF">'2024-01-01'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      End: </span><span style="color:#9ECBFF">'2024-01-31'</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">    Granularity: </span><span style="color:#9ECBFF">'DAILY'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    Metrics: [</span><span style="color:#9ECBFF">'BlendedCost'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">    GroupBy: [</span></span>
+<span class="line"><span style="color:#E1E4E8">      {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Type: </span><span style="color:#9ECBFF">'DIMENSION'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        Key: </span><span style="color:#9ECBFF">'SERVICE'</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    ]</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> result</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> costExplorer.</span><span style="color:#B392F0">getCostAndUsage</span><span style="color:#E1E4E8">(params).</span><span style="color:#B392F0">promise</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> result.ResultsByTime;</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (error) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Error fetching cost data:'</span><span style="color:#E1E4E8">, error);</span></span>
+<span class="line"><span style="color:#F97583">    throw</span><span style="color:#E1E4E8"> error;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="team-collaboration">Team Collaboration</h2>
+<h3 id="devops-culture">DevOps Culture</h3>
+<ul>
+<li><strong>Shared Responsibility</strong>: Development and operations work together</li>
+<li><strong>Continuous Learning</strong>: Regular training and knowledge sharing</li>
+<li><strong>Blameless Postmortems</strong>: Learn from failures without blame</li>
+<li><strong>Documentation</strong>: Maintain up-to-date runbooks and procedures</li>
+</ul>
+<h3 id="communication-tools">Communication Tools</h3>
+<ul>
+<li><strong>Slack/Teams</strong>: Real-time communication</li>
+<li><strong>Jira/Linear</strong>: Project and issue tracking</li>
+<li><strong>Confluence/Notion</strong>: Documentation and knowledge base</li>
+<li><strong>PagerDuty</strong>: Incident management and alerting</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Effective cloud DevOps requires a combination of the right tools, processes, and culture. Focus on automation, monitoring, and continuous improvement to build reliable, scalable, and secure applications.</p>
+<p>Start with the basics—CI/CD pipelines and infrastructure as code—then gradually add more sophisticated practices like advanced monitoring, security scanning, and cost optimization.</p>
+<p>Remember that DevOps is as much about culture and collaboration as it is about technology. Invest in your team’s skills and create an environment that encourages experimentation and learning from failures.</p>
+<p>The cloud DevOps landscape continues to evolve rapidly. Stay current with new tools and practices, but always evaluate them against your specific needs and constraints.</p>  <!-- Social Share Component --> <div class="social-share " data-astro-cid-luj3ckct> <h4 class="share-title" data-astro-cid-luj3ckct>Share this article</h4> <div class="share-buttons" data-astro-cid-luj3ckct> <!-- Twitter Share --> <a href="https://twitter.com/intent/tweet?text=Cloud%20DevOps%20Best%20Practices%3A%20Streamlining%20Development%20and%20Deployment&url=https%3A%2F%2Fexample.com%2Fblog%2Fcloud-devops-best-practices%2F&via=somadhantec" target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on Twitter" data-astro-cid-luj3ckct> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-luj3ckct> <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" data-astro-cid-luj3ckct></path> </svg> <span data-astro-cid-luj3ckct>Twitter</span> </a> <!-- Facebook Share --> <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fexample.com%2Fblog%2Fcloud-devops-best-practices%2F" target="_blank" rel="noopener noreferrer" class="share-btn facebook" aria-label="Share on Facebook" data-astro-cid-luj3ckct> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-luj3ckct> <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" data-astro-cid-luj3ckct></path> </svg> <span data-astro-cid-luj3ckct>Facebook</span> </a> <!-- LinkedIn Share --> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.com%2Fblog%2Fcloud-devops-best-practices%2F" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn" data-astro-cid-luj3ckct> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-luj3ckct> <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" data-astro-cid-luj3ckct></path> <rect x="2" y="9" width="4" height="12" data-astro-cid-luj3ckct></rect> <circle cx="4" cy="4" r="2" data-astro-cid-luj3ckct></circle> </svg> <span data-astro-cid-luj3ckct>LinkedIn</span> </a> <!-- WhatsApp Share --> <a href="https://wa.me/?text=Cloud%20DevOps%20Best%20Practices%3A%20Streamlining%20Development%20and%20Deployment%20https%3A%2F%2Fexample.com%2Fblog%2Fcloud-devops-best-practices%2F" target="_blank" rel="noopener noreferrer" class="share-btn whatsapp" aria-label="Share on WhatsApp" data-astro-cid-luj3ckct> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-luj3ckct> <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" data-astro-cid-luj3ckct></path> </svg> <span data-astro-cid-luj3ckct>WhatsApp</span> </a> <!-- Copy Link --> <button class="share-btn copy-link" data-url="https://example.com/blog/cloud-devops-best-practices/" aria-label="Copy link" data-astro-cid-luj3ckct> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-luj3ckct> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-luj3ckct></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-luj3ckct></path> </svg> <span class="copy-text" data-astro-cid-luj3ckct>Copy Link</span> </button> </div> </div>  <script type="module">document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".copy-link").forEach(n=>{n.addEventListener("click",async function(){const e=this.dataset.url,o=this.querySelector(".copy-text");try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(e);else{const t=document.createElement("textarea");t.value=e,t.style.position="fixed",t.style.left="-999999px",t.style.top="-999999px",document.body.appendChild(t),t.focus(),t.select(),document.execCommand("copy"),document.body.removeChild(t)}const c=o.textContent;o.textContent="Copied!",this.classList.add("copied"),setTimeout(()=>{o.textContent=c,this.classList.remove("copied")},2e3),typeof gtag<"u"&&gtag("event","share",{method:"copy_link",content_type:"article",item_id:e})}catch(c){console.error("Failed to copy link:",c),o.textContent="Failed to copy",setTimeout(()=>{o.textContent="Copy Link"},2e3)}})}),document.querySelectorAll(".share-btn:not(.copy-link)").forEach(n=>{n.addEventListener("click",function(){const e=this.classList[1];this.href,typeof gtag<"u"&&gtag("event","share",{method:e,content_type:"article",item_id:window.location.href})})})});</script> </div> </article> </main> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <div class="footer-section" data-astro-cid-sz7xmlte> <h3 data-astro-cid-sz7xmlte>SomaDhanTech Blog</h3> <p data-astro-cid-sz7xmlte>Your ultimate destination for technology insights, domain expertise, hosting solutions, and digital products.</p> </div> <div class="footer-section" data-astro-cid-sz7xmlte> <h4 data-astro-cid-sz7xmlte>Quick Links</h4> <ul data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte><a href="/" data-astro-cid-sz7xmlte>Home</a></li><li data-astro-cid-sz7xmlte><a href="/blog" data-astro-cid-sz7xmlte>Blog</a></li><li data-astro-cid-sz7xmlte><a href="https://github.com/somadhantec" data-astro-cid-sz7xmlte>GitHub</a></li><li data-astro-cid-sz7xmlte><a href="https://twitter.com/somadhantec" data-astro-cid-sz7xmlte>Twitter</a></li> </ul> </div><div class="footer-section" data-astro-cid-sz7xmlte> <h4 data-astro-cid-sz7xmlte>Categories</h4> <ul data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte><a href="/blog/category/technology" data-astro-cid-sz7xmlte>Technology</a></li><li data-astro-cid-sz7xmlte><a href="/blog/category/hosting" data-astro-cid-sz7xmlte>Hosting</a></li><li data-astro-cid-sz7xmlte><a href="/blog/category/domains" data-astro-cid-sz7xmlte>Domains</a></li><li data-astro-cid-sz7xmlte><a href="/blog/category/tutorials" data-astro-cid-sz7xmlte>Tutorials</a></li> </ul> </div> <div class="footer-section" data-astro-cid-sz7xmlte> <h4 data-astro-cid-sz7xmlte>Follow Us</h4> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://twitter.com/somadhantec" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow SomaDhanTech on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/somadhantec" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit SomaDhanTech GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </div> </div> <div class="footer-bottom" data-astro-cid-sz7xmlte> <p data-astro-cid-sz7xmlte>&copy; 2025 SomaDhanTech Team. All rights reserved.</p> </div> </footer>  <button id="go-to-top" class="go-to-top" aria-label="Go to top" title="Go to top" data-astro-cid-4ogupr24> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-4ogupr24> <path d="M18 15l-6-6-6 6" data-astro-cid-4ogupr24></path> </svg> </button>  <script type="module">document.addEventListener("DOMContentLoaded",function(){const o=document.getElementById("go-to-top");if(!o)return;function t(){(window.pageYOffset||document.documentElement.scrollTop)>300?o.classList.add("visible"):o.classList.remove("visible")}function n(){window.scrollTo({top:0,behavior:"smooth"})}window.addEventListener("scroll",t),o.addEventListener("click",n),o.addEventListener("keydown",function(e){(e.key==="Enter"||e.key===" ")&&(e.preventDefault(),n())}),t()});document.addEventListener("astro:page-load",function(){const o=document.getElementById("go-to-top");o&&(o.classList.remove("visible"),window.addEventListener("scroll",function(){(window.pageYOffset||document.documentElement.scrollTop)>300?o.classList.add("visible"):o.classList.remove("visible")}))});</script> <script type="module">document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("main-header"),s=document.getElementById("hamburger-menu"),n=document.getElementById("mobile-menu-overlay");let c=window.scrollY,o=!1;function a(){const e=window.scrollY;t&&(e>50?t.classList.add("scrolled"):t.classList.remove("scrolled"),window.innerWidth<=768&&e>c&&e>100?t.style.transform="translateY(-100%)":t.style.transform="translateY(0)",c=e,o=!1)}function u(){o||(requestAnimationFrame(a),o=!0)}function d(e){if(!s)return;const r=s.querySelectorAll(".hamburger-line");e?(r[0].style.transform="rotate(45deg) translate(5px, 5px)",r[1].style.opacity="0",r[2].style.transform="rotate(-45deg) translate(7px, -6px)",s.setAttribute("aria-expanded","true")):(r[0].style.transform="none",r[1].style.opacity="1",r[2].style.transform="none",s.setAttribute("aria-expanded","false"))}s&&s.addEventListener("click",function(){const e=n&&n.classList.contains("active");d(!e)}),n&&new MutationObserver(function(r){r.forEach(function(i){if(i.type==="attributes"&&i.attributeName==="class"){const l=n.classList.contains("active");d(l)}})}).observe(n,{attributes:!0,attributeFilter:["class"]});function m(){t&&window.innerWidth>768&&(t.style.transform="translateY(0)"),window.innerWidth>768&&n&&n.classList.contains("active")&&(n.classList.remove("active"),document.body.style.overflow="",d(!1))}function f(){const e=window.location.pathname;document.querySelectorAll(".desktop-nav a, .mobile-nav-link").forEach(i=>{i.classList.remove("active");const l=i.getAttribute("href");(l===e||e==="/"&&l==="/"||e.startsWith("/blog")&&l==="/blog")&&i.classList.add("active")})}function v(){a(),f(),window.addEventListener("scroll",u,{passive:!0}),window.addEventListener("resize",m)}v()});document.addEventListener("astro:page-load",function(){document.getElementById("main-header");const t=document.getElementById("mobile-menu-overlay");t&&t.classList.contains("active")&&(t.classList.remove("active"),document.body.style.overflow="");const s=document.getElementById("hamburger-menu");s&&(s.querySelectorAll(".hamburger-line").forEach(a=>{a.style.transform="none",a.style.opacity="1"}),s.setAttribute("aria-expanded","false"));const n=window.location.pathname;document.querySelectorAll(".desktop-nav a, .mobile-nav-link").forEach(o=>{o.classList.remove("active");const a=o.getAttribute("href");(a===n||n==="/"&&a==="/"||n.startsWith("/blog")&&a==="/blog")&&o.classList.add("active")})});</script> </body></html>

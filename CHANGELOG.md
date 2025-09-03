@@ -2,6 +2,34 @@
 
 All notable changes to SomaDhanTech Blog will be documented in this file.
 
+## [2.7.0] - 2025-09-04
+
+### Workflow Simplification
+- **Removed Build Steps**: Eliminated Node.js setup, dependency installation, and build steps from GitHub workflow
+- **Manual Build Process**: Changed to manual build process where developer runs `npm run build` locally
+- **Dist Directory Tracking**: Removed `dist/` from .gitignore to allow committing built files to repository
+- **Simplified Deployment**: GitHub Actions now only syncs pre-built files from the repository
+- **Faster CI/CD**: Reduced workflow execution time by removing build dependencies
+
+### Technical Changes
+- **Updated GitHub Workflow**: Streamlined workflow to only checkout code and sync files
+- **Git Tracking**: Built files in dist directory are now version controlled
+- **Manual Control**: Developer has full control over when builds are created and deployed
+
+## [2.6.0] - 2025-09-04
+
+### Deployment Optimization
+- **Dist-Only Deployment**: Modified GitHub workflow to deploy only the dist directory to cPanel server
+- **Reduced Upload Size**: Eliminated unnecessary source files, configuration files, and dependencies from deployment
+- **Optimized FTP Sync**: Added local-dir parameter to sync only built files instead of entire project
+- **Simplified Exclusions**: Removed extensive exclude patterns since only dist directory is now deployed
+- **Enhanced Security**: Source code and configuration files are no longer exposed on the production server
+
+### Technical Improvements
+- **Faster Deployments**: Significantly reduced deployment time by uploading only essential built files
+- **Better Resource Management**: Server storage optimized by excluding development dependencies
+- **Cleaner Production Environment**: Only production-ready files are deployed to the server
+
 ## [2.5.0] - 2024-12-28
 
 ### Content Management Migration
