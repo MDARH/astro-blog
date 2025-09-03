@@ -1,49 +1,605 @@
 ---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import AdBanner from '../components/AdBanner.astro';
+import GoToTop from '../components/GoToTop.astro';
+import HeaderScript from '../components/HeaderScript.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import contentData from '../data/content.json';
+
+// Get all blog posts and sort by publication date
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Get featured posts (first 3 most recent)
+const featuredPosts = posts.slice(0, 3);
+
+// Get recent posts (next 6 posts)
+const recentPosts = posts.slice(3, 6);
+
+// Get content from JSON
+const { hero, categories, newsletter, ads } = contentData;
+
+// Filter ads by position
+const sidebarAds = ads.filter(ad => ad.position === 'sidebar');
+const contentAds = ads.filter(ad => ad.position === 'content');
+const footerAds = ads.filter(ad => ad.position === 'footer');
+
+// SEO keywords for homepage
+const keywords = [
+	'technology blog',
+	'web hosting',
+	'domain management',
+	'digital products',
+	'programming tutorials',
+	'cloud computing',
+	'devops',
+	'web development',
+	'tech insights',
+	'coding tutorials'
+];
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} keywords={keywords} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<!-- Hero Section -->
+			<section class="hero">
+				<div class="container">
+					<div class="hero-content">
+						<h1 class="hero-title">
+							{hero.title}
+						</h1>
+						<p class="hero-description">
+							{hero.description}
+						</p>
+						<div class="hero-actions">
+							<a href={hero.primaryButton.link} class="btn btn-primary">{hero.primaryButton.text}</a>
+							<a href={hero.secondaryButton.link} class="btn btn-secondary">{hero.secondaryButton.text}</a>
+						</div>
+					</div>
+					<div class="hero-image">
+						<img src={hero.image} alt="Technology and Development" />
+					</div>
+				</div>
+			</section>
+
+			<!-- Featured Posts Section -->
+			<section class="featured-posts">
+				<div class="container">
+					<div class="content-with-sidebar">
+						<div class="main-content">
+							<h2 class="section-title">Featured Articles</h2>
+							<div class="featured-grid">
+								{featuredPosts.map((post) => (
+									<article class="featured-card">
+										<a href={`/blog/${post.slug}/`} class="card-link">
+											<div class="card-image">
+												{post.data.heroImage ? (
+													<Image src={post.data.heroImage} alt={post.data.title} width={400} height={250} />
+												) : (
+													<img src={`https://picsum.photos/400/250?random=${post.slug}`} alt={post.data.title} />
+												)}
+											</div>
+											<div class="card-content">
+												<div class="card-meta">
+													<FormattedDate date={post.data.pubDate} />
+												</div>
+												<h3 class="card-title">{post.data.title}</h3>
+												<p class="card-description">{post.data.description}</p>
+												<span class="read-more">Read More →</span>
+											</div>
+										</a>
+									</article>
+								))}
+							</div>
+						</div>
+						<aside class="sidebar">
+							{sidebarAds.map((ad) => (
+								<AdBanner ad={ad} />
+							))}
+						</aside>
+					</div>
+				</div>
+			</section>
+
+			<!-- Content Ad -->
+			{contentAds.length > 0 && (
+				<section class="content-ad">
+					<div class="container">
+						<AdBanner ad={contentAds[0]} class="ad-horizontal" />
+					</div>
+				</section>
+			)}
+
+			<!-- Categories Section -->
+			<section id="categories" class="categories">
+				<div class="container">
+					<h2 class="section-title">Explore by Category</h2>
+					<div class="categories-grid">
+						{categories.map((category) => (
+							<div class="category-card">
+								<div class="category-icon">{category.icon}</div>
+								<h3>{category.title}</h3>
+								<p>{category.description}</p>
+								<a href={category.link} class="category-link">Explore →</a>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- Recent Posts Section -->
+			<section class="recent-posts">
+				<div class="container">
+					<div class="section-header">
+						<h2 class="section-title">Latest Articles</h2>
+						<a href="/blog" class="view-all">View All Articles →</a>
+					</div>
+					<div class="posts-grid">
+						{recentPosts.map((post) => (
+							<article class="post-card">
+								<a href={`/blog/${post.slug}/`} class="card-link">
+									<div class="card-image">
+										{post.data.heroImage ? (
+											<Image src={post.data.heroImage} alt={post.data.title} width={300} height={200} />
+										) : (
+											<img src={`https://picsum.photos/300/200?random=${post.slug}`} alt={post.data.title} />
+										)}
+									</div>
+									<div class="card-content">
+										<div class="card-meta">
+											<FormattedDate date={post.data.pubDate} />
+										</div>
+										<h3 class="card-title">{post.data.title}</h3>
+										<p class="card-description">{post.data.description}</p>
+									</div>
+								</a>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- Footer Ads -->
+			{footerAds.length > 0 && (
+				<section class="footer-ads">
+					<div class="container">
+						<div class="ads-grid">
+							{footerAds.map((ad) => (
+								<AdBanner ad={ad} class="ad-horizontal" />
+							))}
+						</div>
+					</div>
+				</section>
+			)}
+
+			<!-- Newsletter CTA Section -->
+			<section class="newsletter-cta">
+				<div class="container">
+					<div class="cta-content">
+						<h2>{newsletter.title}</h2>
+						<p>{newsletter.description}</p>
+						<a href="https://twitter.com/somadhantec" target="_blank" class="btn btn-primary">{newsletter.buttonText}</a>
+					</div>
+				</div>
+			</section>
 		</main>
 		<Footer />
+		<GoToTop />
+		<HeaderScript />
 	</body>
 </html>
+
+<style>
+	.container {
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	/* Content with Sidebar Layout */
+	.content-with-sidebar {
+		display: grid;
+		grid-template-columns: 1fr 320px;
+		gap: 3rem;
+		align-items: start;
+	}
+
+	.main-content {
+		min-width: 0; /* Prevent overflow */
+	}
+
+	.sidebar {
+		position: sticky;
+		top: 120px;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	/* Hero Section */
+	.hero {
+		padding: 6rem 0;
+		background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hero::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23000" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+		pointer-events: none;
+	}
+
+	.hero .container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.hero-title {
+		font-size: 4rem;
+		font-weight: 800;
+		line-height: 1.1;
+		margin-bottom: 2rem;
+		color: var(--text-color);
+		background: linear-gradient(135deg, var(--text-color) 0%, var(--accent) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.hero-description {
+		font-size: 1.2rem;
+		line-height: 1.6;
+		color: var(--text-muted);
+		margin-bottom: 2rem;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.hero-image img {
+		width: 100%;
+		height: auto;
+		border-radius: 12px;
+		box-shadow: var(--shadow);
+	}
+
+	/* Buttons */
+	.btn {
+		display: inline-block;
+		padding: 1rem 2rem;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.2s ease;
+		border: 2px solid transparent;
+	}
+
+	.btn-primary {
+		background: var(--accent);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background: var(--accent-dark);
+		transform: translateY(-2px);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+
+	.btn-secondary:hover {
+		background: var(--accent);
+		color: white;
+	}
+
+	/* Sections */
+	.featured-posts,
+	.categories,
+	.recent-posts {
+		padding: 5rem 0;
+	}
+
+	.content-ad {
+		padding: 3rem 0;
+		background: var(--bg-secondary);
+	}
+
+	.footer-ads {
+		padding: 3rem 0;
+		background: var(--bg-color);
+		border-top: 1px solid var(--border-color);
+	}
+
+	.ads-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		justify-items: center;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		margin-bottom: 3rem;
+		text-align: center;
+		color: var(--text-color);
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 3rem;
+	}
+
+	.view-all {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	/* Featured Posts Grid */
+	.featured-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 2.5rem;
+	}
+
+	.featured-card {
+		background: var(--card-bg);
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: var(--shadow);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		border: 1px solid var(--border-color);
+	}
+
+	.featured-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Categories Grid */
+	.categories {
+		background: var(--bg-secondary);
+	}
+
+	.categories-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 2rem;
+	}
+
+	.category-card {
+		background: var(--card-bg);
+		padding: 2rem;
+		border-radius: 12px;
+		text-align: center;
+		border: 1px solid var(--border-color);
+		transition: transform 0.2s ease;
+	}
+
+	.category-card:hover {
+		transform: translateY(-2px);
+	}
+
+	.category-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	.category-card h3 {
+		margin-bottom: 1rem;
+		color: var(--text-color);
+	}
+
+	.category-card p {
+		color: var(--text-muted);
+		margin-bottom: 1.5rem;
+	}
+
+	.category-link {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	/* Posts Grid */
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.post-card {
+		background: var(--card-bg);
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: var(--shadow);
+		transition: transform 0.2s ease;
+		border: 1px solid var(--border-color);
+	}
+
+	.post-card:hover {
+		transform: translateY(-2px);
+	}
+
+	/* Card Styles */
+	.card-link {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+
+	.card-image {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.card-image img {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		transition: transform 0.2s ease;
+	}
+
+	.card-link:hover .card-image img {
+		transform: scale(1.05);
+	}
+
+	.card-content {
+		padding: 1.5rem;
+	}
+
+	.card-meta {
+		color: var(--text-muted);
+		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.card-title {
+		font-size: 1.25rem;
+		margin-bottom: 0.75rem;
+		color: var(--text-color);
+		line-height: 1.3;
+	}
+
+	.card-description {
+		color: var(--text-muted);
+		line-height: 1.5;
+		margin-bottom: 1rem;
+	}
+
+	.read-more {
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 0.9rem;
+	}
+
+	/* Newsletter CTA */
+	.newsletter-cta {
+		padding: 4rem 0;
+		background: var(--accent);
+		color: white;
+		text-align: center;
+	}
+
+	.newsletter-cta h2 {
+		color: white;
+		margin-bottom: 1rem;
+	}
+
+	.newsletter-cta p {
+		font-size: 1.1rem;
+		margin-bottom: 2rem;
+		opacity: 0.9;
+	}
+
+	.newsletter-cta .btn-primary {
+		background: white;
+		color: var(--accent);
+	}
+
+	.newsletter-cta .btn-primary:hover {
+		background: var(--bg-color);
+		transform: translateY(-2px);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 1024px) {
+		.content-with-sidebar {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.sidebar {
+			position: static;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 1.5rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 0 1rem;
+		}
+
+		.hero {
+			padding: 4rem 0;
+		}
+
+		.hero .container {
+			grid-template-columns: 1fr;
+			text-align: center;
+			gap: 2rem;
+		}
+
+		.hero-title {
+			font-size: 2.5rem;
+		}
+
+		.section-header {
+			flex-direction: column;
+			gap: 1rem;
+			text-align: center;
+		}
+
+		.featured-grid,
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.categories-grid {
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		}
+
+		.hero-actions {
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.hero-actions .btn {
+			width: 100%;
+			max-width: 280px;
+		}
+
+		.sidebar {
+			grid-template-columns: 1fr;
+		}
+
+		.featured-posts,
+		.categories,
+		.recent-posts {
+			padding: 3rem 0;
+		}
+	}
+</style>

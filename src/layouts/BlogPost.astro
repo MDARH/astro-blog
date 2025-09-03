@@ -5,20 +5,66 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import HeaderScript from '../components/HeaderScript.astro';
+import SocialShare from '../components/SocialShare.astro';
+import GoToTop from '../components/GoToTop.astro';
+import { SITE_AUTHOR } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+// Extract tags from the current URL or content (you can customize this)
+const currentPath = Astro.url.pathname;
+const tags = [];
+if (currentPath.includes('hosting')) tags.push('Web Hosting');
+if (currentPath.includes('domain')) tags.push('Domain Management');
+if (currentPath.includes('react')) tags.push('React', 'JavaScript', 'Frontend');
+if (currentPath.includes('digital-products')) tags.push('Digital Products', 'SaaS', 'Business');
+if (currentPath.includes('cloud') || currentPath.includes('devops')) tags.push('Cloud Computing', 'DevOps', 'Infrastructure');
+if (currentPath.includes('tutorial')) tags.push('Tutorial', 'Programming');
+
+// Determine article section based on content
+let section = 'Technology';
+if (currentPath.includes('hosting')) section = 'Web Hosting';
+else if (currentPath.includes('domain')) section = 'Domain Management';
+else if (currentPath.includes('tutorial') || currentPath.includes('react')) section = 'Programming Tutorials';
+else if (currentPath.includes('digital-products')) section = 'Digital Business';
+else if (currentPath.includes('cloud') || currentPath.includes('devops')) section = 'Cloud & DevOps';
+
+// Generate keywords for SEO
+const keywords = [
+	'technology blog',
+	'web development',
+	'hosting solutions',
+	'domain management',
+	'digital products',
+	'programming tutorials',
+	...tags.map(tag => tag.toLowerCase())
+];
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead 
+			title={title} 
+			description={description}
+			heroImage={heroImage}
+			article={{
+				publishedTime: pubDate.toISOString(),
+				modifiedTime: updatedDate?.toISOString(),
+				author: SITE_AUTHOR,
+				tags: tags,
+				section: section
+			}}
+			keywords={keywords}
+		/>
 		<style>
 			main {
-				width: calc(100% - 2em);
+				width: 100%;
 				max-width: 100%;
 				margin: 0;
+				padding: 2rem 0;
 			}
 			.hero-image {
 				width: 100%;
@@ -30,24 +76,47 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				box-shadow: var(--box-shadow);
 			}
 			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
+				width: 100%;
+				max-width: 800px;
 				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
+				padding: 0 2rem;
+				color: var(--text-color);
 			}
 			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
+				margin-bottom: 2rem;
+				padding: 2rem 0;
 				text-align: center;
 				line-height: 1;
+				border-bottom: 1px solid var(--border-color);
 			}
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				margin: 0 0 1rem 0;
+				font-size: 2.5rem;
+				line-height: 1.2;
+				color: var(--text-color);
+			}
+			
+			@media (max-width: 768px) {
+				.prose {
+					padding: 0 1rem;
+				}
+				
+				.title {
+					padding: 1.5rem 0;
+				}
+				
+				.title h1 {
+					font-size: 2rem;
+				}
+				
+				.hero-image {
+					margin: 0 -1rem;
+				}
 			}
 			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				margin-bottom: 1rem;
+				color: var(--text-muted);
+				font-size: 0.95rem;
 			}
 			.last-updated-on {
 				font-style: italic;
@@ -78,9 +147,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<hr />
 					</div>
 					<slot />
+					
+					<!-- Social Share Component -->
+					<SocialShare 
+						title={title} 
+						description={description}
+					/>
 				</div>
 			</article>
 		</main>
 		<Footer />
+		<GoToTop />
+		<HeaderScript />
 	</body>
 </html>

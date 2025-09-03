@@ -1,0 +1,204 @@
+---
+// Header JavaScript functionality for sticky behavior and animations
+---
+
+<script>
+	/**
+	 * Header Sticky Behavior and Animations
+	 * Handles scroll effects, mobile menu, and smooth animations
+	 */
+	document.addEventListener('DOMContentLoaded', function() {
+		const header = document.getElementById('main-header');
+		const hamburgerBtn = document.getElementById('hamburger-menu');
+		const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+		let lastScrollY = window.scrollY;
+		let ticking = false;
+
+		/**
+		 * Handle scroll effects for sticky header
+		 */
+		function updateHeaderOnScroll() {
+			const currentScrollY = window.scrollY;
+			
+			if (!header) return;
+
+			// Add scrolled class for styling
+			if (currentScrollY > 50) {
+				header.classList.add('scrolled');
+			} else {
+				header.classList.remove('scrolled');
+			}
+
+			// Hide/show header based on scroll direction (mobile only)
+			if (window.innerWidth <= 768) {
+				if (currentScrollY > lastScrollY && currentScrollY > 100) {
+					// Scrolling down - hide header
+					header.style.transform = 'translateY(-100%)';
+				} else {
+					// Scrolling up - show header
+					header.style.transform = 'translateY(0)';
+				}
+			} else {
+				// Always show header on desktop
+				header.style.transform = 'translateY(0)';
+			}
+
+			lastScrollY = currentScrollY;
+			ticking = false;
+		}
+
+		/**
+		 * Throttled scroll handler for performance
+		 */
+		function onScroll() {
+			if (!ticking) {
+				requestAnimationFrame(updateHeaderOnScroll);
+				ticking = true;
+			}
+		}
+
+		/**
+		 * Hamburger menu animation
+		 */
+		function toggleHamburgerAnimation(isOpen) {
+			if (!hamburgerBtn) return;
+			
+			const lines = hamburgerBtn.querySelectorAll('.hamburger-line');
+			
+			if (isOpen) {
+				// Transform to X
+				lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+				lines[1].style.opacity = '0';
+				lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+				hamburgerBtn.setAttribute('aria-expanded', 'true');
+			} else {
+				// Reset to hamburger
+				lines[0].style.transform = 'none';
+				lines[1].style.opacity = '1';
+				lines[2].style.transform = 'none';
+				hamburgerBtn.setAttribute('aria-expanded', 'false');
+			}
+		}
+
+		/**
+		 * Mobile menu event handlers
+		 */
+		if (hamburgerBtn) {
+			hamburgerBtn.addEventListener('click', function() {
+				const isOpen = mobileMenuOverlay && mobileMenuOverlay.classList.contains('active');
+				toggleHamburgerAnimation(!isOpen);
+			});
+		}
+
+		// Listen for mobile menu state changes
+		if (mobileMenuOverlay) {
+			const observer = new MutationObserver(function(mutations) {
+				mutations.forEach(function(mutation) {
+					if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+						const isOpen = mobileMenuOverlay.classList.contains('active');
+						toggleHamburgerAnimation(isOpen);
+					}
+				});
+			});
+			
+			observer.observe(mobileMenuOverlay, {
+				attributes: true,
+				attributeFilter: ['class']
+			});
+		}
+
+		/**
+		 * Handle window resize
+		 */
+		function onResize() {
+			// Reset header transform on resize
+			if (header && window.innerWidth > 768) {
+				header.style.transform = 'translateY(0)';
+			}
+			
+			// Close mobile menu on desktop
+			if (window.innerWidth > 768 && mobileMenuOverlay && mobileMenuOverlay.classList.contains('active')) {
+				mobileMenuOverlay.classList.remove('active');
+				document.body.style.overflow = '';
+				toggleHamburgerAnimation(false);
+			}
+		}
+
+		/**
+		 * Set active navigation link
+		 */
+		function setActiveNavLink() {
+			const currentPath = window.location.pathname;
+			const navLinks = document.querySelectorAll('.desktop-nav a, .mobile-nav-link');
+			
+			navLinks.forEach(link => {
+				link.classList.remove('active');
+				const href = link.getAttribute('href');
+				
+				if (href === currentPath || 
+					(currentPath === '/' && href === '/') ||
+					(currentPath.startsWith('/blog') && href === '/blog')) {
+					link.classList.add('active');
+				}
+			});
+		}
+
+		/**
+		 * Initialize header functionality
+		 */
+		function initHeader() {
+			// Set initial scroll state
+			updateHeaderOnScroll();
+			
+			// Set active navigation link
+			setActiveNavLink();
+			
+			// Add event listeners
+			window.addEventListener('scroll', onScroll, { passive: true });
+			window.addEventListener('resize', onResize);
+		}
+
+		// Initialize
+		initHeader();
+	});
+
+	/**
+	 * Re-initialize on page navigation (for SPA-like behavior)
+	 */
+	document.addEventListener('astro:page-load', function() {
+		const header = document.getElementById('main-header');
+		const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+		
+		// Close mobile menu if open
+		if (mobileMenuOverlay && mobileMenuOverlay.classList.contains('active')) {
+			mobileMenuOverlay.classList.remove('active');
+			document.body.style.overflow = '';
+		}
+		
+		// Reset hamburger animation
+		const hamburgerBtn = document.getElementById('hamburger-menu');
+		if (hamburgerBtn) {
+			const lines = hamburgerBtn.querySelectorAll('.hamburger-line');
+			lines.forEach(line => {
+				line.style.transform = 'none';
+				line.style.opacity = '1';
+			});
+			hamburgerBtn.setAttribute('aria-expanded', 'false');
+		}
+		
+		// Update active navigation links
+		const currentPath = window.location.pathname;
+		const navLinks = document.querySelectorAll('.desktop-nav a, .mobile-nav-link');
+		
+		navLinks.forEach(link => {
+			link.classList.remove('active');
+			const href = link.getAttribute('href');
+			
+			if (href === currentPath || 
+				(currentPath === '/' && href === '/') ||
+				(currentPath.startsWith('/blog') && href === '/blog')) {
+				link.classList.add('active');
+			}
+		});
+	});
+</script>

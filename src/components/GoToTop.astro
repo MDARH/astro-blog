@@ -1,0 +1,139 @@
+---
+// Go to Top Button Component
+---
+
+<button id="go-to-top" class="go-to-top" aria-label="Go to top" title="Go to top">
+	<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<path d="M18 15l-6-6-6 6"></path>
+	</svg>
+</button>
+
+<style>
+	.go-to-top {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		width: 50px;
+		height: 50px;
+		background: var(--accent);
+		color: white;
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		transition: all 0.3s ease;
+		z-index: 1000;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(20px);
+	}
+
+	.go-to-top.visible {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	.go-to-top:hover {
+		background: var(--accent-dark);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+	}
+
+	.go-to-top:active {
+		transform: translateY(0);
+	}
+
+	/* Responsive design */
+	@media (max-width: 768px) {
+		.go-to-top {
+			bottom: 1rem;
+			right: 1rem;
+			width: 45px;
+			height: 45px;
+		}
+	}
+
+	/* Animation */
+	@keyframes bounce {
+		0%, 20%, 50%, 80%, 100% {
+			transform: translateY(0);
+		}
+		40% {
+			transform: translateY(-5px);
+		}
+		60% {
+			transform: translateY(-3px);
+		}
+	}
+
+	.go-to-top.visible:hover {
+		animation: bounce 1s;
+	}
+</style>
+
+<script>
+	/**
+	 * Go to Top Button Functionality
+	 * Shows/hides button based on scroll position
+	 * Smoothly scrolls to top when clicked
+	 */
+	document.addEventListener('DOMContentLoaded', function() {
+		const goToTopBtn = document.getElementById('go-to-top');
+		
+		if (!goToTopBtn) return;
+
+		// Show/hide button based on scroll position
+		function toggleGoToTopButton() {
+			const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			
+			if (scrollTop > 300) {
+				goToTopBtn.classList.add('visible');
+			} else {
+				goToTopBtn.classList.remove('visible');
+			}
+		}
+
+		// Smooth scroll to top
+		function scrollToTop() {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
+
+		// Event listeners
+		window.addEventListener('scroll', toggleGoToTopButton);
+		goToTopBtn.addEventListener('click', scrollToTop);
+
+		// Keyboard accessibility
+		goToTopBtn.addEventListener('keydown', function(e) {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				scrollToTop();
+			}
+		});
+
+		// Initial check
+		toggleGoToTopButton();
+	});
+
+	// Re-initialize on page navigation (for SPA-like behavior)
+	document.addEventListener('astro:page-load', function() {
+		const goToTopBtn = document.getElementById('go-to-top');
+		if (goToTopBtn) {
+			goToTopBtn.classList.remove('visible');
+			window.addEventListener('scroll', function() {
+				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+				if (scrollTop > 300) {
+					goToTopBtn.classList.add('visible');
+				} else {
+					goToTopBtn.classList.remove('visible');
+				}
+			});
+		}
+	});
+</script>

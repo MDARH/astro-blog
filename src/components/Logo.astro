@@ -1,0 +1,78 @@
+---
+// SomaDhanTech SVG Logo Component
+interface Props {
+	width?: string;
+	height?: string;
+	class?: string;
+}
+
+const { width = "200", height = "60", class: className = "" } = Astro.props;
+---
+
+<svg 
+	width={width} 
+	height={height} 
+	viewBox="0 0 200 60" 
+	fill="none" 
+	xmlns="http://www.w3.org/2000/svg"
+	class={className}
+>
+	<!-- Background gradient -->
+	<defs>
+		<linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+			<stop offset="0%" style="stop-color:var(--accent);stop-opacity:1" />
+			<stop offset="100%" style="stop-color:var(--accent-dark);stop-opacity:1" />
+		</linearGradient>
+		<linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+			<stop offset="0%" style="stop-color:var(--text-color);stop-opacity:1" />
+			<stop offset="50%" style="stop-color:var(--accent);stop-opacity:1" />
+			<stop offset="100%" style="stop-color:var(--text-color);stop-opacity:1" />
+		</linearGradient>
+	</defs>
+	
+	<!-- Logo background shape -->
+	<rect x="2" y="8" width="196" height="44" rx="8" fill="url(#logoGradient)" opacity="0.1" stroke="url(#logoGradient)" stroke-width="1"/>
+	
+	<!-- Main text: SomaDhanTech -->
+	<text x="100" y="38" 
+		font-family="'Atkinson', sans-serif" 
+		font-size="18" 
+		font-weight="700" 
+		text-anchor="middle" 
+		fill="url(#textGradient)"
+		letter-spacing="0.5px">
+		SomaDhanTech
+	</text>
+	
+	<!-- Decorative tech elements -->
+	<circle cx="15" cy="30" r="3" fill="var(--accent)" opacity="0.6">
+		<animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+	</circle>
+	<circle cx="185" cy="30" r="3" fill="var(--accent)" opacity="0.6">
+		<animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+	</circle>
+	
+	<!-- Tech circuit lines -->
+	<path d="M25 30 L35 30 L35 25 L45 25" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+	<path d="M175 30 L165 30 L165 35 L155 35" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+</svg>
+
+<style>
+	/* Logo hover effects */
+	svg {
+		transition: transform 0.3s ease;
+		cursor: pointer;
+	}
+	
+	svg:hover {
+		transform: scale(1.05);
+	}
+	
+	/* Responsive sizing */
+	@media (max-width: 768px) {
+		svg {
+			max-width: 150px;
+			height: auto;
+		}
+	}
+</style>
