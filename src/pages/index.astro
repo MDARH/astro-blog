@@ -9,7 +9,6 @@ import AdBanner from '../components/AdBanner.astro';
 import GoToTop from '../components/GoToTop.astro';
 import HeaderScript from '../components/HeaderScript.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import contentData from '../data/content.json';
 
 // Get all blog posts and sort by publication date
 const posts = (await getCollection('blog')).sort(
@@ -22,8 +21,17 @@ const featuredPosts = posts.slice(0, 3);
 // Get recent posts (next 6 posts)
 const recentPosts = posts.slice(3, 6);
 
-// Get content from JSON
-const { hero, categories, newsletter, ads } = contentData;
+// Get content from markdown collections
+const heroContent = await getCollection('site');
+const categoriesContent = await getCollection('categories');
+const newsletterContent = await getCollection('site');
+const adsContent = await getCollection('ads');
+
+// Extract specific content
+const hero = heroContent.find(item => item.id === 'hero')?.data;
+const categories = categoriesContent.sort((a, b) => a.data.order - b.data.order).map(item => item.data);
+const newsletter = newsletterContent.find(item => item.id === 'newsletter')?.data;
+const ads = adsContent.filter(ad => ad.data.active).sort((a, b) => a.data.order - b.data.order).map(item => item.data);
 
 // Filter ads by position
 const sidebarAds = ads.filter(ad => ad.position === 'sidebar');

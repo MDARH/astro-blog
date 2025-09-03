@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import { SITE_AUTHOR, SITE_TITLE } from '../consts';
-import contentData from '../data/content.json';
+
+/**
+ * Get footer content from markdown collection
+ */
+const siteContent = await getCollection('site');
+const footerData = siteContent.find(item => item.id === 'footer');
+const footer = footerData?.data;
 const today = new Date();
-const { footer } = contentData;
 ---
 
 <footer>
@@ -11,7 +17,7 @@ const { footer } = contentData;
 			<h3>{SITE_TITLE}</h3>
 			<p>Your ultimate destination for technology insights, domain expertise, hosting solutions, and digital products.</p>
 		</div>
-		{footer.sections.map((section) => (
+		{footer?.sections?.map((section) => (
 			<div class="footer-section">
 				<h4>{section.title}</h4>
 				<ul>

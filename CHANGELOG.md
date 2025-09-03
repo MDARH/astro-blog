@@ -2,6 +2,37 @@
 
 All notable changes to SomaDhanTech Blog will be documented in this file.
 
+## [2.5.0] - 2024-12-28
+
+### Content Management Migration
+- **Migrated from JSON to Markdown**: Converted all site content from JSON format to markdown-based content collections
+- **New Content Collections**: Created dedicated collections for site data, categories, and advertisements
+- **Enhanced Content Structure**: Organized content into logical collections (site, categories, ads) with proper schemas
+- **Improved Content Management**: Content is now managed through markdown files with frontmatter for better maintainability
+
+### Content Collections
+- **Site Collection**: Hero section, newsletter, and footer configuration in markdown format
+- **Categories Collection**: Technology categories (hosting, domains, tutorials, digital products) with structured metadata
+- **Ads Collection**: Advertisement management with type, position, and activation controls
+- **Enhanced Schema Validation**: Comprehensive Zod schemas for all content types
+
+### Technical Improvements
+- **Updated Content Config**: Enhanced content.config.ts with new collection definitions and schemas
+- **Removed JSON Dependencies**: Eliminated content.json file and API endpoint for cleaner architecture
+- **Component Updates**: Updated index.astro and Footer.astro to use content collections
+- **Better Type Safety**: Improved type checking with Astro content collections
+
+### Developer Experience
+- **Markdown-First Approach**: All content now editable in markdown format for better version control
+- **Function-Level Documentation**: Added comprehensive comments for content collection functions
+- **Structured Content**: Organized content files in logical directory structure
+- **Schema Validation**: Runtime validation of content structure and types
+
+### Removed Features
+- **JSON API Endpoint**: Removed /api/content.json endpoint as content is now handled by collections
+- **Legacy JSON Import**: Eliminated direct JSON imports in favor of content collections
+- **Static Content Data**: Replaced static JSON with dynamic markdown-based content
+
 ## [2.4.0] - 2024-12-28
 
 ### GitHub Actions & Deployment
