@@ -2,6 +2,305 @@
 
 All notable changes to SomaDhanTech Blog will be documented in this file.
 
+## [2.27.0] - 2025-09-04
+
+### Header Search Bar Improvements
+- **Simplified Search Results**: Streamlined search results to show only thumbnail and title for cleaner display
+- **Reduced Visual Clutter**: Removed description and tags from search results for better focus
+- **Improved Layout**: Adjusted padding and spacing for more compact search result items
+- **Better Performance**: Faster rendering with simplified result structure
+
+### Mobile Header Layout Reorganization
+- **Logo Repositioning**: Moved logo to the right side on mobile devices
+- **Hamburger Menu**: Repositioned hamburger menu to the left side for better accessibility
+- **Centered Search Bar**: Search bar now centered between logo and hamburger menu
+- **Grid Layout Enhancement**: Updated CSS grid structure for better mobile organization
+- **Improved UX**: More intuitive mobile navigation layout following modern design patterns
+
+### Client-Side Pagination Implementation
+- **No-Reload Pagination**: Implemented JavaScript-based pagination without page reloads
+- **Real-Time Filtering**: Pagination works seamlessly with search, category, and tag filters
+- **Dynamic Page Controls**: Previous/Next buttons and page numbers update dynamically
+- **Performance Optimization**: Faster navigation with client-side post filtering
+- **Smooth User Experience**: Instant page transitions without loading delays
+- **State Management**: Proper handling of current page state during filtering
+
+### SVG Logo Management System
+- **Proper Directory Structure**: Created `/src/assets/icons/` directory for SVG logos
+- **Clean SVG Files**: Converted Astro components to proper SVG files
+- **Laravel Logo**: Added `laravel.svg` with proper import structure
+- **FilamentPHP Logo**: Added `filament.svg` with optimized code
+- **Better Organization**: Removed SVG components from `/src/components/` directory
+- **Maintainable Structure**: Easier to manage and update logo assets
+- **Performance**: Optimized loading with proper asset imports
+
+### Inline Tags Display Enhancement
+- **Streamlined Layout**: Tags now display inline with category list without extra spacing
+- **Same-Line Design**: Tags appear on the same line as "Tags:" heading
+- **Reduced Margin**: Minimized spacing between categories and tags sections
+- **Cleaner Interface**: More compact and organized filter section
+- **Better Space Utilization**: Efficient use of horizontal space
+
+### Technical Improvements
+- **Asset Management**: Proper SVG file organization in assets directory
+- **JavaScript Enhancement**: Advanced pagination logic with filter integration
+- **CSS Optimization**: Improved mobile responsive design patterns
+- **Code Cleanup**: Removed redundant Astro component files
+- **Performance**: Faster search results rendering and pagination
+
+### User Experience Enhancements
+- **Faster Search**: Simplified search results load quicker
+- **Better Mobile Navigation**: Intuitive header layout on mobile devices
+- **Instant Pagination**: No page reloads for better browsing experience
+- **Cleaner Interface**: Streamlined tags and categories display
+- **Professional Design**: Proper logo management and display
+
+### Code Organization
+- **Asset Structure**: Organized SVG logos in proper directory hierarchy
+- **Component Cleanup**: Removed unnecessary Astro component files
+- **Maintainable Code**: Better separation of assets and components
+- **Scalable Architecture**: Easy to add new logos and icons
+- **Best Practices**: Following Astro recommended patterns for asset management
+
+## [2.26.0] - 2025-09-04
+
+### Homepage Category Section Enhancement
+- **Real Categories Integration**: Replaced hardcoded categories with dynamic categories from content collection
+- **SVG Logo Integration**: Added Laravel and FilamentPHP SVG logos to category buttons
+- **Professional Category Display**: Categories now show proper logos with hover effects and transitions
+- **Dynamic Category Loading**: Categories automatically loaded from `/src/content/categories/` with proper ordering
+- **Visual Brand Recognition**: Laravel and FilamentPHP categories display recognizable brand logos
+
+### Inline Tags Implementation
+- **Streamlined Tag Display**: Replaced separate "Search by Tags" section with inline tags after categories
+- **Compact Tag Layout**: Tags now displayed in same line format: "Tags: api, advanced, css, etc."
+- **Real Post Tags**: Tags automatically extracted from actual post content using keyword matching
+- **Space-Efficient Design**: Inline tags save vertical space while maintaining functionality
+- **Responsive Tag Layout**: Tags wrap properly on mobile devices with optimized spacing
+
+### Pagination System Implementation
+- **Complete Pagination**: Added full pagination system for blog posts with 9 posts per page
+- **Smart Page Navigation**: Previous/Next buttons with intelligent page number display
+- **Ellipsis Support**: Shows "..." for large page ranges with smart truncation
+- **URL Parameter Support**: Pagination works with category and tag filters via URL parameters
+- **Page Information**: Shows current page, total pages, and post counts
+- **SEO-Friendly URLs**: Clean URL structure with proper page parameters
+
+### Visual Design Improvements
+- **Category Logo Styling**: SVG logos with proper sizing, opacity effects, and hover animations
+- **Professional Button Design**: Enhanced category buttons with flex layout and proper spacing
+- **Pagination Controls**: Modern pagination design with hover effects and active states
+- **Mobile Optimization**: Responsive design for categories and pagination on all screen sizes
+- **Brand Consistency**: Laravel and FilamentPHP logos maintain brand recognition
+
+### Technical Implementation
+- **Dynamic Content Loading**: Categories loaded from markdown files with proper metadata
+- **Efficient Pagination Logic**: Smart calculation of page ranges and post slicing
+- **URL State Management**: Proper handling of page, category, and tag parameters
+- **Performance Optimization**: Efficient rendering of paginated content
+- **Responsive CSS Grid**: Proper layout handling across different screen sizes
+
+### User Experience Enhancements
+- **Improved Navigation**: Easy browsing through large numbers of posts
+- **Visual Category Recognition**: Instant brand recognition with professional logos
+- **Streamlined Interface**: Cleaner layout with inline tags reducing visual clutter
+- **Better Content Discovery**: Enhanced category system with visual brand elements
+- **Mobile-Friendly Design**: Optimized experience across all device sizes
+
+### Code Organization
+- **Modular Category System**: Categories managed through content collection
+- **Reusable SVG Components**: Logo components can be easily maintained and updated
+- **Clean Pagination Logic**: Well-structured pagination with proper error handling
+- **Responsive Design Patterns**: Consistent mobile-first approach across new features
+- **Maintainable Code Structure**: Easy to extend and modify category and pagination systems
+
+## [2.25.0] - 2025-09-04
+
+### Header Search Bar Enhancements
+- **Increased Search Width**: Expanded search bar width from 400px to 600px for desktop devices
+- **Responsive Design**: Maintained mobile responsiveness with proper breakpoints
+- **Improved Search Results**: Increased search results container width with min-width of 500px
+- **Better Image Handling**: Added fallback placeholders for missing post images with error handling
+- **Enhanced Result Items**: Larger result items with improved spacing and 80x60px images
+- **Better No Results Message**: Improved styling with search icon and more helpful messaging
+
+### Search Results Improvements
+- **Image Loading Fix**: Added proper error handling for missing images with fallback placeholders
+- **Wider Results Container**: Increased max-height to 500px and added min-width for better visibility
+- **Enhanced Mobile Experience**: Improved mobile search results with better spacing and responsive design
+- **Visual Feedback**: Added document emoji (📄) as placeholder for posts without images
+- **Better Typography**: Improved font sizes and spacing for better readability
+
+### Homepage Tag Search Implementation
+- **Tag-Based Filtering**: Added comprehensive tag search functionality to homepage
+- **Visual Tag Cloud**: Interactive tag buttons with hover effects and active states
+- **Smart Tag Detection**: Automatic tag extraction from post content using keyword matching
+- **Combined Filtering**: Tag filters work alongside category and text search filters
+- **Analytics Integration**: Tag filter clicks tracked for user behavior insights
+- **Responsive Tag Layout**: Scrollable tag container with proper mobile optimization
+
+### Blog Sidebar Scrolling Enhancement
+- **Scrollable Categories**: Added smooth scrolling to category navigation on hover
+- **Custom Scrollbars**: Styled scrollbars that appear only on hover for clean design
+- **Height Optimization**: Set max-height for sidebar and category sections
+- **Smooth Interactions**: Added transition effects for scrollbar visibility
+- **Better UX**: Scrollbars only visible when needed and on hover
+
+### Technical Improvements
+- **JavaScript Enhancement**: Updated filtering logic to handle multiple filter types simultaneously
+- **CSS Optimization**: Added proper scrollbar styling for webkit and Firefox browsers
+- **Performance**: Efficient tag matching algorithms for real-time filtering
+- **Accessibility**: Maintained keyboard navigation and screen reader compatibility
+- **Mobile Optimization**: Responsive design across all new features
+
+### User Experience Enhancements
+- **Faster Search**: Wider search bar makes it easier to see search queries
+- **Better Discovery**: Tag-based search helps users find content by specific technologies
+- **Visual Feedback**: Improved search results with better image handling and placeholders
+- **Smooth Navigation**: Scrollable sidebar prevents content overflow issues
+- **Intuitive Filtering**: Clear visual indicators for active filters and search states
+
+## [2.24.0] - 2025-09-04
+
+### Image Generation Cleanup
+- **Removed Image Generation Code**: Eliminated all image generation utilities and scripts
+- **Deleted Files**: Removed `src/utils/imageGenerator.ts` and `scripts/generateImages.js`
+- **Code Cleanup**: Removed image generation imports and function calls from homepage
+- **Simplified Structure**: Streamlined codebase by removing unused image generation functionality
+
+### Header Layout Improvements
+- **Theme Toggle Repositioning**: Moved theme toggle from sticky position back to header
+- **Integrated with Categories**: Theme toggle now positioned alongside category navigation
+- **Removed Sticky Styles**: Eliminated sticky positioning CSS and related mobile styles
+- **Better Organization**: Theme toggle and categories grouped together in header end position
+- **Improved Spacing**: Added proper gap between header elements for better visual hierarchy
+
+### Google Tag Manager Integration
+- **GTM Head Script**: Added Google Tag Manager script to BaseHead component as high as possible in head
+- **GTM Body Script**: Added noscript iframe code immediately after body tag opening
+- **Complete Implementation**: GTM tracking code added to both homepage and BlogPost layout
+- **Universal Coverage**: All pages now include proper GTM tracking for analytics
+- **Container ID**: Configured with GTM container ID 'GTM-MCXGFWB6'
+
+### Code Organization
+- **Cleaner Codebase**: Removed unnecessary image generation dependencies
+- **Better Header Structure**: Logical grouping of header elements (logo, search, categories+theme)
+- **Consistent Tracking**: Unified analytics tracking across all page types
+- **Simplified Maintenance**: Reduced complexity by removing unused features
+
+### Technical Improvements
+- **Performance**: Removed unused image generation code for better performance
+- **Analytics Ready**: Complete GTM setup for comprehensive user behavior tracking
+- **Mobile Optimization**: Improved header layout without sticky elements
+- **Clean Architecture**: Streamlined component structure and dependencies
+
+## [2.23.0] - 2025-09-04
+
+### Major Site Restructuring
+- **Removed Blog Page**: Eliminated separate /blog page and moved all content to homepage
+- **New URL Structure**: Changed post URLs from `/blog/post-slug` to `/post-slug` for cleaner URLs
+- **Homepage Transformation**: Converted homepage to display all blog content with filtering and search
+- **Dynamic Routing**: Created new `[...slug].astro` file for individual post pages at root level
+
+### Header Layout Reorganization
+- **Logo Repositioning**: Moved logo from center to start position (left side)
+- **Search Bar Centering**: Positioned search bar in the center of header
+- **Categories at End**: Moved category navigation to end position (right side)
+- **Sticky Theme Toggle**: Made theme toggle sticky in top-right corner of viewport
+- **Grid Layout**: Updated header to use CSS Grid for better responsive layout
+
+### Homepage Blog Functionality
+- **Complete Blog Integration**: Homepage now includes all blog functionality
+- **Advanced Search**: Real-time search through post titles and descriptions
+- **Category Filtering**: Interactive category filters with visual feedback
+- **Results Count**: Dynamic display of filtered results count
+- **No Results Handling**: Proper messaging when no posts match filters
+- **Active Filter Display**: Visual indicators for currently active filters
+
+### URL Structure Optimization
+- **Root-Level Posts**: All blog posts now accessible at domain.com/post-slug
+- **SEO Improvement**: Cleaner URLs for better search engine optimization
+- **Simplified Navigation**: Removed unnecessary /blog/ prefix from all post URLs
+- **Direct Access**: Posts are now directly accessible from the root domain
+
+### Header Design Improvements
+- **Responsive Grid**: New CSS Grid layout for better responsiveness
+- **Mobile Optimization**: Improved mobile header layout with stacked elements
+- **Sticky Controls**: Theme toggle remains accessible via sticky positioning
+- **Better Spacing**: Improved spacing and alignment across all screen sizes
+
+### Search and Filter Features
+- **Live Search**: Real-time filtering as user types in search box
+- **Category Buttons**: Interactive category filter buttons with hover effects
+- **Visual Feedback**: Active states and hover effects for better UX
+- **Analytics Integration**: Search and filter actions tracked for insights
+- **Responsive Design**: Search and filters work seamlessly on all devices
+
+### Technical Implementation
+- **Dynamic Route Creation**: New routing system for individual posts
+- **JavaScript Functionality**: Complete client-side filtering and search
+- **CSS Grid Layout**: Modern layout system for header organization
+- **Performance Optimization**: Efficient filtering algorithms for large content sets
+- **Mobile-First Design**: Responsive design that works across all screen sizes
+
+### User Experience Enhancements
+- **Simplified Navigation**: All content accessible from single homepage
+- **Faster Content Discovery**: Immediate access to all posts with filtering
+- **Better Mobile Experience**: Optimized header layout for mobile devices
+- **Consistent Branding**: Logo prominently positioned for better brand recognition
+- **Intuitive Controls**: Logical arrangement of navigation elements
+
+## [2.22.0] - 2025-09-04
+
+### Hero Image Fix
+- **Fixed Server Image Loading**: Corrected hero image path from `/src/assets/` to proper relative path `../../assets/`
+- **Server Compatibility**: Hero image now loads correctly when deployed to production server
+- **Asset Path Resolution**: Fixed asset path issues that prevented images from loading after build
+
+### Header Search Implementation
+- **Real-time Search Bar**: Added comprehensive search functionality to header with live results
+- **Post Thumbnails**: Search results display post images, titles, and descriptions
+- **Tag Integration**: Search includes tag-based filtering and displays relevant tags
+- **Responsive Design**: Search bar adapts to mobile and desktop layouts
+- **Performance Optimized**: Debounced search with 300ms delay for better performance
+- **Analytics Integration**: Search queries tracked for insights
+
+### Search Features
+- **Live Results**: Real-time search results as user types
+- **Visual Results**: Post thumbnails, titles, descriptions, and tags in results
+- **Keyboard Navigation**: Proper focus management and accessibility
+- **Clear Functionality**: Easy-to-use clear button for search input
+- **No Results Handling**: Helpful messaging when no results found
+- **Click Outside**: Results hide when clicking outside search area
+
+### Hostnin Referral Links
+- **Complete Link Integration**: Added referral links to all 'Hostnin' mentions in blog posts
+- **Affiliate URL**: All Hostnin references now link to `https://my.hostnin.com/aff.php?aff=700`
+- **Revenue Optimization**: Monetized all hosting-related content mentions
+- **User Experience**: Links open in same tab for better user flow
+- **Content Enhancement**: Maintained natural reading flow while adding affiliate links
+
+### Tag System Enhancement
+- **Dynamic Tag Extraction**: Tags automatically extracted from post content
+- **Clickable Tags**: All tags in sidebar are clickable and filter related posts
+- **Available Tags Only**: Only shows tags that actually exist in published posts
+- **Smart Detection**: Intelligent tag detection based on content keywords
+- **Tag Filtering**: Complete tag-based filtering system with URL parameters
+
+### Technical Improvements
+- **SearchBar Component**: New comprehensive search component with advanced features
+- **Header Integration**: Search bar properly integrated into header layout
+- **Mobile Optimization**: Search functionality works seamlessly on mobile devices
+- **Asset Management**: Improved asset path handling for production deployment
+- **Performance**: Optimized search algorithms and result rendering
+
+### User Experience Enhancements
+- **Faster Content Discovery**: Users can quickly find relevant posts through search
+- **Visual Search Results**: Rich search results with images and metadata
+- **Better Navigation**: Enhanced header functionality with search capabilities
+- **Monetization**: Seamless affiliate link integration without disrupting user experience
+- **Tag-based Browsing**: Easy content discovery through clickable tags
+
 ## [2.21.0] - 2025-09-04
 
 ### BlogSidebar Category Fix

@@ -1,0 +1,395 @@
+---
+/**
+ * Search Bar Component
+ * Provides real-time search functionality with post thumbnails, titles, and tags
+ */
+import { getCollection } from 'astro:content';
+
+// Get all blog posts for search
+const allPosts = await getCollection('blog');
+const searchData = allPosts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+  description: post.data.description,
+  heroImage: post.data.heroImage,
+  pubDate: post.data.pubDate,
+  tags: extractTagsFromContent(post.body)
+}));
+
+/**
+ * Extract tags from post content
+ */
+function extractTagsFromContent(content: string): string[] {
+  const lowerContent = content.toLowerCase();
+  const tags = [];
+  
+  if (lowerContent.includes('react') || lowerContent.includes('jsx')) tags.push('React');
+  if (lowerContent.includes('vue') || lowerContent.includes('vuejs')) tags.push('Vue.js');
+  if (lowerContent.includes('laravel') || lowerContent.includes('php')) tags.push('Laravel');
+  if (lowerContent.includes('javascript') || lowerContent.includes('js')) tags.push('JavaScript');
+  if (lowerContent.includes('typescript') || lowerContent.includes('ts')) tags.push('TypeScript');
+  if (lowerContent.includes('css') || lowerContent.includes('styling')) tags.push('CSS');
+  if (lowerContent.includes('html') || lowerContent.includes('markup')) tags.push('HTML');
+  if (lowerContent.includes('hosting') || lowerContent.includes('server')) tags.push('Web Hosting');
+  if (lowerContent.includes('wordpress') || lowerContent.includes('wp')) tags.push('WordPress');
+  if (lowerContent.includes('database') || lowerContent.includes('mysql')) tags.push('Database');
+  if (lowerContent.includes('api') || lowerContent.includes('rest')) tags.push('API');
+  if (lowerContent.includes('tutorial') || lowerContent.includes('guide')) tags.push('Tutorial');
+  if (lowerContent.includes('beginner') || lowerContent.includes('basics')) tags.push('Beginner');
+  if (lowerContent.includes('advanced') || lowerContent.includes('expert')) tags.push('Advanced');
+  if (lowerContent.includes('performance') || lowerContent.includes('optimization')) tags.push('Performance');
+  if (lowerContent.includes('security') || lowerContent.includes('auth')) tags.push('Security');
+  if (lowerContent.includes('deployment') || lowerContent.includes('deploy')) tags.push('Deployment');
+  if (lowerContent.includes('testing') || lowerContent.includes('test')) tags.push('Testing');
+  if (lowerContent.includes('mobile') || lowerContent.includes('responsive')) tags.push('Mobile');
+  if (lowerContent.includes('ui') || lowerContent.includes('ux')) tags.push('UI/UX');
+  
+  return tags;
+}
+---
+
+<div class="search-container">
+  <div class="search-input-wrapper">
+    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.35-4.35"></path>
+    </svg>
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Search articles, tags..."
+      id="header-search-input"
+      autocomplete="off"
+    />
+    <button class="search-clear" id="search-clear-btn" style="display: none;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="search-results" id="search-results" style="display: none;">
+    <div class="search-results-content" id="search-results-content">
+      <!-- Results will be populated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    outline: none;
+  }
+  
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .search-clear {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .search-clear:hover {
+    background: var(--bg-secondary);
+    color: var(--text-color);
+  }
+  
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    margin-top: 0.5rem;
+    max-height: 500px;
+    overflow-y: auto;
+    min-width: 500px;
+  }
+  
+  .search-results-content {
+    padding: 0.5rem;
+  }
+  
+  .search-result-item {
+    display: block;
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+  }
+  
+  .search-result-item:last-child {
+    border-bottom: none;
+  }
+  
+  .search-result-item:hover {
+    background: var(--accent-light);
+    transform: translateX(4px);
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-result-content {
+    width: 100%;
+  }
+  
+  .search-result-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+  }
+  
+  .search-result-item:hover .search-result-title {
+    color: var(--accent);
+  }
+  
+
+  
+  .search-no-results {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-muted);
+  }
+  
+  .search-no-results h4 {
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+  }
+  
+  .search-no-results p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  
+  .search-no-results .search-icon-large {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    opacity: 0.3;
+  }
+  
+  @media (max-width: 768px) {
+    .search-container {
+      max-width: 100%;
+    }
+    
+    .search-input {
+      font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .search-results {
+      max-height: 400px;
+      min-width: auto;
+      left: -1rem;
+      right: -1rem;
+    }
+    
+    .search-result-item {
+      padding: 0.75rem;
+    }
+    
+    .search-result-title {
+      font-size: 0.9rem;
+    }
+    
+    .search-no-results {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
+
+<script define:vars={{ searchData }}>
+  /**
+   * Initialize search functionality
+   */
+  function initializeSearch() {
+    const searchInput = document.getElementById('header-search-input');
+    const searchResults = document.getElementById('search-results');
+    const searchResultsContent = document.getElementById('search-results-content');
+    const clearBtn = document.getElementById('search-clear-btn');
+    
+    if (!searchInput || !searchResults || !searchResultsContent) return;
+    
+    let searchTimeout;
+    
+    /**
+     * Perform search and display results
+     */
+    function performSearch(query) {
+      const trimmedQuery = query.trim().toLowerCase();
+      
+      if (trimmedQuery.length < 2) {
+        hideResults();
+        return;
+      }
+      
+      const results = searchData.filter(post => {
+        const titleMatch = post.title.toLowerCase().includes(trimmedQuery);
+        const descriptionMatch = post.description?.toLowerCase().includes(trimmedQuery);
+        const tagMatch = post.tags.some(tag => tag.toLowerCase().includes(trimmedQuery));
+        
+        return titleMatch || descriptionMatch || tagMatch;
+      });
+      
+      displayResults(results, trimmedQuery);
+    }
+    
+    /**
+     * Display search results
+     */
+    function displayResults(results, query) {
+      if (results.length === 0) {
+        searchResultsContent.innerHTML = `
+          <div class="search-no-results">
+            <svg class="search-icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <h4>No articles found</h4>
+            <p>We couldn't find any articles matching "<strong>${query}</strong>"</p>
+            <p>Try searching with different keywords or browse our categories.</p>
+          </div>
+        `;
+      } else {
+        searchResultsContent.innerHTML = results.map(post => `
+          <a href="/${post.id}/" class="search-result-item">
+            <div class="search-result-content">
+              <div class="search-result-title">${highlightText(post.title, query)}</div>
+            </div>
+          </a>
+        `).join('');
+      }
+      
+      showResults();
+    }
+    
+    /**
+     * Highlight search terms in text
+     */
+    function highlightText(text, query) {
+      if (!query || !text) return text;
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<mark style="background: var(--accent-light); color: var(--accent); padding: 0;">$1</mark>');
+    }
+    
+    /**
+     * Show search results
+     */
+    function showResults() {
+      searchResults.style.display = 'block';
+    }
+    
+    /**
+     * Hide search results
+     */
+    function hideResults() {
+      searchResults.style.display = 'none';
+    }
+    
+    /**
+     * Update clear button visibility
+     */
+    function updateClearButton() {
+      if (searchInput.value.length > 0) {
+        clearBtn.style.display = 'block';
+      } else {
+        clearBtn.style.display = 'none';
+      }
+    }
+    
+    // Event listeners
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      updateClearButton();
+      
+      searchTimeout = setTimeout(() => {
+        performSearch(e.target.value);
+      }, 300);
+    });
+    
+    searchInput.addEventListener('focus', () => {
+      if (searchInput.value.trim().length >= 2) {
+        showResults();
+      }
+    });
+    
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      updateClearButton();
+      hideResults();
+      searchInput.focus();
+    });
+    
+    // Hide results when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        hideResults();
+      }
+    });
+    
+    // Track search analytics
+    searchInput.addEventListener('input', (e) => {
+      if (e.target.value.length >= 3 && typeof window.trackEvent === 'function') {
+        window.trackEvent('search_query', {
+          query: e.target.value,
+          event_category: 'search',
+          event_label: 'header_search'
+        });
+      }
+    });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSearch);
+  } else {
+    initializeSearch();
+  }
+</script>

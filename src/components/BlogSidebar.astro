@@ -111,12 +111,39 @@ const { currentCategory, currentTags = [] } = Astro.props;
     top: 100px;
     width: 280px;
     height: fit-content;
+    max-height: calc(100vh - 120px);
     background: var(--bg-color);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     margin-left: 2rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-light) transparent;
+  }
+  
+  .blog-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .blog-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .blog-sidebar::-webkit-scrollbar-thumb {
+    background: var(--accent-light);
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .blog-sidebar:hover::-webkit-scrollbar-thumb {
+    opacity: 1;
+  }
+  
+  .blog-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
   }
 
   .sidebar-section {
@@ -140,6 +167,35 @@ const { currentCategory, currentTags = [] } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    margin-right: -0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-light) transparent;
+  }
+  
+  .category-nav::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .category-nav::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .category-nav::-webkit-scrollbar-thumb {
+    background: var(--accent-light);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .category-nav:hover::-webkit-scrollbar-thumb {
+    opacity: 1;
+  }
+  
+  .category-nav::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
   }
 
   .category-nav-item {

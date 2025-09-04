@@ -9,44 +9,137 @@ import AdBanner from '../components/AdBanner.astro';
 import GoToTop from '../components/GoToTop.astro';
 import HeaderScript from '../components/HeaderScript.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { getBlogImage } from '../utils/imageGenerator';
 import HeroImage from '../assets/piclumen-1756945094910.png';
+import LaravelLogo from '../assets/icons/laravel.svg';
+import FilamentLogo from '../assets/icons/filament.svg';
 
 // Get all blog posts and sort by publication date
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// Get featured posts (first 3 most recent)
-const featuredPosts = posts.slice(0, 3);
+const categories = await getCollection('categories');
+const sortedCategories = categories.sort((a, b) => a.data.order - b.data.order);
 
-// Get recent posts (next 6 posts)
-const recentPosts = posts.slice(3, 6);
+// Get URL parameters for filtering
+const url = new URL(Astro.request.url);
+const categoryFilter = url.searchParams.get('category');
+const tagFilter = url.searchParams.get('tag');
 
-// Generate topic-related images for posts
-const featuredPostsWithImages = await Promise.all(
-	featuredPosts.map(async (post) => ({
-		...post,
-		topicImage: post.data.heroImage ? null : await getBlogImage(post.id, post.data.title, 400, 250)
-	}))
-);
+// Extract all unique tags from posts
+const allTags = [...new Set(posts.flatMap(post => {
+  const content = post.body.toLowerCase();
+  const tags = [];
+  
+  // Extract tags based on content keywords
+  if (content.includes('react') || content.includes('jsx')) tags.push('React');
+  if (content.includes('vue') || content.includes('vuejs')) tags.push('Vue.js');
+  if (content.includes('laravel') || content.includes('php')) tags.push('Laravel');
+  if (content.includes('javascript') || content.includes('js')) tags.push('JavaScript');
+  if (content.includes('typescript') || content.includes('ts')) tags.push('TypeScript');
+  if (content.includes('css') || content.includes('styling')) tags.push('CSS');
+  if (content.includes('html') || content.includes('markup')) tags.push('HTML');
+  if (content.includes('hosting') || content.includes('server')) tags.push('Web Hosting');
+  if (content.includes('wordpress') || content.includes('wp')) tags.push('WordPress');
+  if (content.includes('database') || content.includes('mysql')) tags.push('Database');
+  if (content.includes('api') || content.includes('rest')) tags.push('API');
+  if (content.includes('tutorial') || content.includes('guide')) tags.push('Tutorial');
+  if (content.includes('beginner') || content.includes('basics')) tags.push('Beginner');
+  if (content.includes('advanced') || content.includes('expert')) tags.push('Advanced');
+  if (content.includes('performance') || content.includes('optimization')) tags.push('Performance');
+  if (content.includes('security') || content.includes('auth')) tags.push('Security');
+  if (content.includes('deployment') || content.includes('deploy')) tags.push('Deployment');
+  if (content.includes('testing') || content.includes('test')) tags.push('Testing');
+  if (content.includes('mobile') || content.includes('responsive')) tags.push('Mobile');
+  if (content.includes('ui') || content.includes('ux')) tags.push('UI/UX');
+  
+  return tags;
+}))].sort();
 
-const recentPostsWithImages = await Promise.all(
-	recentPosts.map(async (post) => ({
-		...post,
-		topicImage: post.data.heroImage ? null : await getBlogImage(post.id, post.data.title, 300, 200)
-	}))
-);
+// Filter posts by tag if tag parameter exists
+let filteredPosts = posts;
+if (tagFilter) {
+  filteredPosts = posts.filter(post => {
+    const content = post.body.toLowerCase();
+    const postTags = [];
+    
+    // Extract tags for this post (same logic as above)
+    if (content.includes('react') || content.includes('jsx')) postTags.push('React');
+    if (content.includes('vue') || content.includes('vuejs')) postTags.push('Vue.js');
+    if (content.includes('laravel') || content.includes('php')) postTags.push('Laravel');
+    if (content.includes('javascript') || content.includes('js')) postTags.push('JavaScript');
+    if (content.includes('typescript') || content.includes('ts')) postTags.push('TypeScript');
+    if (content.includes('css') || content.includes('styling')) postTags.push('CSS');
+    if (content.includes('html') || content.includes('markup')) postTags.push('HTML');
+    if (content.includes('hosting') || content.includes('server')) postTags.push('Web Hosting');
+    if (content.includes('wordpress') || content.includes('wp')) postTags.push('WordPress');
+    if (content.includes('database') || content.includes('mysql')) postTags.push('Database');
+    if (content.includes('api') || content.includes('rest')) postTags.push('API');
+    if (content.includes('tutorial') || content.includes('guide')) postTags.push('Tutorial');
+    if (content.includes('beginner') || content.includes('basics')) postTags.push('Beginner');
+    if (content.includes('advanced') || content.includes('expert')) postTags.push('Advanced');
+    if (content.includes('performance') || content.includes('optimization')) postTags.push('Performance');
+    if (content.includes('security') || content.includes('auth')) postTags.push('Security');
+    if (content.includes('deployment') || content.includes('deploy')) postTags.push('Deployment');
+    if (content.includes('testing') || content.includes('test')) postTags.push('Testing');
+    if (content.includes('mobile') || content.includes('responsive')) postTags.push('Mobile');
+    if (content.includes('ui') || content.includes('ux')) postTags.push('UI/UX');
+    
+    return postTags.includes(tagFilter);
+  });
+}
+
+// Group posts by category for filtering
+const postsByCategory = {
+  all: filteredPosts,
+  hosting: posts.filter(post => 
+    post.data.title.toLowerCase().includes('hosting') || 
+    post.data.title.toLowerCase().includes('hostnin') ||
+    post.data.title.toLowerCase().includes('cpanel')
+  ),
+  laravel: posts.filter(post => 
+    post.data.title.toLowerCase().includes('laravel') ||
+    post.data.title.toLowerCase().includes('filament')
+  ),
+  react: posts.filter(post => 
+    post.data.title.toLowerCase().includes('react')
+  ),
+  vue: posts.filter(post => 
+    post.data.title.toLowerCase().includes('vue')
+  ),
+  tutorials: posts.filter(post => 
+    post.data.title.toLowerCase().includes('guide') ||
+    post.data.title.toLowerCase().includes('tutorial') ||
+    post.data.title.toLowerCase().includes('wordpress') ||
+    post.data.title.toLowerCase().includes('markdown') ||
+    post.data.title.toLowerCase().includes('mdx')
+  )
+};
+
+// Pagination logic
+const postsPerPage = 9;
+const currentPage = parseInt(Astro.url.searchParams.get('page') || '1');
+const totalPosts = filteredPosts.length;
+const totalPages = Math.ceil(totalPosts / postsPerPage);
+const startIndex = (currentPage - 1) * postsPerPage;
+const endIndex = startIndex + postsPerPage;
+const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
+
+// Get featured posts (first 3 most recent from all posts)
+const featuredPosts = filteredPosts.slice(0, 3);
+
+// Get recent posts (next 6 posts from all posts)
+const recentPosts = filteredPosts.slice(3, 6);
+
+
 
 // Get content from markdown collections
 const heroContent = await getCollection('site');
-const categoriesContent = await getCollection('categories');
 const newsletterContent = await getCollection('site');
 const adsContent = await getCollection('ads');
 
 // Extract specific content
 const hero = heroContent.find(item => item.id === 'hero')?.data;
-const categories = categoriesContent.sort((a, b) => a.data.order - b.data.order).map(item => item.data);
 const newsletter = newsletterContent.find(item => item.id === 'newsletter')?.data;
 const ads = adsContent.filter(ad => ad.data.active).sort((a, b) => a.data.order - b.data.order).map(item => item.data);
 
@@ -76,71 +169,149 @@ const keywords = [
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} keywords={keywords} />
 	</head>
 	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MCXGFWB6"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		
 		<Header />
-		<main>
-			<!-- Hero Section -->
-			<section class="hero">
-				<div class="container">
-					<div class="hero-content">
-						<h1 class="hero-title">
-							{hero?.title || 'Your Ultimate Tech Resource Hub'}
-						</h1>
-						<p class="hero-description">
-							{hero?.description || 'Discover cutting-edge insights on technology, web hosting, domain management, digital products, and comprehensive programming tutorials.'}
-						</p>
-						<div class="hero-actions">
-							<a href={hero?.primaryButton?.link || '/blog'} class="btn btn-primary">{hero?.primaryButton?.text || 'Explore Articles'}</a>
-							<a href={hero?.secondaryButton?.link || '#categories'} class="btn btn-secondary">{hero?.secondaryButton?.text || 'Explore Categories'}</a>
-						</div>
+		<main class="blog-container">
+			<div class="blog-header">
+				<h1 class="blog-title">Latest Articles</h1>
+				<p class="blog-subtitle">Discover the latest insights on web development, hosting, and technology</p>
+				
+				<div class="blog-controls">
+					<div class="search-box">
+						<svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="11" cy="11" r="8"></circle>
+							<path d="m21 21-4.35-4.35"></path>
+						</svg>
+						<input type="text" class="search-input" placeholder="Search articles..." id="search-input">
 					</div>
-					<div class="hero-image">
-						{hero?.image ? (
-							<img src={hero.image} alt="Technology and Development" />
-						) : (
-							<Image src={HeroImage} alt="Technology and Development" width={600} height={400} />
+					
+					<div class="category-filters">
+						<button class="category-filter active" data-category="all">All Posts</button>
+						{sortedCategories.map((category) => (
+							<button class="category-filter" data-category={category.id}>
+								<span class="category-name">{category.data.title}</span>
+							</button>
+						))}
+					</div>
+					<div class="tags-inline-section">
+						<span class="tags-label">Tags:</span>
+						{allTags.map(tag => (
+							<button class="tag-inline" data-tag={tag}>{tag}</button>
+						))}
+					</div>
+				</div>
+			</div>
+			
+			<!-- Active Filters Display -->
+			{(categoryFilter || tagFilter) && (
+				<div class="active-filters">
+					<span class="filter-label">Active Filters:</span>
+					{categoryFilter && (
+						<span class="filter-tag">
+							Category: {categoryFilter}
+							<a href="/" class="remove-filter">×</a>
+						</span>
+					)}
+					{tagFilter && (
+						<span class="filter-tag">
+							Tag: {tagFilter}
+							<a href="/" class="remove-filter">×</a>
+						</span>
+					)}
+				</div>
+			)}
+			
+			<div class="results-count" id="results-count">
+				Showing {paginatedPosts.length} of {totalPosts} articles (Page {currentPage} of {totalPages})
+			</div>
+
+			<div class="posts-grid" id="posts-grid">
+				{paginatedPosts.map((post) => (
+					<article class="post-card" data-title={post.data.title.toLowerCase()} data-description={post.data.description?.toLowerCase() || ''}>
+						<a href={`/${post.id}/`} class="post-link" onclick={`if(typeof window.trackPostClick === 'function') window.trackPostClick('${post.data.title.replace(/'/g, "\\'").replace(/"/g, '\\"')}', '/${post.id}/', 'blog')`}>
+							{post.data.heroImage && (
+								<Image 
+									src={post.data.heroImage} 
+									alt={post.data.title}
+									width={350} 
+									height={200} 
+									class="post-image"
+								/>
+							)}
+							<div class="post-content">
+								<h2 class="post-title">{post.data.title}</h2>
+								{post.data.description && (
+									<p class="post-description">{post.data.description}</p>
+								)}
+								<div class="post-meta">
+									<span class="post-date">
+										<FormattedDate date={post.data.pubDate} />
+									</span>
+									<span class="read-more">Read More →</span>
+								</div>
+							</div>
+						</a>
+					</article>
+				))}
+			</div>
+			
+			<!-- Pagination Controls -->
+			{totalPages > 1 && (
+				<div class="pagination">
+					{currentPage > 1 && (
+						<a href={`/?page=${currentPage - 1}${categoryFilter ? `&category=${categoryFilter}` : ''}${tagFilter ? `&tag=${tagFilter}` : ''}`} class="pagination-btn pagination-prev">
+							← Previous
+						</a>
+					)}
+					
+					<div class="pagination-numbers">
+						{currentPage > 3 && (
+							<a href="/?page=1" class="pagination-number">1</a>
+						)}
+						{currentPage > 4 && (
+							<span class="pagination-ellipsis">...</span>
+						)}
+						
+						{Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+							const startPage = Math.max(1, Math.min(currentPage - 2, totalPages - 4));
+							const pageNum = startPage + i;
+							if (pageNum > totalPages) return null;
+							const isActive = pageNum === currentPage;
+							
+							return (
+								<a 
+									href={`/?page=${pageNum}${categoryFilter ? `&category=${categoryFilter}` : ''}${tagFilter ? `&tag=${tagFilter}` : ''}`}
+									class={`pagination-number ${isActive ? 'active' : ''}`}
+								>
+									{pageNum}
+								</a>
+							);
+						})}
+						
+						{currentPage < totalPages - 3 && (
+							<span class="pagination-ellipsis">...</span>
+						)}
+						{currentPage < totalPages - 2 && (
+							<a href={`/?page=${totalPages}`} class="pagination-number">{totalPages}</a>
 						)}
 					</div>
+					
+					{currentPage < totalPages && (
+						<a href={`/?page=${currentPage + 1}${categoryFilter ? `&category=${categoryFilter}` : ''}${tagFilter ? `&tag=${tagFilter}` : ''}`} class="pagination-btn pagination-next">
+							Next →
+						</a>
+					)}
 				</div>
-			</section>
-
-			<!-- Featured Posts Section -->
-			<section class="featured-posts">
-				<div class="container">
-					<div class="content-with-sidebar">
-						<div class="main-content">
-							<h2 class="section-title">Featured Articles</h2>
-				<div class="featured-grid">
-					{featuredPostsWithImages.map((post) => (
-						<article class="featured-card">
-							<a href={`/blog/${post.id}/`} class="card-link">
-								<div class="card-image">
-									{post.data.heroImage ? (
-										<Image src={post.data.heroImage} alt={post.data.title} width={400} height={250} />
-									) : (
-										<img src={post.topicImage} alt={post.data.title} />
-									)}
-								</div>
-											<div class="card-content">
-												<div class="card-meta">
-													<FormattedDate date={post.data.pubDate} />
-												</div>
-												<h3 class="card-title">{post.data.title}</h3>
-												<p class="card-description">{post.data.description}</p>
-												<span class="read-more">Read More →</span>
-											</div>
-										</a>
-									</article>
-								))}
-							</div>
-						</div>
-						<aside class="sidebar">
-							{sidebarAds.map((ad) => (
-								<AdBanner ad={ad} />
-							))}
-						</aside>
-					</div>
-				</div>
-			</section>
+			)}
+			
+			<div class="no-results" id="no-results" style="display: none;">
+				<h3>No articles found</h3>
+				<p>Try adjusting your search or filter criteria.</p>
+			</div>
 
 			<!-- Content Ad -->
 			{contentAds.length > 0 && (
@@ -151,80 +322,9 @@ const keywords = [
 				</section>
 			)}
 
-			<!-- Categories Section -->
-			<section id="categories" class="categories">
-				<div class="container">
-					<h2 class="section-title">Explore by Category</h2>
-					<div class="categories-grid">
-						{categories && categories.length > 0 ? categories.map((category) => (
-							<div class="category-card">
-								<div class="category-icon">{category?.icon || '💻'}</div>
-								<h3>{category?.title || 'Technology'}</h3>
-								<p>{category?.description || 'Explore technology topics and tutorials'}</p>
-								<a href={category?.link || '/blog'} class="category-link">Explore →</a>
-							</div>
-						)) : (
-							<!-- Fallback categories if none are loaded -->
-							<div class="category-card">
-								<div class="category-icon">🌐</div>
-								<h3>Web Hosting</h3>
-								<p>Comprehensive guides on choosing the right hosting solution for your needs.</p>
-								<a href="/blog" class="category-link">Explore →</a>
-							</div>
-							<div class="category-card">
-								<div class="category-icon">🔗</div>
-								<h3>Domain Management</h3>
-								<p>Master domain registration, DNS, and digital identity best practices.</p>
-								<a href="/blog" class="category-link">Explore →</a>
-							</div>
-							<div class="category-card">
-								<div class="category-icon">💻</div>
-								<h3>Programming Tutorials</h3>
-								<p>Step-by-step coding tutorials and development best practices.</p>
-								<a href="/blog" class="category-link">Explore →</a>
-							</div>
-							<div class="category-card">
-								<div class="category-icon">📱</div>
-								<h3>Digital Products</h3>
-								<p>Insights on building, launching, and scaling digital products.</p>
-								<a href="/blog" class="category-link">Explore →</a>
-							</div>
-						)}
-					</div>
-				</div>
-			</section>
 
-			<!-- Recent Posts Section -->
-			<section class="recent-posts">
-				<div class="container">
-					<div class="section-header">
-						<h2 class="section-title">Latest Articles</h2>
-						<a href="/blog" class="view-all">View All Articles →</a>
-					</div>
-					<div class="posts-grid">
-				{recentPostsWithImages.map((post) => (
-					<article class="post-card">
-						<a href={`/blog/${post.id}/`} class="card-link">
-							<div class="card-image">
-								{post.data.heroImage ? (
-									<Image src={post.data.heroImage} alt={post.data.title} width={300} height={200} />
-								) : (
-									<img src={post.topicImage} alt={post.data.title} />
-								)}
-							</div>
-									<div class="card-content">
-										<div class="card-meta">
-											<FormattedDate date={post.data.pubDate} />
-										</div>
-										<h3 class="card-title">{post.data.title}</h3>
-										<p class="card-description">{post.data.description}</p>
-									</div>
-								</a>
-							</article>
-						))}
-					</div>
-				</div>
-			</section>
+
+
 
 			<!-- Footer Ads -->
 			{footerAds.length > 0 && (
@@ -486,24 +586,353 @@ const keywords = [
 		font-weight: 600;
 	}
 
+	/* Blog Container */
+	.blog-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
+	
+	.blog-header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+	
+	.blog-title {
+		font-size: 2.5rem;
+		margin-bottom: 0.5rem;
+		color: var(--text-color);
+	}
+	
+	.blog-subtitle {
+		font-size: 1.1rem;
+		color: var(--text-muted);
+		margin-bottom: 2rem;
+	}
+	
+	.blog-controls {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: center;
+	}
+	
+	.search-box {
+		position: relative;
+		width: 100%;
+		max-width: 400px;
+	}
+	
+	.search-icon {
+		position: absolute;
+		left: 1rem;
+		top: 50%;
+		transform: translateY(-50%);
+		color: var(--text-muted);
+	}
+	
+	.search-input {
+		width: 100%;
+		padding: 0.75rem 1rem 0.75rem 3rem;
+		border: 1px solid var(--border-color);
+		border-radius: 25px;
+		background: var(--bg-color);
+		color: var(--text-color);
+		font-size: 1rem;
+		transition: border-color 0.2s ease;
+	}
+	
+	.search-input:focus {
+		outline: none;
+		border-color: var(--accent);
+	}
+	
+	.category-filters {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	
+	.category-filter {
+		padding: 0.5rem 1rem;
+		border: 1px solid var(--border-color);
+		border-radius: 20px;
+		background: var(--bg-color);
+		color: var(--text-color);
+		cursor: pointer;
+		transition: all 0.2s ease;
+		font-size: 0.9rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	
+	.category-logo {
+		height: 16px;
+		width: auto;
+		max-width: 40px;
+		opacity: 0.8;
+		transition: opacity 0.2s ease;
+	}
+	
+	.category-filter:hover .category-logo {
+		opacity: 1;
+	}
+	
+	.category-icon {
+		font-size: 1rem;
+	}
+	
+	.category-filter:hover,
+	.category-filter.active {
+		background: var(--accent);
+		color: white;
+		border-color: var(--accent);
+	}
+	
+	.tags-inline-section {
+		margin-top: 0.75rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	
+	.tags-label {
+		font-weight: 600;
+		color: var(--text-color);
+		font-size: 0.9rem;
+		white-space: nowrap;
+	}
+	
+	.tags-inline {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	
+	.tag-inline {
+		padding: 0.25rem 0.5rem;
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+		background: var(--bg-color);
+		color: var(--text-color);
+		cursor: pointer;
+		transition: all 0.2s ease;
+		font-size: 0.75rem;
+		white-space: nowrap;
+	}
+	
+	.tag-inline:hover {
+		background: var(--accent-light);
+		color: var(--accent);
+		border-color: var(--accent);
+		transform: translateY(-1px);
+	}
+	
+	.tag-inline.active {
+		background: var(--accent);
+		color: white;
+		border-color: var(--accent);
+	}
+	
+	/* Pagination Styles */
+	.pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 3rem 0;
+		flex-wrap: wrap;
+	}
+	
+	.pagination-btn {
+		padding: 0.75rem 1.5rem;
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+		background: var(--bg-color);
+		color: var(--text-color);
+		text-decoration: none;
+		transition: all 0.2s ease;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	
+	.pagination-btn:hover {
+		background: var(--accent);
+		color: white;
+		border-color: var(--accent);
+		transform: translateY(-1px);
+	}
+	
+	.pagination-numbers {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+	
+	.pagination-number {
+		padding: 0.5rem 0.75rem;
+		border: 1px solid var(--border-color);
+		border-radius: 6px;
+		background: var(--bg-color);
+		color: var(--text-color);
+		text-decoration: none;
+		transition: all 0.2s ease;
+		font-weight: 500;
+		min-width: 40px;
+		text-align: center;
+	}
+	
+	.pagination-number:hover {
+		background: var(--accent-light);
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+	
+	.pagination-number.active {
+		background: var(--accent);
+		color: white;
+		border-color: var(--accent);
+	}
+	
+	.pagination-ellipsis {
+		padding: 0.5rem 0.25rem;
+		color: var(--text-muted);
+		font-weight: 500;
+	}
+	
+	.active-filters {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		margin-bottom: 1rem;
+		flex-wrap: wrap;
+	}
+	
+	.filter-label {
+		font-weight: 600;
+		color: var(--text-color);
+	}
+	
+	.filter-tag {
+		padding: 0.25rem 0.75rem;
+		background: var(--accent-light);
+		color: var(--accent);
+		border-radius: 15px;
+		font-size: 0.85rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	
+	.remove-filter {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: bold;
+		padding: 0 0.25rem;
+	}
+	
+	.remove-filter:hover {
+		color: var(--text-color);
+	}
+	
+	.results-count {
+		text-align: center;
+		color: var(--text-muted);
+		margin-bottom: 2rem;
+		font-size: 0.9rem;
+	}
+	
 	/* Posts Grid */
 	.posts-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: 2rem;
+		margin-bottom: 3rem;
 	}
 
 	.post-card {
-		background: var(--card-bg);
+		background: var(--bg-color);
 		border-radius: 12px;
 		overflow: hidden;
-		box-shadow: var(--shadow);
-		transition: transform 0.2s ease;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		transition: all 0.2s ease;
 		border: 1px solid var(--border-color);
 	}
 
 	.post-card:hover {
-		transform: translateY(-2px);
+		transform: translateY(-4px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+	}
+	
+	.post-link {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+	
+	.post-image {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		transition: transform 0.2s ease;
+	}
+	
+	.post-link:hover .post-image {
+		transform: scale(1.05);
+	}
+	
+	.post-content {
+		padding: 1.5rem;
+	}
+	
+	.post-title {
+		font-size: 1.25rem;
+		margin-bottom: 0.75rem;
+		color: var(--text-color);
+		line-height: 1.3;
+		font-weight: 600;
+	}
+	
+	.post-description {
+		color: var(--text-muted);
+		line-height: 1.5;
+		margin-bottom: 1rem;
+		font-size: 0.95rem;
+	}
+	
+	.post-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.post-date {
+		color: var(--text-muted);
+		font-size: 0.85rem;
+	}
+	
+	.read-more {
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 0.9rem;
+	}
+	
+	.no-results {
+		text-align: center;
+		padding: 3rem;
+		color: var(--text-muted);
+	}
+	
+	.no-results h3 {
+		margin-bottom: 0.5rem;
+		color: var(--text-color);
 	}
 
 	/* Card Styles */
@@ -658,5 +1087,263 @@ const keywords = [
 		.recent-posts {
 			padding: 3rem 0;
 		}
+
+		.pagination {
+			gap: 0.25rem;
+			margin: 2rem 0;
+		}
+
+		.pagination-btn {
+			padding: 0.5rem 1rem;
+			font-size: 0.9rem;
+		}
+
+		.pagination-number {
+			padding: 0.4rem 0.6rem;
+			min-width: 35px;
+			font-size: 0.9rem;
+		}
+
+		.category-filter {
+			flex-direction: column;
+			gap: 0.25rem;
+			padding: 0.4rem 0.8rem;
+			font-size: 0.8rem;
+		}
+
+		.category-logo {
+			height: 12px;
+			max-width: 30px;
+		}
+
+		.category-name {
+			font-size: 0.75rem;
+		}
 	}
 </style>
+
+<script>
+	/**
+	 * Initialize blog page functionality
+	 */
+	function initBlogPage() {
+		const searchInput = document.getElementById('search-input');
+		const categoryFilters = document.querySelectorAll('.category-filter');
+		const tagFilters = document.querySelectorAll('.tag-inline');
+		const postsGrid = document.getElementById('posts-grid');
+		const resultsCount = document.getElementById('results-count');
+		const noResults = document.getElementById('no-results');
+		const allPosts = Array.from(postsGrid.children);
+		
+		let currentCategory = 'all';
+		let currentSearch = '';
+		let currentTag = '';
+		let currentPage = 1;
+		const postsPerPage = 9;
+		let filteredPostsArray = [];
+		
+		/**
+		 * Filter posts based on search, category, and tag
+		 */
+		function filterPosts() {
+			// Reset current page when filtering
+			currentPage = 1;
+			
+			// Filter posts and store in array
+			filteredPostsArray = [];
+			
+			allPosts.forEach(post => {
+				const title = post.dataset.title || '';
+				const description = post.dataset.description || '';
+				const searchText = (title + ' ' + description).toLowerCase();
+				
+				const matchesSearch = currentSearch === '' || searchText.includes(currentSearch.toLowerCase());
+				const matchesCategory = currentCategory === 'all' || post.classList.contains(`category-${currentCategory}`);
+				
+				// Check tag matching
+				let matchesTag = currentTag === '';
+				if (currentTag !== '') {
+					// Check if post content contains the selected tag
+					matchesTag = searchText.includes(currentTag.toLowerCase()) || 
+								 title.toLowerCase().includes(currentTag.toLowerCase()) ||
+								 description.toLowerCase().includes(currentTag.toLowerCase());
+				}
+				
+				if (matchesSearch && matchesCategory && matchesTag) {
+					filteredPostsArray.push(post);
+				}
+			});
+			
+			// Apply pagination
+			applyPagination();
+			
+			// Track search analytics
+			if (currentSearch && typeof window.trackSearch === 'function') {
+				window.trackSearch(currentSearch, filteredPostsArray.length);
+			}
+			
+			// Track category filter analytics
+			if (currentCategory !== 'all' && typeof window.trackCategoryFilter === 'function') {
+				window.trackCategoryFilter(currentCategory, filteredPostsArray.length);
+			}
+		}
+		
+		/**
+		 * Apply pagination to filtered posts
+		 */
+		function applyPagination() {
+			const totalPosts = filteredPostsArray.length;
+			const totalPages = Math.ceil(totalPosts / postsPerPage);
+			const startIndex = (currentPage - 1) * postsPerPage;
+			const endIndex = startIndex + postsPerPage;
+			
+			// Hide all posts first
+			allPosts.forEach(post => {
+				post.style.display = 'none';
+			});
+			
+			// Show posts for current page
+			const postsToShow = filteredPostsArray.slice(startIndex, endIndex);
+			postsToShow.forEach(post => {
+				post.style.display = 'block';
+			});
+			
+			// Update results count
+			const showingCount = postsToShow.length;
+			resultsCount.textContent = `Showing ${showingCount} of ${totalPosts} articles (Page ${currentPage} of ${totalPages || 1})`;
+			
+			// Show/hide no results message
+			if (totalPosts === 0) {
+				noResults.style.display = 'block';
+				postsGrid.style.display = 'none';
+			} else {
+				noResults.style.display = 'none';
+				postsGrid.style.display = 'grid';
+			}
+			
+			// Update pagination controls
+			updatePaginationControls(totalPages);
+		}
+		
+		/**
+		 * Update pagination controls
+		 */
+		function updatePaginationControls(totalPages) {
+			const paginationContainer = document.querySelector('.pagination');
+			if (!paginationContainer) return;
+			
+			if (totalPages <= 1) {
+				paginationContainer.style.display = 'none';
+				return;
+			}
+			
+			paginationContainer.style.display = 'flex';
+			
+			// Update previous button
+			const prevBtn = paginationContainer.querySelector('.pagination-prev');
+			if (prevBtn) {
+				if (currentPage > 1) {
+					prevBtn.style.display = 'flex';
+					prevBtn.onclick = () => {
+						currentPage--;
+						applyPagination();
+					};
+				} else {
+					prevBtn.style.display = 'none';
+				}
+			}
+			
+			// Update next button
+			const nextBtn = paginationContainer.querySelector('.pagination-next');
+			if (nextBtn) {
+				if (currentPage < totalPages) {
+					nextBtn.style.display = 'flex';
+					nextBtn.onclick = () => {
+						currentPage++;
+						applyPagination();
+					};
+				} else {
+					nextBtn.style.display = 'none';
+				}
+			}
+			
+			// Update page numbers
+			const pageNumbers = paginationContainer.querySelectorAll('.pagination-number');
+			pageNumbers.forEach((pageBtn, index) => {
+				const pageNum = index + 1;
+				if (pageNum <= totalPages) {
+					pageBtn.style.display = 'inline-flex';
+					pageBtn.textContent = pageNum;
+					pageBtn.classList.toggle('active', pageNum === currentPage);
+					pageBtn.onclick = () => {
+						currentPage = pageNum;
+						applyPagination();
+					};
+				} else {
+					pageBtn.style.display = 'none';
+				}
+			});
+		}
+		
+		// Search input handler
+		if (searchInput) {
+			searchInput.addEventListener('input', (e) => {
+				currentSearch = e.target.value;
+				filterPosts();
+			});
+		}
+		
+		// Category filter handlers
+		categoryFilters.forEach(filter => {
+			filter.addEventListener('click', () => {
+				// Remove active class from all filters
+				categoryFilters.forEach(f => f.classList.remove('active'));
+				tagFilters.forEach(f => f.classList.remove('active'));
+				
+				// Add active class to clicked filter
+				filter.classList.add('active');
+				
+				// Update current category and reset tag
+				currentCategory = filter.dataset.category;
+				currentTag = '';
+				
+				// Filter posts
+				filterPosts();
+			});
+		});
+		
+		// Tag filter handlers
+		tagFilters.forEach(filter => {
+			filter.addEventListener('click', () => {
+				// Remove active class from all tag filters
+				tagFilters.forEach(f => f.classList.remove('active'));
+				categoryFilters.forEach(f => f.classList.remove('active'));
+				
+				// Add active class to clicked filter
+				filter.classList.add('active');
+				
+				// Update current tag and reset category
+				currentTag = filter.dataset.tag;
+				currentCategory = 'all';
+				
+				// Filter posts
+				filterPosts();
+				
+				// Track tag filter analytics
+				if (typeof window.trackTagFilter === 'function') {
+					window.trackTagFilter(currentTag);
+				}
+			});
+		});
+		
+		// Initial filter
+		filterPosts();
+	}
+	
+	// Initialize when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initBlogPage);
+	} else {
+		initBlogPage();
+	}
+</script>

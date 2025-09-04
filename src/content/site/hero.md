@@ -7,7 +7,7 @@ primaryButton:
 secondaryButton:
   text: "Explore Categories"
   link: "#categories"
-image: "/src/assets/piclumen-1756945094910.png"
+image: "../../assets/piclumen-1756945094910.png"
 ---
 
 # Hero Section Content
