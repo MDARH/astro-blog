@@ -2,7 +2,7 @@
 id: "ad-1"
 title: "Premium Web Hosting"
 description: "Get 50% off on premium hosting plans. Fast, secure, and reliable."
-image: "https://picsum.photos/300/200?random=ad1"
+image: "/src/assets/Lucid_Origin_Minimal_flat_vector_illustration_of_a_web_dashboa_0.jpg"
 link: "#"
 type: "banner"
 position: "sidebar"

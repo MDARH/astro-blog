@@ -1,8 +1,8 @@
 ---
 title: 'React Hooks: A Complete Guide for Modern Development'
 description: 'Master React Hooks with practical examples. Learn useState, useEffect, useContext, and custom hooks to build powerful React applications.'
-pubDate: 'Jan 25 2024'
-heroImage: 'https://picsum.photos/1020/510?random=3'
+pubDate: 'Sep 14 2025'
+heroImage: '../../assets/Lucid_Origin_Minimal_flat_vector_illustration_of_a_web_dashboa_3.jpg'
 ---
 
 React Hooks revolutionized how we write React components by allowing us to use state and lifecycle features in functional components. This guide covers everything you need to know about React Hooks.

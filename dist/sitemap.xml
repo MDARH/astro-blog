@@ -3,86 +3,104 @@
   
   <url>
     <loc>https://somadhantec.com</loc>
-    <lastmod>2025-09-03T23:07:03.067Z</lastmod>
+    <lastmod>2025-09-04T03:14:18.227Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://somadhantec.com/blog</loc>
-    <lastmod>2025-09-03T23:07:03.067Z</lastmod>
+    <lastmod>2025-09-04T03:14:18.227Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://somadhantec.com/about</loc>
-    <lastmod>2025-09-03T23:07:03.067Z</lastmod>
+    <lastmod>2025-09-04T03:14:18.227Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://somadhantec.com/subscribe</loc>
-    <lastmod>2025-09-03T23:07:03.067Z</lastmod>
+    <lastmod>2025-09-04T03:14:18.227Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2024-05-31T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/using-mdx</loc>
+    <lastmod>2025-09-11T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2024-01-14T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/choosing-right-web-hosting</loc>
+    <lastmod>2025-09-16T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2024-01-19T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/building-digital-products-2024</loc>
+    <lastmod>2025-09-14T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2022-07-07T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/react-hooks-complete-guide</loc>
+    <lastmod>2025-09-13T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2022-07-14T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/markdown-style-guide</loc>
+    <lastmod>2025-09-15T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2022-07-21T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/cloud-devops-best-practices</loc>
+    <lastmod>2025-09-10T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2024-01-31T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/hostnin-best-web-hosting-bangladesh</loc>
+    <lastmod>2025-09-03T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2024-01-24T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/cpanel-management-complete-guide</loc>
+    <lastmod>2025-09-04T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2024-06-18T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/react-complete-guide-2025</loc>
+    <lastmod>2025-09-07T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://somadhantec.com/blog/undefined</loc>
-    <lastmod>2024-02-04T18:00:00.000Z</lastmod>
+    <loc>https://somadhantec.com/blog/wordpress-complete-guide-2025</loc>
+    <lastmod>2025-09-05T18:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://somadhantec.com/blog/filament-php-complete-guide-2025</loc>
+    <lastmod>2025-09-09T18:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://somadhantec.com/blog/vuejs-complete-guide-2025</loc>
+    <lastmod>2025-09-08T18:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://somadhantec.com/blog/laravel-complete-guide-2025</loc>
+    <lastmod>2025-09-06T18:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

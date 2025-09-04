@@ -58,24 +58,21 @@
 		}
 
 		/**
-		 * Hamburger menu animation
+		 * Hamburger menu animation for SVG icon
 		 */
 		function toggleHamburgerAnimation(isOpen) {
 			if (!hamburgerBtn) return;
 			
-			const lines = hamburgerBtn.querySelectorAll('.hamburger-line');
+			const svgIcon = hamburgerBtn.querySelector('.hamburger-icon');
+			if (!svgIcon) return;
 			
 			if (isOpen) {
-				// Transform to X
-				lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-				lines[1].style.opacity = '0';
-				lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+				// Rotate SVG icon to indicate active state
+				svgIcon.style.transform = 'rotate(90deg)';
 				hamburgerBtn.setAttribute('aria-expanded', 'true');
 			} else {
-				// Reset to hamburger
-				lines[0].style.transform = 'none';
-				lines[1].style.opacity = '1';
-				lines[2].style.transform = 'none';
+				// Reset SVG icon
+				svgIcon.style.transform = 'rotate(0deg)';
 				hamburgerBtn.setAttribute('aria-expanded', 'false');
 			}
 		}

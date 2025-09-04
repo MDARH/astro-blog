@@ -1,8 +1,8 @@
 ---
 title: 'Choosing the Right Web Hosting for Your Business'
 description: 'A comprehensive guide to selecting the perfect web hosting solution for your business needs, covering shared, VPS, and dedicated hosting options.'
-pubDate: 'Jan 15 2024'
-heroImage: 'https://picsum.photos/1020/510?random=1'
+pubDate: 'Sep 17 2025'
+heroImage: '../../assets/Lucid_Origin_Minimal_flat_vector_illustration_of_a_web_dashboa_0.jpg'
 ---
 
 Choosing the right web hosting provider is one of the most critical decisions you'll make for your online business. With countless options available, it can be overwhelming to determine which hosting solution best fits your needs.

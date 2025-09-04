@@ -9,6 +9,8 @@ import AdBanner from '../components/AdBanner.astro';
 import GoToTop from '../components/GoToTop.astro';
 import HeaderScript from '../components/HeaderScript.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getBlogImage } from '../utils/imageGenerator';
+import HeroImage from '../assets/piclumen-1756945094910.png';
 
 // Get all blog posts and sort by publication date
 const posts = (await getCollection('blog')).sort(
@@ -20,6 +22,21 @@ const featuredPosts = posts.slice(0, 3);
 
 // Get recent posts (next 6 posts)
 const recentPosts = posts.slice(3, 6);
+
+// Generate topic-related images for posts
+const featuredPostsWithImages = await Promise.all(
+	featuredPosts.map(async (post) => ({
+		...post,
+		topicImage: post.data.heroImage ? null : await getBlogImage(post.id, post.data.title, 400, 250)
+	}))
+);
+
+const recentPostsWithImages = await Promise.all(
+	recentPosts.map(async (post) => ({
+		...post,
+		topicImage: post.data.heroImage ? null : await getBlogImage(post.id, post.data.title, 300, 200)
+	}))
+);
 
 // Get content from markdown collections
 const heroContent = await getCollection('site');
@@ -66,18 +83,22 @@ const keywords = [
 				<div class="container">
 					<div class="hero-content">
 						<h1 class="hero-title">
-							{hero.title}
+							{hero?.title || 'Your Ultimate Tech Resource Hub'}
 						</h1>
 						<p class="hero-description">
-							{hero.description}
+							{hero?.description || 'Discover cutting-edge insights on technology, web hosting, domain management, digital products, and comprehensive programming tutorials.'}
 						</p>
 						<div class="hero-actions">
-							<a href={hero.primaryButton.link} class="btn btn-primary">{hero.primaryButton.text}</a>
-							<a href={hero.secondaryButton.link} class="btn btn-secondary">{hero.secondaryButton.text}</a>
+							<a href={hero?.primaryButton?.link || '/blog'} class="btn btn-primary">{hero?.primaryButton?.text || 'Explore Articles'}</a>
+							<a href={hero?.secondaryButton?.link || '#categories'} class="btn btn-secondary">{hero?.secondaryButton?.text || 'Explore Categories'}</a>
 						</div>
 					</div>
 					<div class="hero-image">
-						<img src={hero.image} alt="Technology and Development" />
+						{hero?.image ? (
+							<img src={hero.image} alt="Technology and Development" />
+						) : (
+							<Image src={HeroImage} alt="Technology and Development" width={600} height={400} />
+						)}
 					</div>
 				</div>
 			</section>
@@ -88,17 +109,17 @@ const keywords = [
 					<div class="content-with-sidebar">
 						<div class="main-content">
 							<h2 class="section-title">Featured Articles</h2>
-							<div class="featured-grid">
-								{featuredPosts.map((post) => (
-									<article class="featured-card">
-										<a href={`/blog/${post.slug}/`} class="card-link">
-											<div class="card-image">
-												{post.data.heroImage ? (
-													<Image src={post.data.heroImage} alt={post.data.title} width={400} height={250} />
-												) : (
-													<img src={`https://picsum.photos/400/250?random=${post.slug}`} alt={post.data.title} />
-												)}
-											</div>
+				<div class="featured-grid">
+					{featuredPostsWithImages.map((post) => (
+						<article class="featured-card">
+							<a href={`/blog/${post.id}/`} class="card-link">
+								<div class="card-image">
+									{post.data.heroImage ? (
+										<Image src={post.data.heroImage} alt={post.data.title} width={400} height={250} />
+									) : (
+										<img src={post.topicImage} alt={post.data.title} />
+									)}
+								</div>
 											<div class="card-content">
 												<div class="card-meta">
 													<FormattedDate date={post.data.pubDate} />
@@ -135,14 +156,40 @@ const keywords = [
 				<div class="container">
 					<h2 class="section-title">Explore by Category</h2>
 					<div class="categories-grid">
-						{categories.map((category) => (
+						{categories && categories.length > 0 ? categories.map((category) => (
 							<div class="category-card">
-								<div class="category-icon">{category.icon}</div>
-								<h3>{category.title}</h3>
-								<p>{category.description}</p>
-								<a href={category.link} class="category-link">Explore →</a>
+								<div class="category-icon">{category?.icon || '💻'}</div>
+								<h3>{category?.title || 'Technology'}</h3>
+								<p>{category?.description || 'Explore technology topics and tutorials'}</p>
+								<a href={category?.link || '/blog'} class="category-link">Explore →</a>
 							</div>
-						))}
+						)) : (
+							<!-- Fallback categories if none are loaded -->
+							<div class="category-card">
+								<div class="category-icon">🌐</div>
+								<h3>Web Hosting</h3>
+								<p>Comprehensive guides on choosing the right hosting solution for your needs.</p>
+								<a href="/blog" class="category-link">Explore →</a>
+							</div>
+							<div class="category-card">
+								<div class="category-icon">🔗</div>
+								<h3>Domain Management</h3>
+								<p>Master domain registration, DNS, and digital identity best practices.</p>
+								<a href="/blog" class="category-link">Explore →</a>
+							</div>
+							<div class="category-card">
+								<div class="category-icon">💻</div>
+								<h3>Programming Tutorials</h3>
+								<p>Step-by-step coding tutorials and development best practices.</p>
+								<a href="/blog" class="category-link">Explore →</a>
+							</div>
+							<div class="category-card">
+								<div class="category-icon">📱</div>
+								<h3>Digital Products</h3>
+								<p>Insights on building, launching, and scaling digital products.</p>
+								<a href="/blog" class="category-link">Explore →</a>
+							</div>
+						)}
 					</div>
 				</div>
 			</section>
@@ -155,16 +202,16 @@ const keywords = [
 						<a href="/blog" class="view-all">View All Articles →</a>
 					</div>
 					<div class="posts-grid">
-						{recentPosts.map((post) => (
-							<article class="post-card">
-								<a href={`/blog/${post.slug}/`} class="card-link">
-									<div class="card-image">
-										{post.data.heroImage ? (
-											<Image src={post.data.heroImage} alt={post.data.title} width={300} height={200} />
-										) : (
-											<img src={`https://picsum.photos/300/200?random=${post.slug}`} alt={post.data.title} />
-										)}
-									</div>
+				{recentPostsWithImages.map((post) => (
+					<article class="post-card">
+						<a href={`/blog/${post.id}/`} class="card-link">
+							<div class="card-image">
+								{post.data.heroImage ? (
+									<Image src={post.data.heroImage} alt={post.data.title} width={300} height={200} />
+								) : (
+									<img src={post.topicImage} alt={post.data.title} />
+								)}
+							</div>
 									<div class="card-content">
 										<div class="card-meta">
 											<FormattedDate date={post.data.pubDate} />
@@ -192,7 +239,8 @@ const keywords = [
 				</section>
 			)}
 
-			<!-- Newsletter CTA Section -->
+			<!-- Newsletter CTA Section - Commented out as requested -->
+			<!-- 
 			<section class="newsletter-cta">
 				<div class="container">
 					<div class="cta-content">
@@ -202,6 +250,7 @@ const keywords = [
 					</div>
 				</div>
 			</section>
+			-->
 		</main>
 		<Footer />
 		<GoToTop />

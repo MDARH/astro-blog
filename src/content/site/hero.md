@@ -7,7 +7,7 @@ primaryButton:
 secondaryButton:
   text: "Explore Categories"
   link: "#categories"
-image: "https://picsum.photos/600/400?random=hero"
+image: "/src/assets/piclumen-1756945094910.png"
 ---
 
 # Hero Section Content

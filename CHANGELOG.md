@@ -2,6 +2,481 @@
 
 All notable changes to SomaDhanTech Blog will be documented in this file.
 
+## [2.21.0] - 2025-09-04
+
+### BlogSidebar Category Fix
+- **Fixed Category Names**: Corrected BlogSidebar to use `category.data.title` instead of `category.data.name`
+- **Added Missing Categories**: Created category files for Laravel, React, Vue.js, and FilamentPHP
+- **Centralized Category Management**: All categories now managed from single content collection
+- **Consistent Category Display**: Categories display properly across sidebar and footer
+
+### Footer Complete Redesign
+- **Logo Integration**: Replaced site title with Logo component for better branding
+- **Updated Description**: Changed to personal, engaging content about Laravel, React, Vue, and hosting topics
+- **Simplified Quick Links**: Reduced to only 'About Us' and 'Contact Us' links
+- **Dynamic Categories**: Footer categories now pulled from centralized category collection
+- **Social Media Update**: Replaced Twitter with X (https://x.com/mdarh411)
+- **Newsletter Subscription**: Added complete newsletter signup form with responsive design
+
+### Category Content Expansion
+- **Laravel Category**: Added comprehensive Laravel framework content and topics
+- **React Category**: Created React.js development tutorials and best practices section
+- **Vue.js Category**: Added Vue.js framework guides and modern development patterns
+- **FilamentPHP Category**: Created FilamentPHP admin panel development resources
+- **Proper Ordering**: All categories have proper order values for consistent display
+
+### Newsletter Form Features
+- **Responsive Design**: Form adapts from stacked to inline layout on larger screens
+- **Modern Styling**: Clean, accessible form design with proper focus states
+- **Email Validation**: Built-in email validation and required field handling
+- **Call-to-Action**: Clear messaging about web development and tech insights
+- **Visual Integration**: Seamlessly integrated with existing footer design
+
+### Technical Improvements
+- **Component Integration**: Proper Logo component integration in footer
+- **Content Collection Usage**: Leveraged Astro's content collections for categories
+- **Responsive CSS**: Mobile-first approach for newsletter form
+- **Accessibility**: Proper form labels, ARIA attributes, and semantic HTML
+- **Performance**: Efficient category loading and rendering
+
+## [2.20.0] - 2025-09-04
+
+### Blog Sidebar Implementation
+- **Sticky Category Menu**: Added right-side sticky sidebar with category navigation for blog posts
+- **Popular Tags Cloud**: Implemented clickable tag cloud with all available tags
+- **Quick Navigation**: Added quick navigation links for better user experience
+- **Responsive Design**: Sidebar automatically hides on smaller screens (below 1200px)
+- **Visual Enhancements**: Modern design with hover effects and smooth transitions
+
+### Tag Filtering System
+- **Clickable Tags**: Made all tags in blog posts clickable with proper linking
+- **Tag-Based Filtering**: Implemented URL-based tag filtering (/blog?tag=TagName)
+- **Smart Tag Detection**: Automatic tag extraction based on content keywords
+- **Active Filter Display**: Visual indicators showing current active filters
+- **Filter Removal**: Easy filter removal with clear buttons
+- **Analytics Integration**: Tag clicks tracked for analytics insights
+
+### Blog Post Layout Improvements
+- **Two-Column Layout**: Implemented responsive grid layout with main content and sidebar
+- **Enhanced Tag Display**: Tags now appear as clickable buttons with hover effects
+- **Better Content Organization**: Improved spacing and visual hierarchy
+- **Mobile Optimization**: Responsive design that adapts to different screen sizes
+
+### Blog Page Enhancements
+- **Advanced Filtering**: Support for both category and tag-based filtering
+- **Filter Indicators**: Clear display of active filters with removal options
+- **URL Parameter Support**: Proper URL handling for shareable filtered views
+- **Enhanced Search**: Improved search functionality with filter integration
+- **Better UX**: Smooth transitions and visual feedback for all interactions
+
+### Footer Social Links Fix
+- **Restored Social Links**: Added GitHub and Twitter back to 'Connect with Me' section
+- **Section Rename**: Changed 'Connect with Hassan' to 'Connect with Me'
+- **Complete Social Suite**: Now includes Facebook, Twitter, GitHub, LinkedIn, and Portfolio
+- **Proper Organization**: Social links properly organized in the correct footer section
+
+### Technical Improvements
+- **BlogSidebar Component**: New reusable component for blog post navigation
+- **Tag Extraction Logic**: Intelligent content-based tag detection system
+- **URL Parameter Handling**: Robust URL parameter parsing and filtering
+- **Performance Optimized**: Efficient filtering and rendering for large content sets
+- **SEO Friendly**: Proper URL structure for filtered views
+
+### User Experience Enhancements
+- **Content Discovery**: Easier navigation between related content
+- **Visual Feedback**: Hover effects and active states for better interaction
+- **Accessibility**: Proper ARIA labels and semantic HTML structure
+- **Mobile Friendly**: Responsive design that works across all devices
+- **Fast Navigation**: Sticky sidebar for quick category switching
+
+## [2.19.0] - 2025-09-04
+
+### Analytics Implementation
+- **Google Analytics GA4**: Implemented comprehensive Google Analytics tracking for visitor monitoring
+- **Custom Event Tracking**: Added tracking for post clicks, search queries, category filtering, and user interactions
+- **Performance Monitoring**: Implemented page load time and scroll depth tracking
+- **External Link Tracking**: Automatic tracking of outbound link clicks
+- **Social Media Tracking**: Support for tracking social media shares and interactions
+- **Privacy Compliant**: GDPR-compliant analytics with user privacy considerations
+
+### Analytics Features
+- **Visitor Tracking**: Total visitors, today's visitors, and session data
+- **Content Analytics**: Most popular posts, category engagement, and content performance
+- **User Behavior**: Scroll depth, time on page, and interaction patterns
+- **Traffic Sources**: Referral tracking and traffic source analysis
+- **Search Analytics**: Internal search query tracking and results analysis
+- **Mobile Analytics**: Device type and mobile usage tracking
+
+### Configuration System
+- **Analytics Config**: Centralized configuration file for easy setup
+- **Environment Control**: Separate settings for development and production
+- **Custom Dimensions**: Support for custom tracking dimensions and events
+- **Easy Setup**: Simple configuration with Google Analytics Measurement ID
+
+### Developer Tools
+- **Analytics Component**: Reusable analytics component for custom tracking
+- **Event Utilities**: JavaScript utilities for tracking custom events
+- **Debug Mode**: Console logging for development and testing
+- **Documentation**: Comprehensive setup guide and usage instructions
+
+### Blog Page Analytics
+- **Search Tracking**: Track what users search for and result counts
+- **Category Filtering**: Monitor which categories users engage with most
+- **Post Click Tracking**: Track which blog posts get the most clicks
+- **User Journey**: Monitor how users navigate through content
+
+### Technical Implementation
+- **Conditional Loading**: Analytics only loads in production by default
+- **Performance Optimized**: Minimal impact on page load times
+- **Error Handling**: Robust error handling for analytics failures
+- **Cross-Browser Support**: Compatible with all modern browsers
+
+## [2.18.0] - 2025-09-04
+
+### Mobile Experience Enhancements
+- **Enhanced Blog Page Mobile**: Improved mobile layout with better spacing, typography, and touch targets
+- **Improved Post Page Mobile**: Enhanced individual blog post mobile experience with better readability
+- **Better Mobile Navigation**: Fixed hamburger menu JavaScript error and improved mobile menu functionality
+- **Responsive Typography**: Optimized font sizes and line heights for mobile devices
+- **Touch-Friendly Interface**: Improved button sizes and spacing for better mobile interaction
+
+### JavaScript Fixes
+- **Fixed Hamburger Menu Error**: Resolved "Cannot read properties of undefined" error in HeaderScript.astro
+- **Updated Animation Logic**: Modified hamburger animation to work with SVG icon instead of CSS lines
+- **Better Error Handling**: Added null checks and improved error handling for menu elements
+- **SVG Icon Animation**: Implemented smooth rotation animation for hamburger SVG icon
+
+### External Dependencies Cleanup
+- **Removed Picsum Links**: Replaced all remaining picsum.photos URLs with local images
+- **Updated Blog Post Images**: Replaced external image URLs in 4 blog posts with local assets
+- **Removed Preconnect Links**: Cleaned up unnecessary external domain preconnections
+- **Local Asset Integration**: All images now load from local assets directory
+
+### Blog Page Mobile Improvements
+- **Enhanced Header**: Increased padding and improved typography hierarchy
+- **Better Search Experience**: Larger search input with improved padding and font size
+- **Horizontal Category Scroll**: Added horizontal scrolling for category filters on mobile
+- **Improved Post Cards**: Better spacing, typography, and image sizing for mobile
+- **Enhanced Grid Layout**: Optimized single-column layout with better gaps
+
+### Post Page Mobile Improvements
+- **Better Content Layout**: Improved prose container with better padding and max-width
+- **Enhanced Typography**: Larger titles with better line height and spacing
+- **Full-Width Hero Images**: Hero images now span full width on mobile with proper margins
+- **Improved Category/Tags**: Better mobile styling for category and tag displays
+- **Enhanced Readability**: Optimized text sizing and spacing for mobile reading
+
+## [2.17.0] - 2025-09-04
+
+### Enhanced Mobile Experience
+- **Increased Mobile Header Height**: Enhanced mobile header height from 80px to 90px for better visibility
+- **Improved Mobile Padding**: Increased nav container padding to 1.5rem vertical and 1.25rem horizontal
+- **Added Minimum Height**: Set minimum height of 70px for nav container on mobile devices
+- **Better Touch Targets**: Enhanced mobile header spacing and interaction areas
+
+### Mobile Menu Fixes
+- **Fixed Scrolling Issues**: Added overflow-y-auto to mobile menu container for proper scrolling
+- **Enhanced Body Scroll Lock**: Improved body scroll prevention when mobile menu is open
+- **Better Error Handling**: Added comprehensive error handling and debugging for mobile menu functionality
+- **Improved Event Handling**: Enhanced click event handling with preventDefault and stopPropagation
+- **Console Debugging**: Added console logging for troubleshooting mobile menu issues
+
+### JavaScript Improvements
+- **Robust Menu Opening**: Enhanced mobile menu opening with better state management
+- **Body Position Fixing**: Added body position fixed to prevent background scrolling
+- **Element Validation**: Added null checks for menu elements before manipulation
+- **Event Prevention**: Proper event handling to prevent conflicts and bubbling
+
+## [2.16.0] - 2025-09-04
+
+### Mobile Menu Fixes
+- **Increased Header Height**: Enhanced mobile header height from 70px to 80px for better visibility
+- **Fixed Hamburger Menu**: Corrected CSS selectors to properly handle mobile menu open/close functionality
+- **Improved Padding**: Increased nav container padding from 0.75rem to 1rem for better spacing
+- **Better Touch Targets**: Enhanced mobile menu interaction and usability
+
+### External Dependencies Cleanup
+- **Removed Unsplash URLs**: Replaced all external Unsplash image references with local assets
+- **Hero Section**: Updated hero image to use local piclumen asset
+- **Ad Banners**: Replaced all ad images with local vector illustrations
+- **Image Generator**: Modified utility to use local images instead of external Unsplash API
+- **Performance Improvement**: Eliminated external image dependencies for faster loading
+
+### Bug Fixes
+- **Mobile Menu CSS**: Fixed CSS class selectors for proper mobile menu activation
+- **External Image Errors**: Resolved Unsplash.com loading errors by using local assets
+- **Header Responsiveness**: Improved mobile header layout and spacing
+- **Image Loading**: Ensured all images load from local assets without external dependencies
+
+## [2.15.0] - 2025-09-04
+
+### Mobile Menu UI Improvements
+- **SVG Hamburger Icon**: Replaced CSS-based hamburger lines with clean SVG icon
+- **Enhanced Padding**: Added proper padding and sizing for better touch targets
+- **Improved Styling**: Updated button styling with better hover states and transitions
+- **Social Links Cleanup**: Removed social media links from mobile menu footer
+- **Streamlined Navigation**: Focused mobile menu on core navigation categories
+- **Better Visual Design**: Improved overall mobile menu appearance and usability
+
+### Header Component Updates
+- **Modern Icon Design**: Implemented SVG-based hamburger menu icon
+- **Responsive Sizing**: Optimized button size and padding for mobile devices
+- **Enhanced Interactions**: Improved hover effects and visual feedback
+- **Clean Code**: Removed legacy CSS for old hamburger line implementation
+
+## [2.14.0] - 2025-09-04
+
+### Mobile Menu Improvements
+- **Enhanced Navigation**: Updated mobile menu with category-based navigation
+- **Preferred Categories**: Added Web Hosting, Laravel, React, Vue.js category links
+- **Personal Social Links**: Updated mobile menu footer with Facebook, LinkedIn, and Portfolio links
+- **Better Organization**: Added category section with visual hierarchy
+
+### Mega Menu Enhancements
+- **Clickable Categories**: Made category titles clickable links to filter posts
+- **Removed All Posts**: Streamlined mega menu by removing redundant "All Posts" section
+- **Category Filtering**: Direct links to category-filtered blog pages
+- **Improved UX**: Better navigation flow with category-based organization
+
+### Footer Social Links Cleanup
+- **Removed GitHub/Twitter**: Cleaned up footer by removing GitHub and Twitter links
+- **Personal Branding**: Focused on Facebook, LinkedIn, and Portfolio links only
+- **Streamlined Design**: Cleaner footer with fewer social media options
+
+### Content Organization
+- **Preferred Categories**: Focused on Laravel, Vue, React, Web Hosting as main categories
+- **Domain Management Removal**: Deleted domain-related category and posts
+- **Category Restructuring**: Updated blog page filtering for new category structure
+- **Content Cleanup**: Removed outdated domain management content
+
+### Blog Post Features
+- **Related Posts**: Implemented intelligent related posts based on category
+- **Category Display**: Added category information to individual post pages
+- **Tags System**: Implemented comprehensive tagging system for posts
+- **Smart Categorization**: Automatic category detection based on post content
+- **Visual Enhancements**: Improved post page layout with category and tag displays
+
+### Blog Page Improvements
+- **Category Filtering**: Updated blog page with new preferred categories
+- **Better Organization**: Streamlined category filters (Hosting, Laravel, React, Vue, Tutorials)
+- **Improved Navigation**: Enhanced category-based post filtering
+- **Content Discovery**: Better post organization and discovery features
+
+### Technical Improvements
+- **Category Logic**: Enhanced category detection and filtering algorithms
+- **Related Posts Algorithm**: Smart related post suggestions based on content similarity
+- **Performance**: Optimized category filtering and post relationships
+- **Code Organization**: Cleaner component structure and better separation of concerns
+
+### User Experience
+- **Focused Content**: Streamlined to preferred technology categories
+- **Better Navigation**: Improved category-based browsing experience
+- **Content Discovery**: Enhanced related posts and category filtering
+- **Mobile Experience**: Better mobile navigation with category organization
+
+## [2.13.0] - 2025-09-04
+
+### Mega Menu UI Improvements
+- **Full-Width Hover Design**: Redesigned mega menu with full-width layout and hover activation
+- **Post Thumbnails**: Added thumbnail images for posts in mega menu categories
+- **Enhanced Visual Hierarchy**: Improved typography, spacing, and visual organization
+- **Better Mobile Experience**: Optimized mobile layout with responsive design
+- **Smooth Animations**: Added hover effects and smooth transitions
+- **Simplified JavaScript**: Removed click-based functionality in favor of CSS hover
+
+### Content Date Updates
+- **Sequential Post Dates**: Updated all blog post dates starting from September 4, 2025
+- **Daily Increments**: Each post now has a unique date with daily progression
+- **Current Relevance**: All content now appears fresh and current
+
+### Hero Section Fixes
+- **Local Image Integration**: Fixed hero section to use local assets instead of external URLs
+- **Proper Image Loading**: Implemented correct Astro Image component usage
+- **Performance Improvement**: Faster loading with local image assets
+
+### UI/UX Enhancements
+- **Community Section Removal**: Commented out "Join Our Tech Community" section as requested
+- **Personal Branding**: Updated footer with personal social media links
+- **Social Media Integration**: Added Facebook, GitHub, LinkedIn, X (Twitter), and Portfolio links
+- **Professional Touch**: Changed social section title to "Connect with Hassan"
+
+### Technical Improvements
+- **Hover-Based Navigation**: Improved mega menu with CSS-only hover interactions
+- **Image Asset Management**: Better handling of local image assets
+- **Code Organization**: Cleaner component structure and reduced JavaScript complexity
+- **Performance Optimization**: Faster page loads with local assets
+
+### Social Media Links Added
+- **Facebook**: https://facebook.com/CapturedByHassan
+- **GitHub**: https://github.com/MDARH
+- **LinkedIn**: https://www.linkedin.com/in/mdarh411/
+- **X (Twitter)**: https://x.com/mdarh411
+- **Portfolio**: https://mdarh.github.io/
+
+## [2.12.0] - 2025-09-04
+
+### Image Assets Integration
+- **Local Image Usage**: Updated blog posts to use locally generated images from assets folder
+- **Hostnin Thumbnail**: Integrated custom thumbnail for Hostnin hosting post
+- **WordPress Images**: Applied WordPress logo illustrations to WordPress guide
+- **Laravel Images**: Applied Laravel logo illustrations to Laravel guide
+- **Filament Images**: Applied web dashboard illustrations to Filament PHP guide
+
+### Header Navigation Redesign
+- **Mega Menu Implementation**: Created comprehensive mega menu component for categories
+- **Navigation Removal**: Removed traditional Home and Blog links from header
+- **Category Organization**: Organized posts by categories (hosting, tutorials, domains, digital-products)
+- **Interactive Dropdown**: Added hover and click interactions with smooth animations
+- **Mobile Responsive**: Ensured mega menu works perfectly on mobile devices
+
+### Blog Page UI Overhaul
+- **Modern Card Layout**: Redesigned blog page with attractive card-based grid layout
+- **Search Functionality**: Added real-time search capability for articles
+- **Category Filtering**: Implemented dynamic category filters with active states
+- **Responsive Design**: Optimized for all screen sizes with mobile-first approach
+- **Enhanced Typography**: Improved readability with better font sizes and spacing
+- **Interactive Elements**: Added hover effects and smooth transitions
+- **Results Counter**: Dynamic article count display with filtering
+- **No Results State**: User-friendly message when no articles match criteria
+
+### User Experience Improvements
+- **Visual Hierarchy**: Better content organization and visual flow
+- **Loading Performance**: Optimized image loading and grid rendering
+- **Accessibility**: Improved keyboard navigation and screen reader support
+- **Content Discovery**: Enhanced ability to find relevant articles
+
+### Technical Enhancements
+- **Component Architecture**: Modular mega menu component for reusability
+- **JavaScript Functionality**: Client-side filtering and search without page reloads
+- **CSS Grid Layout**: Modern CSS Grid for responsive blog post layout
+- **Asset Optimization**: Local image assets for better performance
+
+## [2.11.0] - 2025-09-04
+
+### Content Updates
+- **Hostnin Referral Link**: Added affiliate referral link to Hostnin blog post
+- **Guide Year Update**: Updated all guide titles from 2024 to 2025 for current relevance
+- **File Renaming**: Renamed all guide files to reflect 2025 updates
+
+### Bug Fixes
+- **Post Slug Issue**: Fixed undefined post.slug error in homepage by using post.id instead
+- **Sitemap URLs**: Updated sitemap generation to use correct post.id for URLs
+- **Image Generation**: Fixed getBlogImage function calls to use post.id
+
+### UI/UX Improvements
+- **Header Layout**: Redesigned header with centered logo and left-aligned navigation
+- **Navigation Position**: Moved desktop navigation menu to the left side
+- **Logo Centering**: Positioned logo in the center of the header for better visual balance
+
+### Technical Fixes
+- **Content Collections**: Proper use of Astro content collection properties
+- **URL Generation**: Consistent use of post.id for all blog post URLs
+- **Responsive Design**: Maintained mobile responsiveness with new header layout
+
+## [2.10.0] - 2025-09-04
+
+### New Blog Content
+- **Hostnin Web Hosting**: Comprehensive guide to best web hosting in Bangladesh
+- **cPanel Management**: Complete tutorial for cPanel administration and management
+- **WordPress Guide 2024**: Modern WordPress development and management practices
+- **Laravel Guide 2024**: Complete Laravel framework development tutorial
+- **React Guide 2024**: Modern React development with hooks and best practices
+- **Vue.js Guide 2024**: Progressive JavaScript framework complete guide
+- **Filament PHP Guide**: Modern Laravel admin panel development with Filament
+
+### Content Improvements
+- **Placeholder Post Removal**: Removed Lorem ipsum placeholder posts for cleaner content
+- **Real Content Focus**: Homepage now displays only meaningful, high-quality blog posts
+- **Topic Diversity**: Added comprehensive guides covering hosting, frameworks, and tools
+- **Professional Quality**: All new posts feature detailed, practical content
+- **SEO Optimization**: Proper meta descriptions and structured content for better search visibility
+
+### Homepage Fixes
+- **Content Loading**: Fixed automatic content loading and display issues
+- **Post Filtering**: Improved post selection and sorting by publication date
+- **Slug Generation**: Ensured proper URL slug generation for all blog posts
+- **Content Validation**: Added proper content validation and error handling
+
+### Technical Updates
+- **Build Optimization**: Successful build with 18 pages including all new blog posts
+- **Content Collections**: Proper integration with Astro content collections
+- **Image Processing**: Optimized image generation and processing
+- **Performance**: Improved site performance with better content organization
+
+## [2.9.0] - 2025-09-04
+
+### CLI Image Generation Tool
+- **Local Image Generation**: Created comprehensive CLI tool for generating AI images locally
+- **Command Line Interface**: Added `npm run generate-image` script for easy image generation
+- **Smart Keyword Extraction**: Automatic keyword detection from blog titles for relevant image generation
+- **Multiple Image Sizes**: Generates hero (800x600), featured (400x250), and thumbnail (300x200) versions
+- **Local Storage**: Downloads and saves images to `src/assets/generated/` directory
+- **ES Module Support**: Fixed CLI tool to work with ES modules instead of CommonJS
+- **Fallback System**: Added robust fallback from Unsplash to Picsum when primary source fails
+- **Error Handling**: Comprehensive error handling with retry mechanisms
+
+### cPanel Hosting Fixes
+- **404 Page Configuration**: Created .htaccess file to properly handle 404 errors on cPanel hosting
+- **Custom Error Pages**: Configured custom error pages for 404, 500, and 403 errors
+- **URL Rewriting**: Added proper URL rewriting rules for Astro's static file routing
+- **Security Headers**: Implemented security headers for better protection
+- **Performance Optimization**: Added compression and caching rules for static assets
+
+### Homepage Content Fixes
+- **Undefined Content Resolution**: Fixed undefined content issues with proper null checking
+- **Fallback Content**: Added fallback values for hero section, categories, and other dynamic content
+- **Robust Error Handling**: Implemented optional chaining throughout the homepage
+- **Fallback Categories**: Added static fallback categories when dynamic content fails to load
+- **Content Reliability**: Ensured homepage displays properly even when content collections have issues
+- **Placeholder Post Removal**: Removed Lorem ipsum placeholder posts (first-post, second-post, third-post) with outdated content
+- **Real Content Focus**: Homepage now displays only meaningful, real blog posts with actual content
+
+### Technical Improvements
+- **Error Prevention**: Added comprehensive null checking and optional chaining
+- **Content Resilience**: Homepage now gracefully handles missing or undefined content
+- **CLI Tool Integration**: Seamless integration of image generation into development workflow
+- **Package.json Enhancement**: Added convenient npm script for image generation
+
+### Developer Experience
+- **Easy Image Generation**: Simple command-line interface for creating topic-related images
+- **Automated Workflow**: Streamlined process from blog title to generated images
+- **Local Asset Management**: All generated images stored locally for better performance
+- **Multiple Format Support**: Generates images in multiple sizes for different use cases
+
+### Infrastructure
+- **Apache Configuration**: Comprehensive .htaccess file for production hosting
+- **Error Page Handling**: Proper 404 page routing for cPanel environments
+- **Performance Headers**: Optimized caching and compression for better site speed
+- **Security Enhancements**: Added security headers and protection measures
+
+## [2.8.0] - 2025-09-04
+
+### AI-Powered Image Generation
+- **Topic-Related Images**: Replaced random Picsum images with topic-specific Unsplash images based on content
+- **Image Generation Utility**: Created comprehensive imageGenerator.ts utility for intelligent image selection
+- **Content-Aware Images**: Blog post images now automatically match their topics (hosting, React, domains, etc.)
+- **Hero Section Enhancement**: Updated hero image to use technology-focused imagery
+- **Advertisement Images**: Enhanced ad images to be relevant to their content (hosting, development, cloud, domains)
+
+### Technical Implementation
+- **Smart Keyword Extraction**: Automatic keyword detection from blog titles and slugs
+- **Topic Classification**: Intelligent categorization of content for appropriate image selection
+- **Unsplash Integration**: Leveraged Unsplash Source API for high-quality, topic-relevant images <mcreference link="https://source.unsplash.com" index="1">1</mcreference>
+- **Fallback System**: Robust error handling with topic-based fallbacks
+- **Performance Optimization**: Efficient image URL generation without external API calls
+
+### Content Improvements
+- **Hero Image**: Technology hub themed image with innovation keywords
+- **Blog Images**: Contextual images for web hosting, React development, domain management topics
+- **Ad Visuals**: Professional service-related imagery for hosting, development courses, and cloud solutions
+- **Consistent Branding**: All images now align with technology and professional themes
+
+### Developer Features
+- **Utility Functions**: getBlogImage(), getHeroImage(), getAdImage() for different content types
+- **Keyword Mapping**: Comprehensive technology keyword database for accurate image matching
+- **Extensible System**: Easy to add new topics and keyword associations
+- **Type Safety**: Full TypeScript support with proper type definitions
+
 ## [2.7.0] - 2025-09-04
 
 ### Workflow Simplification

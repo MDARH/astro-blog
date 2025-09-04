@@ -2,7 +2,7 @@
 id: "ad-3"
 title: "Domain Registration"
 description: "Register your domain for just $9.99/year. Free SSL included."
-image: "https://picsum.photos/300/150?random=ad3"
+image: "/src/assets/Lucid_Origin_Minimal_flat_vector_illustration_of_a_web_dashboa_2.jpg"
 link: "#"
 type: "horizontal"
 position: "footer"

@@ -25,7 +25,7 @@ export async function GET() {
   </url>`).join('')}
   ${posts.map(post => `
   <url>
-    <loc>${SITE_URL}/blog/${post.slug}</loc>
+    <loc>${SITE_URL}/blog/${post.id}</loc>
     <lastmod>${post.data.updatedDate ? post.data.updatedDate.toISOString() : post.data.pubDate.toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -1,0 +1,142 @@
+---
+/**
+ * Analytics Component
+ * Provides custom event tracking for user interactions
+ */
+import { isAnalyticsEnabled, getGoogleAnalyticsId } from '../config/analytics';
+---
+
+{isAnalyticsEnabled() && (
+	<script>
+		/**
+		 * Analytics utility functions for tracking custom events
+		 */
+		window.trackEvent = function(eventName, parameters = {}) {
+			if (typeof gtag !== 'undefined') {
+				gtag('event', eventName, {
+					...parameters,
+					timestamp: new Date().toISOString()
+				});
+				console.log('Analytics Event:', eventName, parameters);
+			}
+		};
+
+		/**
+		 * Track post clicks
+		 */
+		window.trackPostClick = function(postTitle, postUrl, category = 'blog') {
+			window.trackEvent('post_click', {
+				post_title: postTitle,
+				post_url: postUrl,
+				category: category,
+				event_category: 'engagement',
+				event_label: postTitle
+			});
+		};
+
+		/**
+		 * Track external link clicks
+		 */
+		window.trackExternalLink = function(linkUrl, linkText) {
+			window.trackEvent('external_link_click', {
+				link_url: linkUrl,
+				link_text: linkText,
+				event_category: 'outbound',
+				event_label: linkUrl
+			});
+		};
+
+		/**
+		 * Track search queries
+		 */
+		window.trackSearch = function(searchTerm, resultsCount = 0) {
+			window.trackEvent('search', {
+				search_term: searchTerm,
+				results_count: resultsCount,
+				event_category: 'search',
+				event_label: searchTerm
+			});
+		};
+
+		/**
+		 * Track category filter usage
+		 */
+		window.trackCategoryFilter = function(category, postsCount = 0) {
+			window.trackEvent('category_filter', {
+				category: category,
+				posts_count: postsCount,
+				event_category: 'navigation',
+				event_label: category
+			});
+		};
+
+		/**
+		 * Track social media shares
+		 */
+		window.trackSocialShare = function(platform, postTitle, postUrl) {
+			window.trackEvent('social_share', {
+				platform: platform,
+				post_title: postTitle,
+				post_url: postUrl,
+				event_category: 'social',
+				event_label: `${platform}_${postTitle}`
+			});
+		};
+
+		/**
+		 * Track scroll depth
+		 */
+		let scrollDepthTracked = [];
+		window.trackScrollDepth = function() {
+			const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+			const milestones = [25, 50, 75, 90];
+			
+			milestones.forEach(milestone => {
+				if (scrollPercent >= milestone && !scrollDepthTracked.includes(milestone)) {
+					scrollDepthTracked.push(milestone);
+					window.trackEvent('scroll_depth', {
+						percent: milestone,
+						page_url: window.location.href,
+						event_category: 'engagement',
+						event_label: `${milestone}%`
+					});
+				}
+			});
+		};
+
+		/**
+		 * Auto-track scroll depth
+		 */
+		window.addEventListener('scroll', window.trackScrollDepth);
+
+		/**
+		 * Auto-track external links
+		 */
+		document.addEventListener('click', function(e) {
+			const link = e.target.closest('a');
+			if (link && link.href) {
+				const isExternal = link.hostname !== window.location.hostname;
+				if (isExternal) {
+					window.trackExternalLink(link.href, link.textContent || link.href);
+				}
+			}
+		});
+
+		/**
+		 * Track page load time
+		 */
+		window.addEventListener('load', function() {
+			setTimeout(() => {
+				const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+				window.trackEvent('page_load_time', {
+					load_time: loadTime,
+					page_url: window.location.href,
+					event_category: 'performance',
+					event_label: `${Math.round(loadTime/1000)}s`
+				});
+			}, 100);
+		});
+
+		console.log('Analytics tracking initialized for:', `${getGoogleAnalyticsId()}`);
+	</script>
+)}

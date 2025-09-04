@@ -2,7 +2,7 @@
 id: "ad-2"
 title: "Learn React Development"
 description: "Master React with our comprehensive course. 30% discount for limited time."
-image: "https://picsum.photos/300/200?random=ad2"
+image: "/src/assets/Lucid_Origin_Minimal_flat_vector_illustration_of_a_web_dashboa_3.jpg"
 link: "#"
 type: "banner"
 position: "content"

@@ -10,105 +10,624 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const categories = await getCollection('categories');
+const sortedCategories = categories.sort((a, b) => a.data.order - b.data.order);
+
+// Get URL parameters for filtering
+const url = new URL(Astro.request.url);
+const categoryFilter = url.searchParams.get('category');
+const tagFilter = url.searchParams.get('tag');
+
+// Extract all unique tags from posts
+const allTags = [...new Set(posts.flatMap(post => {
+  const content = post.body.toLowerCase();
+  const tags = [];
+  
+  // Extract tags based on content keywords
+  if (content.includes('react') || content.includes('jsx')) tags.push('React');
+  if (content.includes('vue') || content.includes('vuejs')) tags.push('Vue.js');
+  if (content.includes('laravel') || content.includes('php')) tags.push('Laravel');
+  if (content.includes('javascript') || content.includes('js')) tags.push('JavaScript');
+  if (content.includes('typescript') || content.includes('ts')) tags.push('TypeScript');
+  if (content.includes('css') || content.includes('styling')) tags.push('CSS');
+  if (content.includes('html') || content.includes('markup')) tags.push('HTML');
+  if (content.includes('hosting') || content.includes('server')) tags.push('Web Hosting');
+  if (content.includes('wordpress') || content.includes('wp')) tags.push('WordPress');
+  if (content.includes('database') || content.includes('mysql')) tags.push('Database');
+  if (content.includes('api') || content.includes('rest')) tags.push('API');
+  if (content.includes('tutorial') || content.includes('guide')) tags.push('Tutorial');
+  if (content.includes('beginner') || content.includes('basics')) tags.push('Beginner');
+  if (content.includes('advanced') || content.includes('expert')) tags.push('Advanced');
+  if (content.includes('performance') || content.includes('optimization')) tags.push('Performance');
+  if (content.includes('security') || content.includes('auth')) tags.push('Security');
+  if (content.includes('deployment') || content.includes('deploy')) tags.push('Deployment');
+  if (content.includes('testing') || content.includes('test')) tags.push('Testing');
+  if (content.includes('mobile') || content.includes('responsive')) tags.push('Mobile');
+  if (content.includes('ui') || content.includes('ux')) tags.push('UI/UX');
+  
+  return tags;
+}))].sort();
+
+// Filter posts by tag if tag parameter exists
+let filteredPosts = posts;
+if (tagFilter) {
+  filteredPosts = posts.filter(post => {
+    const content = post.body.toLowerCase();
+    const postTags = [];
+    
+    // Extract tags for this post (same logic as above)
+    if (content.includes('react') || content.includes('jsx')) postTags.push('React');
+    if (content.includes('vue') || content.includes('vuejs')) postTags.push('Vue.js');
+    if (content.includes('laravel') || content.includes('php')) postTags.push('Laravel');
+    if (content.includes('javascript') || content.includes('js')) postTags.push('JavaScript');
+    if (content.includes('typescript') || content.includes('ts')) postTags.push('TypeScript');
+    if (content.includes('css') || content.includes('styling')) postTags.push('CSS');
+    if (content.includes('html') || content.includes('markup')) postTags.push('HTML');
+    if (content.includes('hosting') || content.includes('server')) postTags.push('Web Hosting');
+    if (content.includes('wordpress') || content.includes('wp')) postTags.push('WordPress');
+    if (content.includes('database') || content.includes('mysql')) postTags.push('Database');
+    if (content.includes('api') || content.includes('rest')) postTags.push('API');
+    if (content.includes('tutorial') || content.includes('guide')) postTags.push('Tutorial');
+    if (content.includes('beginner') || content.includes('basics')) postTags.push('Beginner');
+    if (content.includes('advanced') || content.includes('expert')) postTags.push('Advanced');
+    if (content.includes('performance') || content.includes('optimization')) postTags.push('Performance');
+    if (content.includes('security') || content.includes('auth')) postTags.push('Security');
+    if (content.includes('deployment') || content.includes('deploy')) postTags.push('Deployment');
+    if (content.includes('testing') || content.includes('test')) postTags.push('Testing');
+    if (content.includes('mobile') || content.includes('responsive')) postTags.push('Mobile');
+    if (content.includes('ui') || content.includes('ux')) postTags.push('UI/UX');
+    
+    return postTags.includes(tagFilter);
+  });
+}
+
+// Group posts by category for filtering
+const postsByCategory = {
+  all: filteredPosts,
+  hosting: posts.filter(post => 
+    post.data.title.toLowerCase().includes('hosting') || 
+    post.data.title.toLowerCase().includes('hostnin') ||
+    post.data.title.toLowerCase().includes('cpanel')
+  ),
+  laravel: posts.filter(post => 
+    post.data.title.toLowerCase().includes('laravel') ||
+    post.data.title.toLowerCase().includes('filament')
+  ),
+  react: posts.filter(post => 
+    post.data.title.toLowerCase().includes('react')
+  ),
+  vue: posts.filter(post => 
+    post.data.title.toLowerCase().includes('vue')
+  ),
+  tutorials: posts.filter(post => 
+    post.data.title.toLowerCase().includes('guide') ||
+    post.data.title.toLowerCase().includes('tutorial') ||
+    post.data.title.toLowerCase().includes('wordpress') ||
+    post.data.title.toLowerCase().includes('markdown') ||
+    post.data.title.toLowerCase().includes('mdx')
+  )
+};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog - ${SITE_TITLE}`} description="Explore our latest articles on web development, hosting, and technology." />
 		<style>
-			main {
-				width: 960px;
+			.blog-container {
+				max-width: 1400px;
+				margin: 0 auto;
+				padding: 2rem;
 			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
+			
+			.blog-header {
 				text-align: center;
+				margin-bottom: 3rem;
 			}
-			ul li:first-child img {
+			
+			.blog-title {
+				font-size: 3rem;
+				font-weight: 700;
+				margin-bottom: 1rem;
+				color: var(--text-color);
+			}
+			
+			.blog-subtitle {
+				font-size: 1.25rem;
+				color: var(--text-muted);
+				margin-bottom: 2rem;
+			}
+			
+			.blog-controls {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-bottom: 3rem;
+			}
+			
+			.search-box {
+				position: relative;
+				max-width: 400px;
+				flex: 1;
+			}
+			
+			.search-input {
 				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
+				padding: 0.75rem 1rem 0.75rem 2.5rem;
+				border: 2px solid var(--border-color);
 				border-radius: 12px;
+				font-size: 1rem;
+				background: var(--bg-color);
+				color: var(--text-color);
+				transition: border-color 0.2s ease;
 			}
-			ul li a {
-				display: block;
+			
+			.search-input:focus {
+				outline: none;
+				border-color: var(--accent);
 			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
+			
+			.search-icon {
+				position: absolute;
+				left: 0.75rem;
+				top: 50%;
+				transform: translateY(-50%);
+				color: var(--text-muted);
+			}
+			
+			.category-filters {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+			}
+			
+			.category-filter {
+				padding: 0.5rem 1rem;
+				border: 2px solid var(--border-color);
+				border-radius: 25px;
+				background: var(--bg-color);
+				color: var(--text-color);
+				cursor: pointer;
+				transition: all 0.2s ease;
+				font-size: 0.875rem;
+				font-weight: 500;
+			}
+			
+			.category-filter:hover {
+				border-color: var(--accent);
+				color: var(--accent);
+			}
+			
+			.category-filter.active {
+				background: var(--accent);
+				border-color: var(--accent);
+				color: white;
+			}
+			
+			.posts-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+				gap: 2rem;
+				margin-bottom: 3rem;
+			}
+			
+			.post-card {
+				background: var(--bg-color);
+				border: 1px solid var(--border-color);
+				border-radius: 16px;
+				overflow: hidden;
+				transition: all 0.3s ease;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			.post-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+				border-color: var(--accent-light);
+			}
+			
+			.post-image {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+			}
+			
+			.post-card:hover .post-image {
+				transform: scale(1.05);
+			}
+			
+			.post-content {
+				padding: 1.5rem;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			.post-title {
+				font-size: 1.25rem;
+				font-weight: 600;
+				margin-bottom: 0.75rem;
+				color: var(--text-color);
+				line-height: 1.4;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+			}
+			
+			.post-description {
+				color: var(--text-muted);
+				line-height: 1.6;
+				margin-bottom: 1rem;
+				flex: 1;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+			}
+			
+			.post-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-top: auto;
+				padding-top: 1rem;
+				border-top: 1px solid var(--border-color);
+			}
+			
+			.post-date {
+				font-size: 0.875rem;
+				color: var(--text-muted);
+			}
+			
+			.read-more {
+				color: var(--accent);
+				font-weight: 500;
+				font-size: 0.875rem;
+				transition: color 0.2s ease;
+			}
+			
+			.post-card:hover .read-more {
+				color: var(--accent-dark);
+			}
+			
+			.post-link {
+				text-decoration: none;
+				color: inherit;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			.no-results {
+				text-align: center;
+				padding: 3rem;
+				color: var(--text-muted);
+			}
+			
+			.results-count {
+				text-align: center;
+				margin-bottom: 2rem;
+				color: var(--text-muted);
+				font-size: 0.875rem;
+			}
+			
+			/* Active Filters Styles */
+			.active-filters {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 1.5rem;
+				padding: 1rem;
+				background: var(--bg-secondary);
+				border-radius: 8px;
+				border-left: 4px solid var(--accent);
+			}
+			
+			.filter-label {
+				font-weight: 600;
+				color: var(--text-color);
+				font-size: 0.9rem;
+			}
+			
+			.filter-tag {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.4rem 0.8rem;
+				background: var(--accent-light);
+				color: var(--accent);
+				border-radius: 20px;
+				font-size: 0.85rem;
+				font-weight: 500;
+			}
+			
+			.remove-filter {
+				color: var(--accent);
+				text-decoration: none;
+				font-weight: bold;
+				font-size: 1.1rem;
 				line-height: 1;
+				padding: 0 0.2rem;
+				border-radius: 50%;
+				transition: all 0.2s ease;
 			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
+			
+			.remove-filter:hover {
+				background: var(--accent);
+				color: white;
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+			
+			@media (max-width: 768px) {
+				.blog-container {
+					padding: 1.5rem 1rem;
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
+				
+				.blog-header {
+					padding: 2rem 0;
 				}
-				ul li:first-child {
+				
+				.blog-title {
+					font-size: 2.5rem;
+					margin-bottom: 1rem;
+				}
+				
+				.blog-subtitle {
+					font-size: 1.1rem;
+					margin-bottom: 2.5rem;
+				}
+				
+				.blog-controls {
+					flex-direction: column;
+					align-items: stretch;
+					gap: 1.5rem;
+				}
+				
+				.search-box {
+					max-width: none;
 					margin-bottom: 0;
 				}
-				ul li:first-child .title {
-					font-size: 1.563em;
+				
+				.search-input {
+					padding: 1rem 1rem 1rem 3rem;
+					font-size: 1rem;
+				}
+				
+				.category-filters {
+					justify-content: flex-start;
+					overflow-x: auto;
+					padding-bottom: 0.5rem;
+					scrollbar-width: none;
+					-ms-overflow-style: none;
+				}
+				
+				.category-filters::-webkit-scrollbar {
+					display: none;
+				}
+				
+				.category-filter {
+					padding: 0.75rem 1.25rem;
+					font-size: 0.9rem;
+					white-space: nowrap;
+					min-width: auto;
+				}
+				
+				.posts-grid {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+					margin-top: 2rem;
+				}
+				
+				.post-card {
+					padding: 1.5rem;
+				}
+				
+				.post-image {
+					height: 200px;
+				}
+				
+				.post-title {
+					font-size: 1.25rem;
+					line-height: 1.4;
+				}
+				
+				.post-description {
+					font-size: 0.95rem;
+					line-height: 1.6;
+				}
+				
+				.results-count {
+					margin-bottom: 1.5rem;
+					font-size: 0.9rem;
 				}
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
+		<main class="blog-container">
+			<div class="blog-header">
+				<h1 class="blog-title">Our Blog</h1>
+				<p class="blog-subtitle">Discover the latest insights on web development, hosting, and technology</p>
+				
+				<div class="blog-controls">
+					<div class="search-box">
+						<svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="11" cy="11" r="8"></circle>
+							<path d="m21 21-4.35-4.35"></path>
+						</svg>
+						<input type="text" class="search-input" placeholder="Search articles..." id="search-input">
+					</div>
+					
+					<div class="category-filters">
+						<button class="category-filter active" data-category="all">All Posts</button>
+						<button class="category-filter" data-category="hosting">🌐 Web Hosting</button>
+						<button class="category-filter" data-category="laravel">🔴 Laravel</button>
+						<button class="category-filter" data-category="react">⚛️ React</button>
+						<button class="category-filter" data-category="vue">💚 Vue.js</button>
+						<button class="category-filter" data-category="tutorials">📚 Tutorials</button>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Active Filters Display -->
+			{(categoryFilter || tagFilter) && (
+				<div class="active-filters">
+					<span class="filter-label">Active Filters:</span>
+					{categoryFilter && (
+						<span class="filter-tag">
+							Category: {categoryFilter}
+							<a href="/blog" class="remove-filter">×</a>
+						</span>
+					)}
+					{tagFilter && (
+						<span class="filter-tag">
+							Tag: {tagFilter}
+							<a href="/blog" class="remove-filter">×</a>
+						</span>
+					)}
+				</div>
+			)}
+			
+			<div class="results-count" id="results-count">
+				Showing {filteredPosts.length} articles
+			</div>
+			
+			<div class="posts-grid" id="posts-grid">
+				{filteredPosts.map((post) => (
+					<article class="post-card" data-title={post.data.title.toLowerCase()} data-description={post.data.description?.toLowerCase() || ''}>
+						<a href={`/blog/${post.id}/`} class="post-link" onclick={`if(typeof window.trackPostClick === 'function') window.trackPostClick('${post.data.title.replace(/'/g, "\\'").replace(/"/g, '\\"')}', '/blog/${post.id}/', 'blog')`}>
+							{post.data.heroImage && (
+								<Image 
+									src={post.data.heroImage} 
+									alt={post.data.title}
+									width={350} 
+									height={200} 
+									class="post-image"
+								/>
+							)}
+							<div class="post-content">
+								<h2 class="post-title">{post.data.title}</h2>
+								{post.data.description && (
+									<p class="post-description">{post.data.description}</p>
+								)}
+								<div class="post-meta">
+									<span class="post-date">
 										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+									</span>
+									<span class="read-more">Read More →</span>
+								</div>
+							</div>
+						</a>
+					</article>
+				))}
+			</div>
+			
+			<div class="no-results" id="no-results" style="display: none;">
+				<h3>No articles found</h3>
+				<p>Try adjusting your search or filter criteria.</p>
+			</div>
 		</main>
 		<Footer />
+		
+		<script define:vars={{ postsByCategory }}>
+			// Blog page functionality
+			function initBlogPage() {
+				const searchInput = document.getElementById('search-input');
+				const categoryFilters = document.querySelectorAll('.category-filter');
+				const postsGrid = document.getElementById('posts-grid');
+				const resultsCount = document.getElementById('results-count');
+				const noResults = document.getElementById('no-results');
+				const allPosts = Array.from(document.querySelectorAll('.post-card'));
+				
+				let currentCategory = 'all';
+				let currentSearch = '';
+				
+				// Filter posts based on category and search
+				function filterPosts() {
+					let visiblePosts = allPosts;
+					
+					// Filter by category
+					if (currentCategory !== 'all') {
+						const categoryPosts = postsByCategory[currentCategory] || [];
+						const categoryTitles = categoryPosts.map(post => post.data.title.toLowerCase());
+						visiblePosts = allPosts.filter(card => {
+							const title = card.dataset.title;
+							return categoryTitles.some(catTitle => title.includes(catTitle.toLowerCase()));
+						});
+					}
+					
+					// Filter by search
+				if (currentSearch) {
+					visiblePosts = visiblePosts.filter(card => {
+						const title = card.dataset.title;
+						const description = card.dataset.description;
+						return title.includes(currentSearch) || description.includes(currentSearch);
+					});
+				}
+				
+				// Show/hide posts
+				allPosts.forEach(card => {
+					card.style.display = visiblePosts.includes(card) ? 'block' : 'none';
+				});
+				
+				// Update results count
+				const count = visiblePosts.length;
+				resultsCount.textContent = `Showing ${count} article${count !== 1 ? 's' : ''}`;
+				
+				// Track analytics for search
+				if (currentSearch && typeof window.trackSearch === 'function') {
+					window.trackSearch(currentSearch, count);
+				}
+				
+				// Track analytics for category filtering
+				if (currentCategory !== 'all' && typeof window.trackCategoryFilter === 'function') {
+					window.trackCategoryFilter(currentCategory, count);
+				}
+					
+					// Show/hide no results message
+					if (count === 0) {
+						postsGrid.style.display = 'none';
+						noResults.style.display = 'block';
+					} else {
+						postsGrid.style.display = 'grid';
+						noResults.style.display = 'none';
+					}
+				}
+				
+				// Search functionality
+				if (searchInput) {
+					searchInput.addEventListener('input', (e) => {
+						currentSearch = e.target.value.toLowerCase();
+						filterPosts();
+					});
+				}
+				
+				// Category filter functionality
+				categoryFilters.forEach(filter => {
+					filter.addEventListener('click', () => {
+						// Update active state
+						categoryFilters.forEach(f => f.classList.remove('active'));
+						filter.classList.add('active');
+						
+						// Update current category
+						currentCategory = filter.dataset.category;
+						filterPosts();
+					});
+				});
+			}
+			
+			// Initialize on page load
+			document.addEventListener('DOMContentLoaded', initBlogPage);
+			
+			// Re-initialize on Astro page transitions
+			document.addEventListener('astro:page-load', initBlogPage);
+		</script>
 	</body>
 </html>

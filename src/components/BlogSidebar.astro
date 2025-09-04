@@ -1,0 +1,288 @@
+---
+/**
+ * Blog Sidebar Component
+ * Displays sticky category menu and tags for blog posts
+ */
+import { getCollection } from 'astro:content';
+
+// Get all categories
+const categories = await getCollection('categories');
+const sortedCategories = categories.sort((a, b) => a.data.order - b.data.order);
+
+// Get all blog posts to extract unique tags
+const allPosts = await getCollection('blog');
+const allTags = [...new Set(allPosts.flatMap(post => {
+  const content = post.body.toLowerCase();
+  const tags = [];
+  
+  // Extract tags based on content keywords
+  if (content.includes('react') || content.includes('jsx')) tags.push('React');
+  if (content.includes('vue') || content.includes('vuejs')) tags.push('Vue.js');
+  if (content.includes('laravel') || content.includes('php')) tags.push('Laravel');
+  if (content.includes('javascript') || content.includes('js')) tags.push('JavaScript');
+  if (content.includes('typescript') || content.includes('ts')) tags.push('TypeScript');
+  if (content.includes('css') || content.includes('styling')) tags.push('CSS');
+  if (content.includes('html') || content.includes('markup')) tags.push('HTML');
+  if (content.includes('hosting') || content.includes('server')) tags.push('Web Hosting');
+  if (content.includes('wordpress') || content.includes('wp')) tags.push('WordPress');
+  if (content.includes('database') || content.includes('mysql')) tags.push('Database');
+  if (content.includes('api') || content.includes('rest')) tags.push('API');
+  if (content.includes('tutorial') || content.includes('guide')) tags.push('Tutorial');
+  if (content.includes('beginner') || content.includes('basics')) tags.push('Beginner');
+  if (content.includes('advanced') || content.includes('expert')) tags.push('Advanced');
+  if (content.includes('performance') || content.includes('optimization')) tags.push('Performance');
+  if (content.includes('security') || content.includes('auth')) tags.push('Security');
+  if (content.includes('deployment') || content.includes('deploy')) tags.push('Deployment');
+  if (content.includes('testing') || content.includes('test')) tags.push('Testing');
+  if (content.includes('mobile') || content.includes('responsive')) tags.push('Mobile');
+  if (content.includes('ui') || content.includes('ux')) tags.push('UI/UX');
+  
+  return tags;
+}))].sort();
+
+interface Props {
+  currentCategory?: string;
+  currentTags?: string[];
+}
+
+const { currentCategory, currentTags = [] } = Astro.props;
+---
+
+<aside class="blog-sidebar">
+  <!-- Categories Section -->
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">Categories</h3>
+    <nav class="category-nav">
+      <a href="/blog" class={`category-nav-item ${!currentCategory ? 'active' : ''}`}>
+        <span class="category-icon">📚</span>
+        <span class="category-name">All Posts</span>
+      </a>
+      {sortedCategories.map((category) => (
+        <a 
+          href={`/blog?category=${category.id}`} 
+          class={`category-nav-item ${currentCategory === category.id ? 'active' : ''}`}
+        >
+          <span class="category-icon">{category.data.icon}</span>
+          <span class="category-name">{category.data.title}</span>
+        </a>
+      ))}
+    </nav>
+  </div>
+
+  <!-- Tags Section -->
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">Popular Tags</h3>
+    <div class="tags-cloud">
+      {allTags.map((tag) => (
+        <button 
+          class={`tag-button ${currentTags.includes(tag) ? 'active' : ''}`}
+          data-tag={tag}
+          onclick={`filterByTag('${tag}')`}
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Quick Navigation -->
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">Quick Navigation</h3>
+    <nav class="quick-nav">
+      <a href="#" class="quick-nav-item" onclick="scrollToTop()">
+        <span class="nav-icon">⬆️</span>
+        <span class="nav-text">Back to Top</span>
+      </a>
+      <a href="/blog" class="quick-nav-item">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-text">All Posts</span>
+      </a>
+      <a href="/about" class="quick-nav-item">
+        <span class="nav-icon">👤</span>
+        <span class="nav-text">About</span>
+      </a>
+    </nav>
+  </div>
+</aside>
+
+<style>
+  .blog-sidebar {
+    position: sticky;
+    top: 100px;
+    width: 280px;
+    height: fit-content;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-left: 2rem;
+  }
+
+  .sidebar-section {
+    margin-bottom: 2rem;
+  }
+
+  .sidebar-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-light);
+  }
+
+  .category-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .category-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .category-nav-item:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .category-nav-item.active {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+  }
+
+  .category-icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+  }
+
+  .category-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-button {
+    padding: 0.4rem 0.8rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tag-button:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .tag-button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .quick-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .quick-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .quick-nav-item:hover {
+    background: var(--bg-secondary);
+    color: var(--text-color);
+    transform: translateX(4px);
+  }
+
+  .nav-icon {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+  }
+
+  .nav-text {
+    font-weight: 500;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 1200px) {
+    .blog-sidebar {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Filter posts by tag functionality
+   */
+  function filterByTag(tag) {
+    // Redirect to blog page with tag filter
+    window.location.href = `/blog?tag=${encodeURIComponent(tag)}`;
+    
+    // Track analytics if available
+    if (typeof window.trackEvent === 'function') {
+      window.trackEvent('tag_filter', {
+        tag: tag,
+        event_category: 'navigation',
+        event_label: tag
+      });
+    }
+  }
+
+  /**
+   * Scroll to top functionality
+   */
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Track analytics if available
+    if (typeof window.trackEvent === 'function') {
+      window.trackEvent('scroll_to_top', {
+        event_category: 'navigation',
+        event_label: 'sidebar_button'
+      });
+    }
+  }
+</script>

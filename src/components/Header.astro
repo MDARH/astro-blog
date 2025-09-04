@@ -4,28 +4,30 @@ import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import Logo from './Logo.astro';
 import MobileMenu from './MobileMenu.astro';
+import MegaMenu from './MegaMenu.astro';
 ---
 
 <header id="main-header" class="header">
 	<nav class="nav-container">
 		<!-- Mobile hamburger menu -->
 		<button id="hamburger-menu" class="hamburger-btn" aria-label="Open menu">
-			<span class="hamburger-line"></span>
-			<span class="hamburger-line"></span>
-			<span class="hamburger-line"></span>
+			<svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<line x1="3" y1="6" x2="21" y2="6"></line>
+				<line x1="3" y1="12" x2="21" y2="12"></line>
+				<line x1="3" y1="18" x2="21" y2="18"></line>
+			</svg>
 		</button>
 
-		<!-- Logo (centered on mobile, left on desktop) -->
+		<!-- Desktop navigation with mega menu -->
+		<div class="desktop-nav">
+			<MegaMenu />
+		</div>
+
+		<!-- Logo (centered) -->
 		<div class="logo-container">
 			<a href="/" class="logo-link">
 				<Logo width="180" height="50" />
 			</a>
-		</div>
-
-		<!-- Desktop navigation -->
-		<div class="desktop-nav">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
 		</div>
 
 		<!-- Header actions -->
@@ -75,8 +77,10 @@ import MobileMenu from './MobileMenu.astro';
 	.logo-container {
 		display: flex;
 		align-items: center;
-		flex: 1;
-		justify-content: flex-start;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 10;
 	}
 
 	.logo-link {
@@ -92,30 +96,26 @@ import MobileMenu from './MobileMenu.astro';
 	/* Hamburger Menu */
 	.hamburger-btn {
 		display: none;
-		flex-direction: column;
-		justify-content: space-between;
 		align-items: center;
-		width: 40px;
-		height: 40px;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
 		background: none;
 		border: none;
 		cursor: pointer;
-		padding: 10px 8px;
-		border-radius: 6px;
-		transition: background-color 0.2s ease;
+		padding: 10px;
+		border-radius: 8px;
+		transition: all 0.2s ease;
+		color: var(--text-color);
 	}
 
 	.hamburger-btn:hover {
 		background-color: var(--accent-light);
+		color: var(--accent);
 	}
 
-	.hamburger-line {
-		width: 24px;
-		height: 2px;
-		background-color: var(--text-color);
-		transition: all 0.3s ease;
-		border-radius: 1px;
-		display: block;
+	.hamburger-icon {
+		transition: all 0.2s ease;
 	}
 
 	/* Desktop Navigation */
@@ -124,7 +124,7 @@ import MobileMenu from './MobileMenu.astro';
 		align-items: center;
 		gap: 2rem;
 		flex: 1;
-		justify-content: center;
+		justify-content: flex-start;
 	}
 	.desktop-nav a {
 		padding: 0.75rem 1rem;
@@ -159,12 +159,13 @@ import MobileMenu from './MobileMenu.astro';
 	/* Mobile Styles */
 	@media (max-width: 768px) {
 		:global(body) {
-			padding-top: 70px;
+			padding-top: 90px;
 		}
 
 		.nav-container {
-			padding: 0.75rem 1rem;
+			padding: 1.5rem 1.25rem;
 			position: relative;
+			min-height: 70px;
 		}
 
 		.hamburger-btn {

@@ -2,7 +2,7 @@
 id: "ad-4"
 title: "Cloud Solutions"
 description: "Scale your business with our cloud infrastructure. Try free for 30 days."
-image: "https://picsum.photos/250/250?random=ad4"
+image: "/src/assets/Lucid_Origin_Minimal_flat_vector_illustration_of_a_web_dashboa_1.jpg"
 link: "#"
 type: "square"
 position: "sidebar"
