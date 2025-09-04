@@ -1,0 +1,334 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/BlogPost.astro';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import GoToTop from '../../components/GoToTop.astro';
+import HeaderScript from '../../components/HeaderScript.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+// Get all blog posts
+const posts = await getCollection('blog');
+const categories = await getCollection('categories');
+
+// Get the category from the URL
+const { category } = Astro.params;
+
+// Function to determine post category
+function getPostCategory(post) {
+  const title = post.data.title.toLowerCase();
+  const content = post.body.toLowerCase();
+  
+  if (title.includes('hosting') || title.includes('hostnin') || title.includes('cpanel') || content.includes('hosting')) {
+    return 'hosting';
+  }
+  if (title.includes('laravel') || title.includes('filament') || content.includes('laravel')) {
+    return 'laravel';
+  }
+  if (title.includes('react') || content.includes('react')) {
+    return 'react';
+  }
+  if (title.includes('vue') || content.includes('vue')) {
+    return 'vue';
+  }
+  if (title.includes('guide') || title.includes('tutorial') || title.includes('wordpress') || title.includes('markdown') || title.includes('mdx')) {
+    return 'tutorials';
+  }
+  return 'tutorials';
+}
+
+// Filter posts by category
+const categoryPosts = posts.filter(post => getPostCategory(post) === category);
+
+// Get category info
+const categoryInfo = categories.find(cat => cat.id === category);
+const categoryTitle = categoryInfo?.data.title || category.charAt(0).toUpperCase() + category.slice(1);
+const categoryIcon = categoryInfo?.data.icon || '📁';
+
+// Generate static paths for all categories
+export async function getStaticPaths() {
+  return [
+    { params: { category: 'hosting' } },
+    { params: { category: 'laravel' } },
+    { params: { category: 'react' } },
+    { params: { category: 'vue' } },
+    { params: { category: 'tutorials' } }
+  ];
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead 
+			title={`${categoryTitle} - ${SITE_TITLE}`}
+			description={`Browse all ${categoryTitle} articles and tutorials on ${SITE_TITLE}. Find comprehensive guides, tips, and best practices.`}
+			keywords={[categoryTitle.toLowerCase(), 'tutorials', 'guides', 'articles', 'web development']}
+		/>
+	</head>
+	<body>
+		<Header />
+		
+		<main class="category-page">
+			<div class="container">
+				<div class="category-header">
+					<div class="category-info">
+						<span class="category-icon">{categoryIcon}</span>
+						<h1 class="category-title">{categoryTitle}</h1>
+					</div>
+					<p class="category-description">
+						Explore our collection of {categoryTitle.toLowerCase()} articles and tutorials. 
+						Find comprehensive guides, tips, and best practices to enhance your skills.
+					</p>
+					<div class="posts-count">
+						{categoryPosts.length} article{categoryPosts.length !== 1 ? 's' : ''} found
+					</div>
+				</div>
+				
+				{categoryPosts.length > 0 ? (
+					<div class="posts-grid">
+						{categoryPosts.map((post) => (
+							<article class="post-card">
+								<a href={`/${post.id}/`} class="post-link">
+									{post.data.heroImage && (
+										<Image 
+											src={post.data.heroImage} 
+											alt={post.data.title}
+											width={350} 
+											height={200} 
+											class="post-image"
+										/>
+									)}
+									<div class="post-content">
+										<h2 class="post-title">{post.data.title}</h2>
+										{post.data.description && (
+											<p class="post-description">{post.data.description}</p>
+										)}
+										<div class="post-meta">
+											<span class="post-date">
+												<FormattedDate date={post.data.pubDate} />
+											</span>
+											<span class="read-more">Read More →</span>
+										</div>
+									</div>
+								</a>
+							</article>
+						))}
+					</div>
+				) : (
+					<div class="no-posts">
+						<h3>No articles found</h3>
+						<p>There are currently no articles in the {categoryTitle.toLowerCase()} category.</p>
+						<a href="/" class="back-home">← Back to Homepage</a>
+					</div>
+				)}
+			</div>
+		</main>
+		
+		<Footer />
+		<GoToTop />
+		<HeaderScript />
+	</body>
+</html>
+
+<style>
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	.category-page {
+		padding: 6rem 0;
+		min-height: 80vh;
+	}
+	
+	.category-header {
+		text-align: center;
+		margin-bottom: 4rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--border-color);
+	}
+	
+	.category-info {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+	
+	.category-icon {
+		font-size: 3rem;
+	}
+	
+	.category-title {
+		font-size: 3rem;
+		font-weight: 800;
+		color: var(--text-color);
+		margin: 0;
+		background: linear-gradient(135deg, var(--text-color) 0%, var(--accent) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+	
+	.category-description {
+		font-size: 1.2rem;
+		color: var(--text-muted);
+		max-width: 600px;
+		margin: 0 auto 1.5rem;
+		line-height: 1.6;
+	}
+	
+	.posts-count {
+		font-size: 1rem;
+		color: var(--accent);
+		font-weight: 600;
+		background: var(--bg-secondary);
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		display: inline-block;
+	}
+	
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+	
+	.post-card {
+		background: var(--card-bg);
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+		overflow: hidden;
+		transition: all 0.3s ease;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+	
+	.post-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+		border-color: var(--accent);
+	}
+	
+	.post-link {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+	
+	.post-image {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+	}
+	
+	.post-content {
+		padding: 1.5rem;
+	}
+	
+	.post-title {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--text-color);
+		margin: 0 0 0.75rem 0;
+		line-height: 1.4;
+	}
+	
+	.post-description {
+		color: var(--text-muted);
+		line-height: 1.6;
+		margin: 0 0 1rem 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	
+	.post-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 0.9rem;
+	}
+	
+	.post-date {
+		color: var(--text-muted);
+	}
+	
+	.read-more {
+		color: var(--accent);
+		font-weight: 600;
+	}
+	
+	.no-posts {
+		text-align: center;
+		padding: 4rem 2rem;
+	}
+	
+	.no-posts h3 {
+		font-size: 2rem;
+		color: var(--text-color);
+		margin-bottom: 1rem;
+	}
+	
+	.no-posts p {
+		color: var(--text-muted);
+		margin-bottom: 2rem;
+	}
+	
+	.back-home {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+		padding: 0.75rem 1.5rem;
+		border: 2px solid var(--accent);
+		border-radius: 8px;
+		transition: all 0.3s ease;
+	}
+	
+	.back-home:hover {
+		background: var(--accent);
+		color: white;
+	}
+	
+	/* Mobile Responsive */
+	@media (max-width: 768px) {
+		.category-page {
+			padding: 4rem 0;
+		}
+		
+		.category-title {
+			font-size: 2.5rem;
+		}
+		
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+		
+		.category-info {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
+	
+	@media (max-width: 480px) {
+		.container {
+			padding: 0 1rem;
+		}
+		
+		.category-title {
+			font-size: 2rem;
+		}
+		
+		.post-content {
+			padding: 1rem;
+		}
+	}
+</style>

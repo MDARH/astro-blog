@@ -116,6 +116,29 @@ const postsByCategory = {
   )
 };
 
+// Function to determine post category
+function getPostCategory(post) {
+  const title = post.data.title.toLowerCase();
+  const content = post.body.toLowerCase();
+  
+  if (title.includes('hosting') || title.includes('hostnin') || title.includes('cpanel') || content.includes('hosting')) {
+    return 'hosting';
+  }
+  if (title.includes('laravel') || title.includes('filament') || content.includes('laravel')) {
+    return 'laravel';
+  }
+  if (title.includes('react') || content.includes('react')) {
+    return 'react';
+  }
+  if (title.includes('vue') || content.includes('vue')) {
+    return 'vue';
+  }
+  if (title.includes('guide') || title.includes('tutorial') || title.includes('wordpress') || title.includes('markdown') || title.includes('mdx')) {
+    return 'tutorials';
+  }
+  return 'tutorials'; // default category
+}
+
 // Display all posts on homepage
 const allPostsForDisplay = filteredPosts;
 
@@ -215,7 +238,7 @@ const keywords = [
 
 			<div class="posts-grid" id="posts-grid">
 				{allPostsForDisplay.map((post) => (
-					<article class="post-card" data-title={post.data.title.toLowerCase()} data-description={post.data.description?.toLowerCase() || ''}>
+					<article class={`post-card category-${getPostCategory(post)}`} data-title={post.data.title.toLowerCase()} data-description={post.data.description?.toLowerCase() || ''}>
 						<a href={`/${post.id}/`} class="post-link" onclick={`if(typeof window.trackPostClick === 'function') window.trackPostClick('${post.data.title.replace(/'/g, "\\'").replace(/"/g, '\\"')}', '/${post.id}/', 'blog')`}>
 							{post.data.heroImage && (
 								<Image 

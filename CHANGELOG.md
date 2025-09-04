@@ -2,6 +2,75 @@
 
 All notable changes to SomaDhanTech Blog will be documented in this file.
 
+## [2.33.0] - 2025-09-04
+
+### Category Filtering Fix
+- **Fixed Homepage Filtering**: Resolved 'No articles found' issue for Web hosting category
+- **Category Classification**: Added getPostCategory() function to properly categorize posts
+- **CSS Class Integration**: Posts now have proper category-{category} CSS classes for filtering
+- **Content-Based Detection**: Enhanced category detection using title and content analysis
+- **Improved User Experience**: Category filtering now works correctly on homepage
+
+### Category Pages Implementation
+- **Dynamic Category Pages**: Created /category/[category] route for dedicated category browsing
+- **Static Path Generation**: Pre-generated pages for hosting, laravel, react, vue, and tutorials
+- **Professional Design**: Modern, responsive design with category icons and descriptions
+- **Post Count Display**: Shows number of articles in each category
+- **SEO Optimized**: Proper meta tags and structured content for search engines
+- **Mobile Responsive**: Optimized layout for all device sizes
+
+### Technical Improvements
+- **Category Logic Centralization**: Unified category determination logic across components
+- **Enhanced Post Classification**: Improved algorithm for categorizing posts based on content
+- **Performance Optimization**: Efficient filtering and rendering of category-specific content
+- **Code Organization**: Better separation of concerns for category-related functionality
+- **Type Safety**: Proper TypeScript integration for category pages
+
+### User Experience Enhancements
+- **Consistent Navigation**: Seamless category browsing experience
+- **Visual Feedback**: Clear indication of active categories and post counts
+- **Content Discovery**: Easier exploration of topic-specific content
+- **Professional Presentation**: Clean, modern design for category pages
+- **Accessibility**: Proper semantic HTML and ARIA labels
+
+### Bug Fixes
+- **Category Filter Resolution**: Fixed homepage category filtering that was showing no results
+- **Post Classification**: Corrected post categorization logic for accurate filtering
+- **CSS Class Assignment**: Proper category class assignment to article elements
+- **Content Matching**: Enhanced content-based category detection accuracy
+
+## [2.32.0] - 2025-09-04
+
+### Content Quality Improvements
+- **Fixed Lorem Ipsum**: Replaced placeholder text in using-mdx.mdx with proper description
+- **Enhanced Content**: Updated MDX post description to explain interactive content capabilities
+- **Content Consistency**: Ensured all blog posts have meaningful descriptions
+
+### SEO Optimization
+- **Hostnin Post Enhancement**: Improved title, description, and added comprehensive SEO tags
+- **Keywords Integration**: Added targeted keywords for better search engine visibility
+- **Tag System**: Implemented proper tagging system for blog posts
+- **Category Classification**: Added category field for better content organization
+- **Schema Updates**: Updated content.config.ts to support new SEO fields
+
+### Technical Improvements
+- **Content Schema**: Enhanced blog collection schema with tags, keywords, and category fields
+- **SEO Structure**: Improved meta tag generation and structured data
+- **Image Optimization**: Verified image paths and accessibility
+- **Requirements Documentation**: Created requirement-of-ai.md for future improvements
+
+### Share System Analysis
+- **Issue Documentation**: Created comprehensive requirements document for share system fixes
+- **Meta Tag Review**: Analyzed Open Graph and social media preview functionality
+- **URL Structure**: Verified share URL generation and accessibility
+- **User Requirements**: Documented needed information for complete share system fix
+
+### User Experience Enhancements
+- **Better Content Discovery**: Improved post descriptions for better user engagement
+- **SEO Performance**: Enhanced search engine optimization for better rankings
+- **Content Quality**: Eliminated placeholder content across the site
+- **Professional Presentation**: Improved overall content quality and consistency
+
 ## [2.31.0] - 2025-09-04
 
 ### Category Filtering Fix
