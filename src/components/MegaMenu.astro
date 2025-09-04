@@ -50,7 +50,7 @@ const postsByCategory = {
         return (
           <div class="mega-menu-section">
             <h3 class="section-title">
-              <a href={`/blog?category=${category.id}`} class="category-link">
+              <a href={`/?category=${category.id}`} class="category-link">
                 <span class="category-icon">{category.data.icon}</span>
                 {category.data.title}
               </a>
@@ -76,7 +76,7 @@ const postsByCategory = {
                 ))}
                 {categoryPosts.length > 3 && (
                   <div class="view-more-container">
-                    <a href="/blog" class="view-more">View all {categoryPosts.length} posts →</a>
+                    <a href="/" class="view-more">View all {categoryPosts.length} posts →</a>
                   </div>
                 )}
               </div>

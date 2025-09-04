@@ -2,6 +2,158 @@
 
 All notable changes to SomaDhanTech Blog will be documented in this file.
 
+## [2.31.0] - 2025-09-04
+
+### Category Filtering Fix
+- **URL Parameter Support**: Fixed category filtering to work with URL parameters (?category=hosting)
+- **Initial State Handling**: Added proper URL parameter parsing on page load
+- **Active Filter States**: Filters now show correct active state based on URL parameters
+- **Search Parameter Support**: Added support for search and tag URL parameters
+- **Seamless Navigation**: Category and tag links now work properly from post pages
+
+### Social Sharing Improvements
+- **X Integration**: Updated Twitter share button to X (formerly Twitter) with new logo
+- **Brand Consistency**: Updated styling to use X's black color scheme
+- **Domain Fix**: Fixed share URLs to use bdapex.com instead of example.com
+- **Proper URL Generation**: Share links now generate correct domain URLs for all posts
+- **Better User Experience**: Share functionality now works correctly with proper domain
+
+### Technical Improvements
+- **URL Parameter Handling**: Robust URL parameter parsing and state management
+- **Filter State Persistence**: Active filter states persist across page navigation
+- **Domain Configuration**: Centralized domain configuration for share URLs
+- **Code Quality**: Improved JavaScript for better URL parameter handling
+- **Cross-Platform Sharing**: Enhanced social sharing with proper URL generation
+
+### User Experience Enhancements
+- **Consistent Navigation**: Category filtering works from any page
+- **Visual Feedback**: Proper active states for filtered categories and tags
+- **Social Sharing**: Accurate share URLs for better content distribution
+- **Brand Alignment**: Updated social media integration with current platform branding
+- **Seamless Filtering**: Smooth transition between filtered and unfiltered states
+
+## [2.30.0] - 2025-09-04
+
+### Blog Sidebar Enhancements
+- **Back to Home Button**: Added prominent 'Back to Home' button at top of sidebar on post pages
+- **Improved Navigation**: Enhanced sidebar with gradient button design and hover effects
+- **Better UX**: Clear navigation path from individual posts back to homepage
+- **Professional Design**: Modern button styling with smooth transitions
+
+### Alternative Navigation System
+- **Homepage Redirects**: Updated all category and tag links to redirect to homepage with filters
+- **URL Parameter Support**: Categories and tags now use homepage URL parameters (?category=X, ?tag=Y)
+- **Seamless Filtering**: Users can navigate from post pages to filtered homepage views
+- **Consistent Experience**: All navigation maintains homepage-based filtering system
+- **Cross-Component Updates**: Updated MegaMenu, MobileMenu, Footer, and BlogSidebar components
+
+### Blog Page Removal
+- **Eliminated Blog Page**: Completely removed `/blog` page since all posts display on homepage
+- **Simplified Architecture**: Streamlined site structure with homepage as central hub
+- **Updated Navigation**: All blog page links now redirect to homepage
+- **Code Cleanup**: Removed blog page references across all components
+- **Performance**: Reduced site complexity and improved navigation flow
+
+### Component Updates
+- **BlogSidebar**: Added back-to-home button and updated all navigation links
+- **MegaMenu**: Updated category links and "View all posts" to homepage
+- **MobileMenu**: Updated all category navigation to homepage with filters
+- **Footer**: Updated category links to homepage-based filtering
+- **HeaderScript**: Removed blog page active state logic
+- **Navigation Consistency**: All components now use homepage-centric navigation
+
+### Technical Improvements
+- **URL Structure**: Simplified URL structure with homepage-based filtering
+- **Code Organization**: Removed redundant blog page logic across components
+- **Maintainability**: Cleaner codebase with single source of truth for post display
+- **Performance**: Faster navigation with fewer page loads
+- **SEO**: Better URL structure with homepage as primary content hub
+
+### User Experience Enhancements
+- **Intuitive Navigation**: Clear path from any post back to homepage
+- **Consistent Filtering**: All category and tag navigation works the same way
+- **Reduced Complexity**: Simplified site structure easier to understand
+- **Better Discoverability**: All content accessible from single homepage
+- **Mobile Friendly**: Improved mobile navigation with updated menu structure
+
+## [2.29.0] - 2025-09-04
+
+### UI/UX Improvements
+- **Results Count Repositioning**: Moved 'Showing X articles' count to bottom of posts grid for better visual flow
+- **Cleaner Layout**: Improved homepage layout with results count positioned after content
+- **Better User Experience**: More intuitive content organization and information hierarchy
+
+### Ads Removal
+- **Content Ads Removed**: Removed content ad sections from homepage
+- **Footer Ads Removed**: Removed footer ad sections from homepage
+- **Code Cleanup**: Removed AdBanner imports and ad-related variables
+- **Simplified Codebase**: Eliminated ads collection and filtering logic
+- **Performance**: Faster page loading without ad-related processing
+
+### Contact Us Page
+- **New Contact Page**: Created comprehensive contact page with social media links
+- **Social Media Integration**: Added Twitter, GitHub, LinkedIn, and Facebook links
+- **Professional Design**: Modern, responsive design with hover effects
+- **Content Information**: Detailed information about SomaDhanTech's offerings
+- **Call-to-Action**: Encouraging community engagement and social media following
+- **Mobile Responsive**: Optimized for all device sizes
+
+### About Page Updates
+- **Updated Date**: Changed publication date from January 15, 2024 to January 15, 2025
+- **Content Cleanup**: Removed placeholder Lorem ipsum text
+- **Professional Content**: Clean, focused content about SomaDhanTech
+- **Better Readability**: Improved content structure and flow
+
+### Post Date System
+- **Publish Date Display**: Confirmed implementation of publication date for all posts
+- **Updated Date Support**: Verified 'Last updated on' date functionality
+- **Proper Date Formatting**: Using FormattedDate component for consistent display
+- **SEO Enhancement**: Proper date metadata for search engines
+- **User Information**: Clear date information for content freshness
+
+### Technical Improvements
+- **Code Organization**: Removed unused ad-related imports and variables
+- **Performance Optimization**: Eliminated unnecessary ad collection processing
+- **Clean Architecture**: Simplified homepage structure without ad dependencies
+- **Maintainable Code**: Cleaner codebase with focused functionality
+- **SEO Ready**: Proper date implementation for better search engine indexing
+
+### User Experience Enhancements
+- **Improved Navigation**: New contact page accessible from site navigation
+- **Social Connectivity**: Easy access to all social media platforms
+- **Content Discovery**: Better organized homepage with results count at bottom
+- **Professional Presentation**: Updated about page with current information
+- **Date Transparency**: Clear publication and update dates for all content
+
+## [2.28.0] - 2025-09-04
+
+### Google Analytics Integration
+- **Google Analytics Setup**: Added Google Analytics tracking code (G-5QJ0G5Z0B5) to BaseHead component
+- **Universal Tracking**: Analytics code now loads on all pages automatically
+- **Performance Optimized**: Async loading of Google Analytics script for better page performance
+- **Data Layer Integration**: Proper gtag configuration for comprehensive tracking
+
+### Homepage Pagination Removal
+- **Display All Posts**: Removed 9-post pagination limit from homepage
+- **Complete Post Listing**: Homepage now shows all available blog posts
+- **Simplified Navigation**: Removed pagination controls and page numbers
+- **Better User Experience**: Users can see all content without clicking through pages
+- **Performance Improvement**: Eliminated pagination-related JavaScript functions
+
+### JavaScript Optimization
+- **Code Cleanup**: Removed pagination-related variables and functions
+- **Simplified Filtering**: Updated filterPosts function to show/hide posts directly
+- **Reduced Complexity**: Eliminated applyPagination and updatePaginationControls functions
+- **Better Performance**: Streamlined JavaScript execution
+- **Cleaner Codebase**: Removed unused pagination logic
+
+### Technical Improvements
+- **Analytics Integration**: Proper Google Analytics implementation following best practices
+- **Code Simplification**: Removed complex pagination system in favor of simple show/hide
+- **Performance Enhancement**: Faster page loading with optimized JavaScript
+- **Maintainability**: Cleaner, more maintainable codebase
+- **User Experience**: All posts visible on homepage for better content discovery
+
 ## [2.27.0] - 2025-09-04
 
 ### Header Search Bar Improvements

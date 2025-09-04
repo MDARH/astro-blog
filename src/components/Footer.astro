@@ -36,7 +36,7 @@ const today = new Date();
 			<h4>Categories</h4>
 			<ul>
 				{sortedCategories.map((category) => (
-					<li><a href={`/blog?category=${category.id}`}>{category.data.title}</a></li>
+					<li><a href={`/?category=${category.id}`}>{category.data.title}</a></li>
 				))}
 			</ul>
 		</div>

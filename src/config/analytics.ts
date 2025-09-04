@@ -7,7 +7,7 @@ export const ANALYTICS_CONFIG = {
   // Google Analytics GA4 Measurement ID
   // Replace 'G-XXXXXXX' with your actual GA4 Measurement ID
   // Get this from: https://analytics.google.com/analytics/web/
-  GOOGLE_ANALYTICS_ID: 'G-XXXXXXX',
+  GOOGLE_ANALYTICS_ID: 'G-5QJ0G5Z0B5',
   
   // Enable/disable analytics in development
   ENABLE_IN_DEV: false,

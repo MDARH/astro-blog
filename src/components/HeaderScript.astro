@@ -134,7 +134,7 @@
 				
 				if (href === currentPath || 
 					(currentPath === '/' && href === '/') ||
-					(currentPath.startsWith('/blog') && href === '/blog')) {
+					(currentPath === '/' && href === '/')) {
 					link.classList.add('active');
 				}
 			});
@@ -193,7 +193,7 @@
 			
 			if (href === currentPath || 
 				(currentPath === '/' && href === '/') ||
-				(currentPath.startsWith('/blog') && href === '/blog')) {
+				(currentPath === '/' && href === '/')) {
 				link.classList.add('active');
 			}
 		});

@@ -49,17 +49,25 @@ const { currentCategory, currentTags = [] } = Astro.props;
 ---
 
 <aside class="blog-sidebar">
+  <!-- Back to Home Section -->
+  <div class="sidebar-section">
+    <a href="/" class="back-to-home-btn">
+      <span class="home-icon">🏠</span>
+      <span class="home-text">Back to Home</span>
+    </a>
+  </div>
+
   <!-- Categories Section -->
   <div class="sidebar-section">
     <h3 class="sidebar-title">Categories</h3>
     <nav class="category-nav">
-      <a href="/blog" class={`category-nav-item ${!currentCategory ? 'active' : ''}`}>
+      <a href="/" class={`category-nav-item ${!currentCategory ? 'active' : ''}`}>
         <span class="category-icon">📚</span>
         <span class="category-name">All Posts</span>
       </a>
       {sortedCategories.map((category) => (
         <a 
-          href={`/blog?category=${category.id}`} 
+          href={`/?category=${category.id}`} 
           class={`category-nav-item ${currentCategory === category.id ? 'active' : ''}`}
         >
           <span class="category-icon">{category.data.icon}</span>
@@ -74,13 +82,12 @@ const { currentCategory, currentTags = [] } = Astro.props;
     <h3 class="sidebar-title">Popular Tags</h3>
     <div class="tags-cloud">
       {allTags.map((tag) => (
-        <button 
+        <a 
+          href={`/?tag=${tag.toLowerCase().replace(/\s+/g, '-')}`}
           class={`tag-button ${currentTags.includes(tag) ? 'active' : ''}`}
-          data-tag={tag}
-          onclick={`filterByTag('${tag}')`}
         >
           {tag}
-        </button>
+        </a>
       ))}
     </div>
   </div>
@@ -93,13 +100,13 @@ const { currentCategory, currentTags = [] } = Astro.props;
         <span class="nav-icon">⬆️</span>
         <span class="nav-text">Back to Top</span>
       </a>
-      <a href="/blog" class="quick-nav-item">
-        <span class="nav-icon">🏠</span>
-        <span class="nav-text">All Posts</span>
-      </a>
       <a href="/about" class="quick-nav-item">
         <span class="nav-icon">👤</span>
         <span class="nav-text">About</span>
+      </a>
+      <a href="/contact" class="quick-nav-item">
+        <span class="nav-icon">📞</span>
+        <span class="nav-text">Contact</span>
       </a>
     </nav>
   </div>
@@ -161,6 +168,34 @@ const { currentCategory, currentTags = [] } = Astro.props;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--accent-light);
+  }
+
+  .back-to-home-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .back-to-home-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+  }
+
+  .home-icon {
+    font-size: 1.2rem;
+  }
+
+  .home-text {
+    font-size: 0.95rem;
   }
 
   .category-nav {
@@ -312,7 +347,7 @@ const { currentCategory, currentTags = [] } = Astro.props;
    */
   function filterByTag(tag) {
     // Redirect to blog page with tag filter
-    window.location.href = `/blog?tag=${encodeURIComponent(tag)}`;
+    window.location.href = `/?tag=${encodeURIComponent(tag)}`;
     
     // Track analytics if available
     if (typeof window.trackEvent === 'function') {
